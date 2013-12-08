@@ -1,0 +1,93 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[polish]{babel}
+\usepackage{a4wide}
+\usepackage{array}
+\usepackage{hhline}
+\usepackage{booktabs}
+%\usepackage{forloop}
+%\usepackage{pgffor}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\usepackage[pdftex]{graphicx}
+\usepackage{enumerate} %[I], numerki, [(a)]
+%ustawienie poziomów wypunktowania do wyboru: $\bullet$, $\cdot$, $\diamond$, $-$, $\ast$ and $\circ$ 
+\renewcommand{\labelitemi}{$\diamond$}
+\renewcommand{\labelitemii}{$\bullet$}
+\renewcommand{\labelitemiii}{$-$}
+\renewcommand{\labelitemiv}{$\ast$}
+
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=red,citecolor=green]{hyperref}
+\bibliographystyle{plain}
+
+%marginesy
+\usepackage{geometry}
+\newgeometry{tmargin=2cm, bmargin=2cm, lmargin=1cm, rmargin=1cm}
+
+%Uwaga - testuję nowe komendy
+\renewcommand{\[}{\begin{equation}}
+\renewcommand{\]}{\end{equation}}
+
+%tabelki
+\usepackage{tabularx}
+
+\author{Jakub Nowak, Żaneta Błaszczuk, Filip Kubicz, Jakub Porębski, Rafał Kozik}
+%\title{MODELOWANIE}        
+
+\begin{document}
+\pagestyle{fancy}
+\fancyhead[R]{Automatyka i robotyka rok II}
+\fancyhead[L]{Modelowanie układów fizyczno - biologicznych}     
+\fancyfoot[C]{\thepage}
+\input{./titlepage.tex}
+%\input{./zadanie1.tex}
+%\input{./zadanie2.tex}
+%\input{./zadanie3.tex}
+
+\section{Testowanie generatorów liczb losowych i pseudolosowych}
+\subsection{Generatory}
+
+\subsubsection{Generator 1}
+\subsubsection{Generator 1}
+\subsubsection{Generator liczb losowych - rozpad promieniotwórczy}
+Co w rozpadzie promieniotwórczym jest elementem losowym?\\
+$\Delta t$ okresu pomiędzy kolejnymi rozpadami?\\
+Bo według mnie liczność zliczeń w danej sekundzie powinna się utrzymywać w okolicach stałej wartości, bo to jest własność rozpadu promieniotwórczego
+
+
+
+\subsection{Testy}
+\subsubsection{Test 1}
+WYboru testu dokonamy po prz
+\subsubsection{Test 2}
+\subsubsection{Test 3}
+
+
+\section{Modelowanie stałoczasowego oraz inteligentnie sterowanego regulatora świateł drogowych}
+
+
+\section{Modelowanie procesu ofiar i drapieżników}
+
+
+
+\end{document}
+
+%polskie znaki
+%ę ą ś ć ń ó ł ź ż
+
+%testy
+\\
+%$f(x) = \left\{ x \atop y+2 \right. $
+%\begin{displaymath}
+%y = \left\{ \begin{array}{ll}
+%a & \textrm{jezeli $d>c$}\\
+%b+x & \textrm{rano}\\
+%l & \textrm{w~ciagu dnia}
+%\end{array} \right.
+%\end{displaymath}
+%$ $\\
+
