@@ -28,7 +28,7 @@ change()
 wykonaj_stan()
 {
     if(state == green)
-        Sleep(greenTime);
-    else Sleep(redTime);
+        sleep(greenTime);
+    else sleep(redTime);
     change();
 }
