@@ -3,21 +3,27 @@
 
 Sygnalizator::Sygnalizator(unsigned long greenT,
                            unsigned long redT)
-    : state(red), greentime(greenT), redtime(redT)
+    : state(red), greenTime(greenT), redTime(redT)
 {
     this->wykonaj_stan();
 }
 
-~Sygnalizator()
+Sygnalizator::Sygnalizator()
 {
-
+    greenTime = 30;
+    redTime = 30;
+    state = red;
 }
 
-getState()
+Sygnalizator::~Sygnalizator()
+{
+}
+
+State Sygnalizator::getState()
 {
     return state;
 }
-change()
+void Sygnalizator::change()
 {
     if(state == red)
         state = green;
@@ -25,10 +31,3 @@ change()
         state = red;
 }
 
-wykonaj_stan()
-{
-    if(state == green)
-        sleep(greenTime);
-    else sleep(redTime);
-    change();
-}

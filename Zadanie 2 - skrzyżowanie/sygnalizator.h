@@ -11,12 +11,13 @@ class Sygnalizator
     unsigned long redTime;
 
 public:
-    Sygnalizator(unsigned long greenT,
-                 unsigned long redT);
-    ~Sygnalizator();
-    getState();
-    change();
-    wykonaj_stan();
+    Sygnalizator(unsigned long greenT, unsigned long redT);
+    Sygnalizator(){};
+    virtual ~Sygnalizator();
+    State getState();
+    void change();
+    /* metoda wykonaj stan nie jest potrzebna,
+    jesli program nie bedzie dzialac w czasie rzeczywistym */
 
 
 };
