@@ -1,0 +1,140 @@
+\documentclass[11pt]{aghdpl}
+% \documentclass[en,11pt]{aghdpl}  % praca w języku angielskim
+\usepackage[polish]{babel}
+%\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% dodatkowe pakiety
+\usepackage{enumerate}
+\usepackage{listings}
+\lstloadlanguages{TeX}
+
+\lstset{
+  literate={ą}{{\k{a}}}1
+           {ć}{{\'c}}1
+           {ę}{{\k{e}}}1
+           {ó}{{\'o}}1
+           {ń}{{\'n}}1
+           {ł}{{\l{}}}1
+           {ś}{{\'s}}1
+           {ź}{{\'z}}1
+           {ż}{{\.z}}1
+           {Ą}{{\k{A}}}1
+           {Ć}{{\'C}}1
+           {Ę}{{\k{E}}}1
+           {Ó}{{\'O}}1
+           {Ń}{{\'N}}1
+           {Ł}{{\L{}}}1
+           {Ś}{{\'S}}1
+           {Ź}{{\'Z}}1
+           {Ż}{{\.Z}}1
+}
+
+
+
+%\usepackage[pdftex]{graphicx}
+\usepackage{tikz}
+%---------------------------------------------------------------------------
+
+\author{Żaneta Błaszczuk, Rafał Kozik, Filip Kubicz, Jakub Nowak, Jakub Porębski}
+\shortauthor{Ż. Błaszczuk, R. Kozik, F. Kubicz, J. Nowak, J. Porębski}
+
+\titlePL{Podwójne wachadło}
+\titleEN{Double pendulum}
+
+\shorttitlePL{Podwójne wachadło} % skrócona wersja tytułu jeśli jest bardzo długi
+%\shorttitleEN{Thesis in \LaTeX}
+
+\thesistype{Modelowanie układów fizycznych i biologicznych}
+%\thesistype{Master of Science Thesis}
+
+\supervisor{dr }
+
+\degreeprogramme{Automatyka i Robotyka}
+%\degreeprogramme{Computer Science}
+
+\date{2014}
+
+\department{Katedra Automtyki}
+%\department{Department of Applied Computer Science}
+
+\faculty{Wydział Elektrotechniki, Automatyki,\protect\\[-1mm] Informatyki i Inżynierii Biomedycznej}
+%\faculty{Faculty of Electrical Engineering, Automatics, Computer Science and Biomedical Engineering}
+
+\setlength{\cftsecnumwidth}{10mm}
+
+\begin{document}
+\titlepages
+
+\section{Równania ruchu}
+\begin{figure}[h!]
+\centering
+\label{Schemat}
+\setlength{\unitlength}{2mm}
+\begin{picture}(50,50)(0,0)
+
+\put(25,50){\vector(1,0){3}}
+\put(25,50){\vector(0,-1){3}}
+\put(27,49){\makebox(0,0){$x$}}
+\put(24,48){\makebox(0,0){$y$}}
+
+\put(20,50){\line(1,0){10}}
+\multiput(25,48)(0,-2){7}{\line(0,1){1}}
+\put(25,50){\line(1,-3){5}}
+\put(30,35){\circle*{2}}
+
+\put(27,38){\makebox(0,0){$\varphi_1$}}
+\put(30,40){\makebox(0,0){$l_1$}}
+\put(33,35){\makebox(0,0){$m_1$}}
+
+\multiput(30,33)(0,-2){7}{\line(0,1){1}}
+\put(30,35){\line(1,-5){4}}
+\put(34,15){\circle*{2}}
+
+\put(31.5,22){\makebox(0,0){$\varphi_2$}}
+\put(33,25){\makebox(0,0){$l_2$}}
+\put(37,15){\makebox(0,0){$m_2$}}
+
+\end{picture}
+\caption{Schemat wachadła}
+\end{figure}
+Równania ruchu można wyznaczyć korzystając z równania Lagrangea-Eurela. Energia potencjalna układu jest równa:
+\begin{equation}
+	V=m_1gl_1 \cos(\varphi_1)+m_2g(l_1 \cos(\varphi_1)+l_2 \cos(\varphi_2)
+\end{equation}
+Natomiast energia kinetyczna układu wynosi:
+\begin{equation}
+	K=\frac{1}{2}m_1v_1^2+\frac{1}{2}m_2v_2^2
+\end{equation}
+Aby uprościć równania, przyjmujemy:
+\begin{equation}
+	A = \frac{m_1}{m_2} \qquad B = \frac{l_2}{l_1} \qquad C = \frac{g}{l_1}
+\end{equation}
+Ruch wachadła opisuje równania:
+\begin{equation}
+	\dot{\varphi}_1 = \omega_1
+\end{equation}
+\begin{equation}
+	\dot{\omega}_1=-\frac{\sin(\varphi_1-\varphi_2)(B\omega_2^2+\omega_1^2cos(\varphi_1-\varphi_2))+C((A+1)\sin(\varphi_1)-
+	\sin(\varphi_2)cos(\varphi_1-\varphi_2))}{A+\sin^2(\varphi_1-\varphi_2)}
+\end{equation}
+\begin{equation}
+	\dot{\varphi}_2 = \omega_2
+\end{equation}
+\begin{equation}
+	\dot{\omega}_2 = \frac{(A+1)(\omega_1^2\sin(\varphi_1-\varphi_2)-C\sin(p2))+\cos(\varphi_1-\varphi_2)((B\omega_2^2 \sin(\varphi_1-\varphi_2))+C(A+1)\sin(\varphi_1))}{B(A+\sin^2(\varphi_1-\varphi_2)}
+\end{equation}
+\section{Implementacja}
+
+\section{Wyniki}
+
+
+
+
+
+
+\section{Bibliografia}
+1. Wróblewski J. praca licencjacka Wahadło podwójne Warszawa 2011
+
+\end{document}
