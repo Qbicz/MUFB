@@ -20,3 +20,6 @@ funckje:
 --generowanie samochodów
 -- zapis do pliku 
 
+Czas globalny:
+-- potrzebny do wyliczania czaus oczekiwania samochodów, 
+-- czas wjazdu samochodów najprawdopodobniej synchroniczny z okresem sygnalizacji
