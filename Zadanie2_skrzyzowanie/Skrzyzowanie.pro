@@ -1,10 +1,9 @@
 #-------------------------------------------------
 #
 # Project created by QtCreator 2013-12-17T11:33:22
-# Tylko dla QT większego niż 5.0
+#
 #-------------------------------------------------
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 
 QT       += core gui
 
@@ -31,4 +30,4 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui
 
-#endif
+
