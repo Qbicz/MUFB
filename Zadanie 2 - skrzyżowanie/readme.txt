@@ -1,17 +1,37 @@
-Aktualny stan idei pocz¹tkowej:
+Aktualny stan idei poczï¿½tkowej:
 -- piszemy w C++ w QTCreator -> interfejs graficzny
--- system kolejkowy samochodów stoj¹cych na œwiat³ach
--- algorytm obs³ugi sta³oczasowej œwiate³
+-- system kolejkowy samochodï¿½w stojï¿½cych na ï¿½wiatï¿½ach
+-- algorytm obsï¿½ugi staï¿½oczasowej ï¿½wiateï¿½
 
-Dalsze pomys³y na rozwój:
--- dodaæ drogê
--- inteligentna obs³uga skrzy¿owania
+Dalsze pomysï¿½y na rozwï¿½j:
+-- dodaï¿½ drogï¿½
+-- inteligentna obsï¿½uga skrzyï¿½owania
 
 Parametry klasy auto (minimalizm):
--- typ (zwyk³y, nauka jazdy)
--- prêdkoœæ, przyspieszenie (maksymalne) - czas przejazdy przez skrzyzowanie od tego zale¿y (czas obs³ugi)
--- czas reakcji !
+-- typ (zwykï¿½y, nauka jazdy)
+-- prï¿½dkoï¿½ï¿½, przyspieszenie (maksymalne) - czas przejazdy przez skrzyzowanie od tego zaleï¿½y (czas obsï¿½ugi)
+-- czas reakcji ! (kolejny samochod nie przejedzie szybciej niz poprzedni!)
+do zaimplementowania w sygnalizajci mozna uÅ¼yÄ‡ zaleÅ¼noÅ›Ä‡i: if (t2<t1) t2 = t1; else t2 = t2 + (t2-t1);  
+xx czas wjazdu na skrzyzowanie wzgledem czasu globalnego (potrzebne do policzenia czasu oczekiwania na skrzyzowaniu)
+xx [opcjonalnie] czas zjazdu / czas oczekiwania
+xx [opcjonalnie] wyglÄ…d
+
+SkrzyÅ¼owanie:
+--operuje na kolejkach i ywoÅ‚uje syganlizacjÄ™
+--obiekty: 4xfifo, sygnalizacja, sygnaly do QT
+
+Iloï¿½c potrzebnych list kolejkowych:
+-- zaczynamy od 4, ale dojdziemy do 8 z lewoskrï¿½tami
 
 
-Iloœc potrzebnych list kolejkowych:
--- zaczynamy od 4, ale dojdziemy do 8 z lewoskrêtami
+Sygnalizacja: (zmiennoczasowa dziedziczy po staÅ‚oczasowej)
+-- stan
+-- czas do konca
+--funkcja przejazdu przez skrzyzowanie zwraca wartosci zaleznie od stanu (1 moze jechac kolejny, 0 stop, -1 kolizja)
+-- przelicza czas jaki samochod spedzi na skrzyzowaniu po zgaszeniu zielonego i na jego podstawie zwraca kolizjÄ™ lub nie
+-- funkcja przelacz()
+
+funckje:
+--generowanie samochodÃ³w
+-- zapis do pliku 
+
