@@ -5,7 +5,7 @@ Sygnalizator::Sygnalizator(unsigned long greenT,
                            unsigned long redT)
     : state(red), greenTime(greenT), redTime(redT)
 {
-    this->wykonaj_stan();
+    //this->wykonaj_stan();
 }
 
 Sygnalizator::Sygnalizator()

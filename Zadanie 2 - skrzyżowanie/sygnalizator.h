@@ -12,7 +12,7 @@ class Sygnalizator
 
 public:
     Sygnalizator(unsigned long greenT, unsigned long redT);
-    Sygnalizator(){};
+    Sygnalizator();
     virtual ~Sygnalizator();
     State getState();
     void change();
