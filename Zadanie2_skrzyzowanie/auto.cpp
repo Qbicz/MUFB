@@ -3,13 +3,14 @@
 #include <time.h>       /* time */
 
 
-Auto::Auto()
-{
-    czas_przejazdu = 0;
-    srand (time(NULL));
-}
+/*!  konstruktor z generatorem
+ *  wartością maksymalną (generator inicjalizowany wcześniej poprzez SetRandomSeed)
+ **/
 
 Auto::Auto(int max){
-
     czas_przejazdu = rand()%max;
+}
+
+int Auto::GetCzasPrzejazdu(){
+    return czas_przejazdu;
 }

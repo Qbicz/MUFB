@@ -2,17 +2,16 @@
 #define AUTO_H
 
 //klasa opisująca samochody
-/*POsiada:
+/*! Posiada:
  * czas przejazdu (generowany losowo)
- *
- *
  **/
 
 class Auto
 {
 public:
-    Auto(); //konstruktor bez seeda
-    Auto(int max); //konstruktor z generatorem i wartością maksymalną (generator inicjalizowany wcześniej)
+    Auto(int max = 3);
+    int GetCzasPrzejazdu();
+
 private:
     int czas_przejazdu;
 };
