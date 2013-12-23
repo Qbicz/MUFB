@@ -14,3 +14,11 @@ Auto::Auto(int max){
 int Auto::GetCzasPrzejazdu(){
     return czas_przejazdu;
 }
+
+/*!
+ * \brief Auto::Reset
+ *      Resetuje czas przejazdu na 0.
+ */
+void Auto::Reset(){
+    czas_przejazdu = 0;
+}

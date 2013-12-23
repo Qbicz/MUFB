@@ -11,6 +11,7 @@ class Auto
 public:
     Auto(int max = 3);
     int GetCzasPrzejazdu();
+    void Reset();
 
 private:
     int czas_przejazdu;

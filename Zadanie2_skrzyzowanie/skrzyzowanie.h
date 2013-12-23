@@ -32,17 +32,19 @@ using namespace std;
 class Skrzyzowanie
 {
 public:
-    Skrzyzowanie(int m = 3);
+    Skrzyzowanie(int m);
+    Skrzyzowanie(int gora, int dol, int lewo, int prawo, int add, int przejazd);
     void obsluga();
 
 private:
     queue <Auto> up, down, left, right;
     Sygnalizator sygnalizator;
-    int max;
+    int maxadd; //maksymalna ilość dodanych aut
 
-    void DodajDoKolejki(queue <Auto> & kolejka, int n=1);
+    void DodajDoKolejki(queue <Auto> & kolejka, int n=1, int maxTime = 3);
     void SetRandomSeed();
     void ZapiszDoPliku();
+    void NaglowekPliku();
 };
 
 #endif // SKRZYZOWANIE_H
