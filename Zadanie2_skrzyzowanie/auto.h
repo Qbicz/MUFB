@@ -9,7 +9,7 @@
 class Auto
 {
 public:
-    Auto(int max = 3);
+    Auto(int max = 3, int min = 1);
     int GetCzasPrzejazdu();
     void Reset();
 

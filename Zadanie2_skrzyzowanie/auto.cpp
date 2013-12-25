@@ -7,8 +7,8 @@
  *  wartością maksymalną (generator inicjalizowany wcześniej poprzez SetRandomSeed)
  **/
 
-Auto::Auto(int max){
-    czas_przejazdu = rand()%max;
+Auto::Auto(int max, int min){
+    czas_przejazdu = rand() % (max - min + 1) + min;
 }
 
 int Auto::GetCzasPrzejazdu(){

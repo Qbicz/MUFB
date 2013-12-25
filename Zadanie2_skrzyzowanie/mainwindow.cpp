@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 
 
-    Skrzyzowanie skrzyzowanie(1000,100,0,0,5,10);
+    Skrzyzowanie skrzyzowanie(120,100,20,0,5,10);
 
     for(int i=0; i<100; i++){
         skrzyzowanie.obsluga();
