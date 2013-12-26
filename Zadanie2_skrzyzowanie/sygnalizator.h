@@ -18,6 +18,7 @@ enum Kierunek {pion, poziom};
 *  czasy przepusczania na pionie i poziomie
 */
 
+
 class Sygnalizator
 {
     State state;

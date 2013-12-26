@@ -28,23 +28,34 @@ using namespace std;
  *      1x publiczna funkja obsługa, która robi wszystko - magic.
  */
 
+enum Inteligence {brak, staloczasowa, inteligentna};
 
 class Skrzyzowanie
 {
 public:
-    Skrzyzowanie(int m);
-    Skrzyzowanie(int gora, int dol, int lewo, int prawo, int add, int przejazd);
+    Skrzyzowanie(int m = 3);
+    Skrzyzowanie(int gora, int dol, int lewo, int prawo, int add = 3, int przejazd = 3);
+    void SetInteligence(Inteligence a);
+    void SetStartEntry(int gora, int dol, int lewo, int prawo);
+    void SetMaxAdd(int maxadd = 3);
+    void SetCzasPrzejazdu(int max = 3, int min = 1);
     void obsluga();
 
 private:
     queue <Auto> up, down, left, right;
     Sygnalizator sygnalizator;
-    int maxadd; //maksymalna ilość dodanych aut
+    int MaxAdd; //maksymalna ilość dodanych aut
+    int MaxCzasPrzejazdu, MinCzasPrzejazdu;
 
-    void DodajDoKolejki(queue <Auto> & kolejka, int n=1, int maxTime = 3);
+
+    void AddRandomQueues(int czasoczekiwania = 0);
+    void DodajDoKolejki(queue <Auto> & kolejka, int n=1, int maxczasprzejazdu = 3, int minczasprzejazdu = 1, int czasoczekiwania = 0);
     void SetRandomSeed();
-    void ZapiszDoPliku();
+    void ZapiszDoPliku(int IteracjaNum);
     void NaglowekPliku();
+
+    void TimeOfService(int numer, bool endline = true, bool init = false);
+
 };
 
 #endif // SKRZYZOWANIE_H

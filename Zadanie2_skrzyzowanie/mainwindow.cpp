@@ -11,7 +11,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 
 
-    Skrzyzowanie skrzyzowanie(120,100,20,0,5,10);
+    Skrzyzowanie skrzyzowanie;
+    skrzyzowanie.SetCzasPrzejazdu(5,1);
+    skrzyzowanie.SetMaxAdd(5);
+    skrzyzowanie.SetStartEntry(120,100,20,0);
+
 
     for(int i=0; i<100; i++){
         skrzyzowanie.obsluga();

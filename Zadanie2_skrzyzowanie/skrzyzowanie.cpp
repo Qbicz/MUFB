@@ -17,15 +17,13 @@ using namespace std;
  *      maxadd - zmienna, która określa maksymalną ilość aut dodawanych do kolejki
  */
 
-Skrzyzowanie::Skrzyzowanie(int m = 3)
+Skrzyzowanie::Skrzyzowanie(int add)
 {
-    maxadd = m;
+    MaxAdd = add;
     SetRandomSeed();
-    //zainicjowanie kolejek losową liczbą aut
-    DodajDoKolejki(up, rand()%maxadd);
-    DodajDoKolejki(down, rand()%maxadd);
-    DodajDoKolejki(left, rand()%maxadd);
-    DodajDoKolejki(right, rand()%maxadd);
+    SetCzasPrzejazdu();
+    NaglowekPliku();
+    TimeOfService(-1,false,true);
 }
 
 /*!
@@ -42,14 +40,11 @@ Skrzyzowanie::Skrzyzowanie(int m = 3)
  *      Ile maksymalnie czasu auto zajmuje na skrzyzowaniu
  */
 
-Skrzyzowanie::Skrzyzowanie(int gora, int dol, int lewo, int prawo, int add = 3, int przejazd = 3){
-    maxadd = add;
+Skrzyzowanie::Skrzyzowanie(int gora, int dol, int lewo, int prawo, int add, int przejazd){
     SetRandomSeed();
-    //zainicjowanie kolejek liczbą aut podaną w deklaracji
-    DodajDoKolejki(up, gora, przejazd);
-    DodajDoKolejki(down, dol, przejazd);
-    DodajDoKolejki(left, lewo, przejazd);
-    DodajDoKolejki(right, prawo, przejazd);
+    SetMaxAdd(add);
+    SetStartEntry(gora,dol,lewo,prawo);
+    SetCzasPrzejazdu(przejazd);
 
     NaglowekPliku();
 }
@@ -66,19 +61,51 @@ void Skrzyzowanie::NaglowekPliku(){
     if (file.open(QFile::Text | QFile::Truncate | QFile::WriteOnly))
     {
         QTextStream out(&file);
-        out << "Lp."<<SEPARATOR<<
-               "#up"<<SEPARATOR<<
-               "#down"<<SEPARATOR<<
-               "#lewo"<<SEPARATOR<<
-               "#prawo"<<SEPARATOR<<
-               "stan"<<SEPARATOR<<
-               "up.time"<<SEPARATOR<<
-               "down.time"<<SEPARATOR<<
-               "left.time"<<SEPARATOR<<
-               "right.time"<<SEPARATOR<<
-               "GreenTime"<<SEPARATOR<<
-               endl;
+        out.setFieldWidth(3);
+        out << "Lp.";
+        out.setFieldWidth(0);
+        out << SEPARATOR;
+        out.setFieldWidth(5);
+        out <<"#up";
+        out.setFieldWidth(0);
+        out << SEPARATOR;
+        out.setFieldWidth(5);
+        out <<"#down";
+        out.setFieldWidth(0);
+        out << SEPARATOR;
+        out.setFieldWidth(5);
+        out <<"#lewo";
+        out.setFieldWidth(0);
+        out << SEPARATOR;
+        out.setFieldWidth(5);
+        out <<"#prawo";
+        out.setFieldWidth(0);
+        out << SEPARATOR;
+        out.setFieldWidth(5);
+        out <<"stan";
+        out.setFieldWidth(0);
+        out << SEPARATOR;
+        out.setFieldWidth(10);
+        out <<"up.time";
+        out.setFieldWidth(0);
+        out << SEPARATOR;
+        out.setFieldWidth(10);
+        out <<"down.time";
+        out.setFieldWidth(0);
+        out << SEPARATOR;
+        out.setFieldWidth(10);
+        out <<"left.time";
+        out.setFieldWidth(0);
+        out << SEPARATOR;
+        out.setFieldWidth(10);
+        out <<"right.time";
+        out.setFieldWidth(0);
+        out << SEPARATOR;
+        out.setFieldWidth(10);
+        out <<"GreenTime";
+        out <<endl;
     }
+    file.close();
 }
 
 /*!
@@ -92,19 +119,102 @@ void Skrzyzowanie::SetRandomSeed(){
 }
 
 /*!
+ * \brief Skrzyzowanie::SetMaxAdd
+ * \param maxadd - maksymalna liczba dodawanych samochodów przy zmianie świateł
+ */
+
+void Skrzyzowanie::SetMaxAdd(int maxadd){
+    MaxAdd = maxadd;
+}
+
+/*!
+ * \brief Skrzyzowanie::AddRandomQueues
+ *          DOdaje do wszystkich kolejejk skrzyzowania losowe liczby wedlug parametrow klasy skrzyzowanie
+ * \param czasoczekiwania - poczatkowa wartosc czasu oczekiwania
+ */
+
+void Skrzyzowanie::AddRandomQueues(int czasoczekiwania){
+    if(MaxAdd!=0){
+        DodajDoKolejki(up, (rand()%MaxAdd), MaxCzasPrzejazdu, MinCzasPrzejazdu, czasoczekiwania);
+        DodajDoKolejki(down, (rand()%MaxAdd), MaxCzasPrzejazdu, MinCzasPrzejazdu, czasoczekiwania);
+        DodajDoKolejki(left, (rand()%MaxAdd), MaxCzasPrzejazdu, MinCzasPrzejazdu, czasoczekiwania);
+        DodajDoKolejki(right, (rand()%MaxAdd), MaxCzasPrzejazdu, MinCzasPrzejazdu, czasoczekiwania);
+    }
+}
+
+/*!
+ * \brief Skrzyzowanie::SetStartEntry
+        Dodaje do kolejejek odpowiednie liczby samochodów (do inicjalizacji początkowej - konstruktor
+ */
+
+void Skrzyzowanie::SetStartEntry(int gora, int dol, int lewo, int prawo){
+    //zainicjowanie kolejek liczbą aut podaną w deklaracji
+    DodajDoKolejki(up, gora);
+    DodajDoKolejki(down, dol);
+    DodajDoKolejki(left, lewo);
+    DodajDoKolejki(right, prawo);
+}
+
+/*!
+ * \brief Skrzyzowanie::SetCzasPrzejazdu
+ *          Ustala przedziały czasu obsługi każdego samochodu (wartość minimalna i maksymalna)
+ */
+
+void Skrzyzowanie::SetCzasPrzejazdu(int max, int min){
+    MaxCzasPrzejazdu = max;
+    MinCzasPrzejazdu = min;
+}
+
+/*!
  * \brief Skrzyzowanie:: DodajDoKolejki
  *  Dodaje do kolejki określoną ilośc samochodów (domyślnie 1)
  *  używa domyślnego konstruktora klasy Auto
  *
  * \param kolejka - referencja danej kolejki
  * \param n - ile samochodów dodać
+ * \param maxCzasPrzejazdu, MinCzasPrzejazdu - Zakres czasu obsługi samochodu
+ * \param CzasOczekiwania - poczatkowy czas oczekiwania
  */
 
-void Skrzyzowanie::DodajDoKolejki(queue <Auto> & kolejka, int n, int maxTime){
+void Skrzyzowanie::DodajDoKolejki(queue <Auto> & kolejka, int n, int maxCzasPrzejazdu, int MinCzasPrzejazdu, int CzasOczekiwania){
     for(int i=n;i>0;i--){
-        Auto temp(maxTime);
+        Auto temp(maxCzasPrzejazdu, MinCzasPrzejazdu, CzasOczekiwania);
         kolejka.push(temp);
     }
+}
+
+/*!
+ * \brief Skrzyzowanie::TimeOfService
+ *       Wpisuje do pliku czasy oczekiwania koejnych samochodów.
+ *       Ze względu, że nie musimy rozróżniać kierunków świata wszystko idzie do jednego pliczku...
+ * \param numer - dana, którą wpisujemy
+ * \param endline - czy koniec linii po danej?
+ * \param init - Czy usunąć wszystkie dane i zacząc od początku?
+ */
+
+void Skrzyzowanie::TimeOfService(int numer, bool endline, bool init){
+    QFile file("czasy.txt");
+    if (init){
+        file.open(QFile::Truncate | QFile::Text| QFile::WriteOnly);
+        QTextStream out(&file);
+        out<<"iteracja"<<SEPARATOR<<
+            "Czasy oczekiwania"<<endl;
+
+    }
+    else
+    {
+        if (file.open(QFile::Append | QFile::Text| QFile::WriteOnly))
+        {
+            QTextStream out(&file);
+            if(numer!=-1){
+                out<<numer<<SEPARATOR;
+            }
+            if(endline){
+                out<<endl;
+            }
+        }
+    }
+    file.close();
 }
 
 /*!
@@ -112,64 +222,99 @@ void Skrzyzowanie::DodajDoKolejki(queue <Auto> & kolejka, int n, int maxTime){
  *      Zapisuje co tylko wlezie do pliku wynik.txt
  */
 
-void Skrzyzowanie::ZapiszDoPliku(){
+void Skrzyzowanie::ZapiszDoPliku(int IteracjaNum){
 
-    static int iteracjaNum = 0;
+
     QFile file("wynik.txt");
     if (file.open(QFile::Append | QFile::Text| QFile::WriteOnly))
     {
         QTextStream out(&file);
-        out << iteracjaNum<<SEPARATOR<<
-               up.size()<<SEPARATOR<<
-               down.size()<<SEPARATOR<<
-               left.size()<<SEPARATOR<<
-               right.size()<<SEPARATOR<<
-               sygnalizator.getKierunek()<<SEPARATOR;
+        out.setFieldWidth(3);
+        out << IteracjaNum;
+        out.setFieldWidth(0);
+        out << SEPARATOR;
+        out.setFieldWidth(5);
+        out <<up.size();
+        out.setFieldWidth(0);
+        out << SEPARATOR;
+        out.setFieldWidth(5);
+        out <<down.size();
+        out.setFieldWidth(0);
+        out << SEPARATOR;
+        out.setFieldWidth(5);
+        out <<left.size();
+        out.setFieldWidth(0);
+        out << SEPARATOR;
+        out.setFieldWidth(5);
+        out <<right.size();
+        out.setFieldWidth(0);
+        out << SEPARATOR;
+        out.setFieldWidth(5);
+        out <<sygnalizator.getKierunek();
+        out.setFieldWidth(0);
+        out << SEPARATOR;
 
         Auto temp;
         if(!(up.empty())){
             temp = up.front();
-            out << temp.GetCzasPrzejazdu()<<SEPARATOR;
+            out.setFieldWidth(10);
+            out << temp.GetCzasPrzejazdu();
         }
         else {
-            out<<'0'<<SEPARATOR;
+            out.setFieldWidth(10);
+            out<<'0';
         }
+        out.setFieldWidth(0);
+        out << SEPARATOR;
+
         if(!(down.empty())){
             temp = down.front();
-            out << temp.GetCzasPrzejazdu()<<SEPARATOR;
+            out.setFieldWidth(10);
+            out << temp.GetCzasPrzejazdu();
         }
         else {
-            out<<'0'<<SEPARATOR;
+            out.setFieldWidth(10);
+            out<<'0';
         }
+        out.setFieldWidth(0);
+        out << SEPARATOR;
+
         if(!(left.empty())){
             temp = left.front();
-            out << temp.GetCzasPrzejazdu()<<SEPARATOR;
+            out.setFieldWidth(10);
+            out << temp.GetCzasPrzejazdu();
         }
         else {
-            out<<'0'<<SEPARATOR;
+            out.setFieldWidth(10);
+            out<<'0';
         }
+        out.setFieldWidth(0);
+        out << SEPARATOR;
+
         if(!(right.empty())){
             temp = right.front();
-            out << temp.GetCzasPrzejazdu()<<SEPARATOR;
+            out.setFieldWidth(10);
+            out << temp.GetCzasPrzejazdu();
         }
         else {
-            out<<'0'<<SEPARATOR;
+            out.setFieldWidth(10);
+            out<<'0';
         }
-        out<<sygnalizator.getTime()<<SEPARATOR;
+        out.setFieldWidth(0);
+        out << SEPARATOR;
+
+        out.setFieldWidth(10);
+        out << sygnalizator.getTime();
 
         out<<endl;
     }
-    iteracjaNum++;
+
+    file.close();
 }
 
 /*!
  * \brief Skrzyzowanie::obsluga
- *      magia - komentarze dodam w miarę tworzenia
- *      stan na dziś:
- *      - działa przełączanie stanów
- *      - pliki chyba chodzą ok
- *      nie działa:
- *      - usuwanie aut (nie wiem, czy dodawanie działa dobrze)
+ *     Działa, ale trzeba jeszcze dodać obsługę bez świateł oraz z inteligentnymi
  */
 
 void Skrzyzowanie::obsluga(){
@@ -180,20 +325,26 @@ void Skrzyzowanie::obsluga(){
     temp1 = temp2 = sygnalizator.getTime();
     Auto pierwszy, drugi;
 
-    ZapiszDoPliku();
+    static int iteracjaNum = 0;
+    static int CzasObslugi = 0;
 
-    while(((temp1>0)||(temp2>0))&&(m==0)){
+    ZapiszDoPliku(iteracjaNum);
+    TimeOfService(iteracjaNum, false);
+
+    while((temp1>0)&&(temp2>0)&&(m==0)){
     if(sygnalizator.getKierunek()==pion){
         if(!up.empty()){
             pierwszy = up.front();
-            temp1-=pierwszy.GetCzasPrzejazdu();
+            temp1=temp1 - pierwszy.GetCzasPrzejazdu();
+            TimeOfService(CzasObslugi+sygnalizator.getTime() - temp1 + pierwszy.GetCzasOczekiwania(), false);
             up.pop();
         }
         else{}
 
         if(!down.empty()){
             drugi = down.front();
-            temp2-=drugi.GetCzasPrzejazdu();
+            temp2= temp2 - drugi.GetCzasPrzejazdu();
+            TimeOfService(CzasObslugi+sygnalizator.getTime() - temp2 + drugi.GetCzasOczekiwania(), false);
             down.pop();
         }
         else{}
@@ -206,12 +357,14 @@ void Skrzyzowanie::obsluga(){
         if(!left.empty()){
             pierwszy = left.front();
             temp1-=pierwszy.GetCzasPrzejazdu();
+            TimeOfService(CzasObslugi+sygnalizator.getTime() - temp1 + pierwszy.GetCzasOczekiwania(), false);
             left.pop();
         }
 
         if(!right.empty()){
             drugi = right.front();
             temp2-=drugi.GetCzasPrzejazdu();
+            TimeOfService(CzasObslugi+sygnalizator.getTime() - temp2 + drugi.GetCzasOczekiwania(), false);
             right.pop();
         }
 
@@ -219,18 +372,12 @@ void Skrzyzowanie::obsluga(){
             m=1;
         }
     }
-
-    //testy tempów:
-    //cout<<"Temp1: "<<temp1<<endl;
-    //cout<<"Temp2: "<<temp2<<endl;
     }
+    TimeOfService(-1,true);
 
+    iteracjaNum++;
     sygnalizator.changeKierunek();
-
-    DodajDoKolejki(up, (rand()%maxadd));
-    DodajDoKolejki(down, (rand()%maxadd));
-    DodajDoKolejki(left, (rand()%maxadd));
-    DodajDoKolejki(right, (rand()%maxadd));
-
+    CzasObslugi+=sygnalizator.getTime();
+    AddRandomQueues(-CzasObslugi);
 
 }
