@@ -10,17 +10,29 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
 
+    Skrzyzowanie skrzyzowanie;
+    skrzyzowanie.InitFile("rozladowanie.txt");
+
+
+    for(int i = 0;i<100;i++){
+
 
     Skrzyzowanie skrzyzowanie;
     skrzyzowanie.SetCzasPrzejazdu(5,1);
     skrzyzowanie.SetMaxAdd(5);
     skrzyzowanie.SetStartEntry(120,100,20,0);
+    cout<<i<<endl;
 
-
-    for(int i=0; i<100; i++){
+    int j=0;
+    while(!skrzyzowanie.rozladowanie)
+    {
         skrzyzowanie.obsluga();
-        cout<<i<<endl;
+        //cout<<j<<endl;
+        j++;
     }
+
+    }
+
     ui->setupUi(this);
 
 }

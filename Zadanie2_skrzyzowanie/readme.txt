@@ -22,6 +22,22 @@
   Skrzyżowanie:
 --operuje na kolejkach i ywołuje syganlizację
 --obiekty: 4xfifo, sygnalizacja, sygnaly do QT
+
+Sygnalizacja inteligentna:
+Proponuję dodać zmienna czas_opóznienia do kazdego typu skrzyzowania. 
+Chodzi mi o to, że zmiana świateł w rzeczywistości zajmuje czas. Stąd, żeby inteligentne nie puszczały po jednym auteczku dałbym ją jako 2 sekundy 
+(po prostu GetTime zwracałaby czas: greenTime - czas_opóźnienia)
+
+Jednocześnie rozwiąże to problem skrzyżowania bez świateł:
+-- bez świateł:
+--- wybiera, które auto ma najktótszy czas_przejazdu i puszcza to auto jako pierwsze - (w praktyce też tak jest, że najszybsze auto pierwsze przejedzie)
+--- puszcza pozostałe 3 auta po kolei (najprościej jak się da?) - inne propozycje?
+--- czeka czas_opóźnienia (kierowcy decydują kto teraz - reguła lewej ręki i takei tam) - czas ten jest krótszy od światłowego!
+--- otwiera nową kolejkę 
+
+Bez świateł to zabawa z czasem oczekiwania (stałoczasówka daje go w granicach 400-500 (maximum))
+
+
   
  --Ilość potrzebnych list kolejkowych:
  -- zaczynamy od 4, ale dojdziemy do 8 z lewoskrętami

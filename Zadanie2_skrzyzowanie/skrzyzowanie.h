@@ -2,6 +2,7 @@
 #define SKRZYZOWANIE_H
 #include "auto.h"
 #include "sygnalizator.h"
+#include <QString>
 
 /*!
  *plik nagłówkowy kolejek FIFO (działa jak wektor)
@@ -41,12 +42,18 @@ public:
     void SetCzasPrzejazdu(int max = 3, int min = 1);
     void obsluga();
 
+    void SaveFile(int numer, bool endline, QString name);
+    void InitFile(QString name);
+
+    bool rozladowanie; //czy już jest rozladowany
+
 private:
     queue <Auto> up, down, left, right;
     Sygnalizator sygnalizator;
-    int MaxAdd; //maksymalna ilość dodanych aut
+    unsigned int MaxAdd; //maksymalna ilość dodanych aut
     int MaxCzasPrzejazdu, MinCzasPrzejazdu;
-
+    unsigned int CzasObslugi;
+    unsigned int iteracjaNum;
 
     void AddRandomQueues(int czasoczekiwania = 0);
     void DodajDoKolejki(queue <Auto> & kolejka, int n=1, int maxczasprzejazdu = 3, int minczasprzejazdu = 1, int czasoczekiwania = 0);
@@ -54,7 +61,9 @@ private:
     void ZapiszDoPliku(int IteracjaNum);
     void NaglowekPliku();
 
-    void TimeOfService(int numer, bool endline = true, bool init = false);
+    //nazwy plików
+    QString name_czasy;
+    QString name_rozladowanie;
 
 };
 

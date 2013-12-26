@@ -19,11 +19,16 @@ using namespace std;
 
 Skrzyzowanie::Skrzyzowanie(int add)
 {
+    name_czasy = "czasy.txt";
+    name_rozladowanie = "rozladowanie.txt";
     MaxAdd = add;
     SetRandomSeed();
     SetCzasPrzejazdu();
     NaglowekPliku();
-    TimeOfService(-1,false,true);
+    InitFile(name_czasy);
+    rozladowanie =false;
+    CzasObslugi = 0;
+    iteracjaNum = 0;
 }
 
 /*!
@@ -45,8 +50,13 @@ Skrzyzowanie::Skrzyzowanie(int gora, int dol, int lewo, int prawo, int add, int 
     SetMaxAdd(add);
     SetStartEntry(gora,dol,lewo,prawo);
     SetCzasPrzejazdu(przejazd);
-
+    rozladowanie =false;
     NaglowekPliku();
+    name_czasy = "czasy.txt";
+    name_rozladowanie = "rozladowanie.txt";
+    InitFile(name_czasy);
+    CzasObslugi = 0;
+    iteracjaNum = 0;
 }
 
 /*!
@@ -184,26 +194,39 @@ void Skrzyzowanie::DodajDoKolejki(queue <Auto> & kolejka, int n, int maxCzasPrze
 }
 
 /*!
- * \brief Skrzyzowanie::TimeOfService
- *       Wpisuje do pliku czasy oczekiwania koejnych samochodów.
- *       Ze względu, że nie musimy rozróżniać kierunków świata wszystko idzie do jednego pliczku...
- * \param numer - dana, którą wpisujemy
- * \param endline - czy koniec linii po danej?
- * \param init - Czy usunąć wszystkie dane i zacząc od początku?
+ * \brief Skrzyzowanie::InitFile
+ *      To miała być funkcja inicjalizująca nagłówki w plikach, ale coś szwankuje
+ * \param name - nazwa pliku
  */
 
-void Skrzyzowanie::TimeOfService(int numer, bool endline, bool init){
-    QFile file("czasy.txt");
-    if (init){
-        file.open(QFile::Truncate | QFile::Text| QFile::WriteOnly);
-        QTextStream out(&file);
-        out<<"iteracja"<<SEPARATOR<<
-            "Czasy oczekiwania"<<endl;
+void Skrzyzowanie::InitFile(QString name){
+    QFile file(name);
+    if (file.open(QFile::Truncate | QFile::Text | QFile::WriteOnly))
+        {
+            QTextStream out(&file);
+            if (name == name_czasy){
+                out<<"Iteracja"<<SEPARATOR<<"Czasy ozekiwania"<<endl;
+            }
+            if (name == name_rozladowanie){
+                out<<"Rozladowanie po:"<<endl;
+            }
 
-    }
-    else
-    {
-        if (file.open(QFile::Append | QFile::Text| QFile::WriteOnly))
+        }
+    file.close();
+}
+
+/*!
+ * \brief Skrzyzowanie::SaveFile
+ *      Funkcja wpisująca do pliku dane - TU JEST GDZIEŚ BŁĄD (typu dzielenie przez 0, bo wywala aplikację, a nie blędy)
+ * \param numer - liczba jaką wpiszemy do pliku
+ * \param endline - czy koniec linii
+ * \param name - nazwa
+ */
+
+void Skrzyzowanie::SaveFile(int numer, bool endline, QString name){
+
+    QFile file(name);
+    if (file.open(QFile::Append | QFile::Text| QFile::WriteOnly))
         {
             QTextStream out(&file);
             if(numer!=-1){
@@ -213,7 +236,7 @@ void Skrzyzowanie::TimeOfService(int numer, bool endline, bool init){
                 out<<endl;
             }
         }
-    }
+
     file.close();
 }
 
@@ -314,7 +337,7 @@ void Skrzyzowanie::ZapiszDoPliku(int IteracjaNum){
 
 /*!
  * \brief Skrzyzowanie::obsluga
- *     Działa, ale trzeba jeszcze dodać obsługę bez świateł oraz z inteligentnymi
+ *      Działa, ale trzeba jeszcze dodać obsługę bez świateł oraz z inteligentnymi
  */
 
 void Skrzyzowanie::obsluga(){
@@ -322,21 +345,20 @@ void Skrzyzowanie::obsluga(){
     //najpierw mnożymy zmienne
     int temp1, temp2;
     int m=0;
-    temp1 = temp2 = sygnalizator.getTime();
+    temp1 = temp2 = sygnalizator.getTime(); //zmienne określające czas podczas przejazdu aut
     Auto pierwszy, drugi;
 
-    static int iteracjaNum = 0;
-    static int CzasObslugi = 0;
-
     ZapiszDoPliku(iteracjaNum);
-    TimeOfService(iteracjaNum, false);
+    SaveFile(iteracjaNum, false, name_czasy);
 
-    while((temp1>0)&&(temp2>0)&&(m==0)){
+    //pętelka na światła:
+
+    while((temp1>0)&&(temp2>0)&&(m==0)){ // warunek końca przejazdu samochodów
     if(sygnalizator.getKierunek()==pion){
         if(!up.empty()){
             pierwszy = up.front();
             temp1=temp1 - pierwszy.GetCzasPrzejazdu();
-            TimeOfService(CzasObslugi+sygnalizator.getTime() - temp1 + pierwszy.GetCzasOczekiwania(), false);
+            SaveFile(CzasObslugi+sygnalizator.getTime() - temp1 + pierwszy.GetCzasOczekiwania(), false, name_czasy);
             up.pop();
         }
         else{}
@@ -344,7 +366,7 @@ void Skrzyzowanie::obsluga(){
         if(!down.empty()){
             drugi = down.front();
             temp2= temp2 - drugi.GetCzasPrzejazdu();
-            TimeOfService(CzasObslugi+sygnalizator.getTime() - temp2 + drugi.GetCzasOczekiwania(), false);
+            SaveFile(CzasObslugi+sygnalizator.getTime() - temp2 + drugi.GetCzasOczekiwania(), false, name_czasy);
             down.pop();
         }
         else{}
@@ -357,14 +379,14 @@ void Skrzyzowanie::obsluga(){
         if(!left.empty()){
             pierwszy = left.front();
             temp1-=pierwszy.GetCzasPrzejazdu();
-            TimeOfService(CzasObslugi+sygnalizator.getTime() - temp1 + pierwszy.GetCzasOczekiwania(), false);
+            SaveFile(CzasObslugi+sygnalizator.getTime() - temp1 + pierwszy.GetCzasOczekiwania(), false, name_czasy);
             left.pop();
         }
 
         if(!right.empty()){
             drugi = right.front();
             temp2-=drugi.GetCzasPrzejazdu();
-            TimeOfService(CzasObslugi+sygnalizator.getTime() - temp2 + drugi.GetCzasOczekiwania(), false);
+            SaveFile(CzasObslugi+sygnalizator.getTime() - temp2 + drugi.GetCzasOczekiwania(), false, name_czasy);
             right.pop();
         }
 
@@ -373,10 +395,23 @@ void Skrzyzowanie::obsluga(){
         }
     }
     }
-    TimeOfService(-1,true);
+
+    //zakończ linię w pliku czasy.txt
+    SaveFile(-1,true, name_czasy);
+
+    //warunek rozładowania skrzyżowania
+    if((up.size()<=MaxAdd)&&(down.size()<=MaxAdd)&&(left.size()<=MaxAdd)&&(right.size()<=MaxAdd)){
+        rozladowanie = true;
+        iteracjaNum++;
+        ZapiszDoPliku(iteracjaNum);
+        SaveFile(iteracjaNum,true,name_rozladowanie);
+    }
+
 
     iteracjaNum++;
     sygnalizator.changeKierunek();
+
+    //obsługa czasu obsługi
     CzasObslugi+=sygnalizator.getTime();
     AddRandomQueues(-CzasObslugi);
 
