@@ -10,6 +10,28 @@
 \usepackage{listings}
 \lstloadlanguages{TeX}
 
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+    backgroundcolor=\color{lbcolor},
+    tabsize=4,
+  language=C++,
+  captionpos=b,
+  tabsize=3,
+  frame=lines,
+  numbers=left,
+  numberstyle=\tiny,
+  numbersep=5pt,
+  breaklines=true,
+  showstringspaces=false,
+  basicstyle=\footnotesize,
+%  identifierstyle=\color{magenta},
+  keywordstyle=\color[rgb]{0,0,1},
+  commentstyle=\color{Darkgreen},
+  stringstyle=\color{red}
+  }
 \lstset{
   literate={ą}{{\k{a}}}1
            {ć}{{\'c}}1
@@ -67,12 +89,13 @@
 \begin{document}
 \titlepages
 
-\chapter{Równania ruchu}
+\section{Teoria}
+Wachadło podwójne jest to wachadło matematyczne zawieszone na drugim wachadle matematycznym. Jego schemat pokazuje rys. \ref{Schemat}.
 \begin{figure}[h!]
 \centering
 \label{Schemat}
 \setlength{\unitlength}{2mm}
-\begin{picture}(50,50)(0,0)
+\begin{picture}(50,35)(0,15)
 
 \put(25,50){\vector(1,0){3}}
 \put(25,50){\vector(0,-1){3}}
@@ -99,19 +122,12 @@
 \end{picture}
 \caption{Schemat wachadła}
 \end{figure}
-Równania ruchu można wyznaczyć korzystając z równania Lagrangea-Eurela. Energia potencjalna układu jest równa:
-\begin{equation}
-	V=m_1gl_1 \cos(\varphi_1)+m_2g(l_1 \cos(\varphi_1)+l_2 \cos(\varphi_2)
-\end{equation}
-Natomiast energia kinetyczna układu wynosi:
-\begin{equation}
-	K=\frac{1}{2}m_1v_1^2+\frac{1}{2}m_2v_2^2
-\end{equation}
-Aby uprościć równania, przyjmujemy:
+Wachadło opisuje 5 parametrów masy $m_1$ i $m_2$, długości $l_1$ i $l_2$ oraz przyśpieszenie ziemskie $g$. Można jednka zmniejszyś ich ilość podstawiając: 
 \begin{equation}
 	A = \frac{m_1}{m_2} \qquad B = \frac{l_2}{l_1} \qquad C = \frac{g}{l_1}
 \end{equation}
-Ruch wachadła opisuje równania:
+Stan wachadł opisują cztery parametry: kąty $\varphi_1$ i $\varphi_2$ oraz prędkości kątowe $\omega_1$ i $\omega_2$. 
+Ruch opisuje układ czterech równań różniczkowych:
 \begin{equation}
 	\dot{\varphi}_1 = \omega_1
 \end{equation}
@@ -125,7 +141,44 @@ Ruch wachadła opisuje równania:
 \begin{equation}
 	\dot{\omega}_2 = \frac{(A+1)(\omega_1^2\sin(\varphi_1-\varphi_2)-C\sin(p2))+\cos(\varphi_1-\varphi_2)((B\omega_2^2 \sin(\varphi_1-\varphi_2))+C(A+1)\sin(\varphi_1))}{B(A+\sin^2(\varphi_1-\varphi_2)}
 \end{equation}
+W modelu nie uwzględniono tarcia.
 \section{Implementacja}
+Równiania zostały rozwiązane numerycznie za pomocą metody Rungego-Kutty czwartego rzędu która została zaimplementowana w języku c++:
+\begin{lstlisting}
+  void next_step(
+    e1 = next_e1();
+    e2 = next_e2();
+
+    float k1_1 = h*n_e1(p1,p2,w1,w2);
+    float k1_2 = h*n_e2(p1,p2,w1,w2);
+    float k1_3 = h*(w1);
+    float k1_4 = h*(w2);
+
+    float k2_1 = h*n_e1(p1+k1_3/2, p2+k1_4/2, w1+k1_1/2, w2+k1_2/2);
+    float k2_2 = h*n_e2(p1+k1_3/2, p2+k1_4/2, w1+k1_1/2, w2+k1_2/2);
+    float k2_3 = h*(k1_1/2+w1);
+    float k2_4 = h*(k1_2/2+w2);
+
+    float k3_1 = h*n_e1(p1+k2_3/2, p2+k2_4/2, w1+k2_1/2, w2+k2_2/2);
+    float k3_2 = h*n_e2(p1+k2_3/2, p2+k2_4/2, w1+k2_1/2, w2+k2_2/2);
+    float k3_3 = h*(k2_1/2+w1);
+    float k3_4 = h*(k2_2/2+w2);
+
+    float k4_1 = h*n_e1(p1+k3_3, p2+k3_4, w1+k3_1, w2+k3_2);
+    float k4_2 = h*n_e2(p1+k3_3, p2+k3_4, w1+k3_1, w2+k3_2);
+    float k4_3 = h*(k3_1+w1);
+    float k4_4 = h*(k3_2+w2);
+
+    w1 += (k1_1+2*k2_1+2*k3_1+k4_1)/6;
+    w2 += (k1_2+2*k2_2+2*k3_2+k4_2)/6;
+    p1 += (k1_3+2*k2_3+2*k3_3+k4_3)/6;
+    p2 += (k1_4+2*k2_4+2*k3_4+k4_4)/6;
+
+    i++;
+  }
+
+
+\end{lstlisting}
 
 \section{Wyniki}
 

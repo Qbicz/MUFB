@@ -119,23 +119,21 @@ Supervisor: & {\itshape \@supervisor}\\
 \centerline{\small\sffamily Krak\'{o}w, \@date}
 
 
-\clearpage \titlepage
-
 \setcounter{page}{2}
 
 }
 
 
 \pagestyle{fancy}
-\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+%\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+%\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
 \renewcommand{\headrulewidth}{0.5pt}
 \renewcommand{\footrulewidth}{0.5pt}
 \fancyhf{}
 \fancyhead{}
-%\fancyhead[L]{\slshape{\small \rightmark}}
+\fancyhead[L]{\slshape{\small \rightmark}}
 \fancyhead[RE,LO]{\slshape{\small \rightmark}}
-%\fancyhead[R]{\bfseries \thepage}
+\fancyhead[R]{\bfseries \thepage}
 \fancyhead[RO,LE]{\bfseries \thepage}
 
 \thesisheaders
@@ -150,11 +148,11 @@ Supervisor: & {\itshape \@supervisor}\\
 % Ustawienia parametrów dla tytu³ów rozdzia³ów, podrozdzia³ów, itd.
 %---------------------------------------------------------------------------
 
-
-\titleformat{\chapter}[block]
-{\bfseries\LARGE}{\filright \LARGE\thechapter. }{0ex}{}
+\renewcommand{\thesection}{\arabic{section}}
+\titleformat{\section}[block]
+{\bfseries\LARGE}{\filright \LARGE }{0ex}{}
 %odstêpy: lewy, góra, dó³
-\titlespacing{\chapter}{0pt}{17mm}{19mm}
+\titlespacing{\section}{0pt}{17mm}{19mm}
 \titleformat{\section}[block]
 {\bfseries\Large}{\filright \Large\thesection. }{0ex}{}
 \titlespacing{\section}{7mm}{8mm plus 0mm minus 1mm}{4mm plus 0mm minus 1mm}
