@@ -13,6 +13,11 @@ class Inteligentne : public Sygnalizator
 {
 public:
     Inteligentne();
+    int getTime();
+    void setParameters(int *parameters);
+    void obsluga(int *dane);
+    //wspołłczynniki:
+    int proporcjonalny;
 };
 
 #endif // INTELIGENTNE_H

@@ -13,11 +13,16 @@ MainWindow::MainWindow(QWidget *parent) :
     Skrzyzowanie skrzyzowanie;
     skrzyzowanie.InitFile("rozladowanie.txt");
 
+    //parametry sygnalizacji
+    int parametry[3];
+    parametry[0] = 33; //greenTime
+    parametry[1] = 2;  //opóźnienie
+    parametry[2] = pion;  //kierunek
 
-    for(int i = 0;i<100;i++){
+    for(int i = 0;i<10;i++){
 
-
-    Skrzyzowanie skrzyzowanie;
+    Skrzyzowanie skrzyzowanie(i);
+    skrzyzowanie.SetInteligence(staloczasowa,parametry);
     skrzyzowanie.SetCzasPrzejazdu(5,1);
     skrzyzowanie.SetMaxAdd(5);
     skrzyzowanie.SetStartEntry(120,100,20,0);

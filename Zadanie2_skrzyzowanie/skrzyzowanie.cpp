@@ -3,6 +3,7 @@
 #include <time.h>       /* time */
 #include <iostream>
 
+
 #include <QFile>
 #include <QTextStream>
 
@@ -14,15 +15,15 @@ using namespace std;
 /*!
  * \brief Skrzyzowanie::Skrzyzowanie
  *      Domyślny konstruktok klasy skrzyżowanie - jeszcze nic nie robi...
- *      maxadd - zmienna, która określa maksymalną ilość aut dodawanych do kolejki
+ *      mnoznik - tylko i wylacznie do usuniecia efektu zbyt szybkiego programu i małej liczby liczb losowych...
  */
 
-Skrzyzowanie::Skrzyzowanie(int add)
+Skrzyzowanie::Skrzyzowanie(int mnoznik)
 {
     name_czasy = "czasy.txt";
     name_rozladowanie = "rozladowanie.txt";
-    MaxAdd = add;
-    SetRandomSeed();
+    MaxAdd = 3;
+    SetRandomSeed(mnoznik);
     SetCzasPrzejazdu();
     NaglowekPliku();
     InitFile(name_czasy);
@@ -123,8 +124,8 @@ void Skrzyzowanie::NaglowekPliku(){
  *      ustala seed na time(NULL)
  */
 
-void Skrzyzowanie::SetRandomSeed(){
-    srand (time(NULL));
+void Skrzyzowanie::SetRandomSeed(int mnoznik){
+    srand (time(NULL) *mnoznik);
 
 }
 
@@ -135,6 +136,33 @@ void Skrzyzowanie::SetRandomSeed(){
 
 void Skrzyzowanie::SetMaxAdd(int maxadd){
     MaxAdd = maxadd;
+}
+
+void Skrzyzowanie::SetInteligence(Inteligence a, int * parameters){
+    switch (a)
+    {
+        case staloczasowa:
+            {
+                sygnalizator  = new Staloczasowy;
+                break;
+            }
+
+    case inteligentna :
+    {
+        sygnalizator = new Inteligentne;
+        break;
+    }
+    case brak:
+    {
+        break;
+    }
+    default:
+    {
+        break;
+    }
+    }
+
+    sygnalizator->setParameters(parameters);
 }
 
 /*!
@@ -273,7 +301,7 @@ void Skrzyzowanie::ZapiszDoPliku(int IteracjaNum){
         out.setFieldWidth(0);
         out << SEPARATOR;
         out.setFieldWidth(5);
-        out <<sygnalizator.getKierunek();
+        out <<sygnalizator->getKierunek();
         out.setFieldWidth(0);
         out << SEPARATOR;
 
@@ -327,7 +355,7 @@ void Skrzyzowanie::ZapiszDoPliku(int IteracjaNum){
         out << SEPARATOR;
 
         out.setFieldWidth(10);
-        out << sygnalizator.getTime();
+        out << sygnalizator->getTime();
 
         out<<endl;
     }
@@ -345,7 +373,7 @@ void Skrzyzowanie::obsluga(){
     //najpierw mnożymy zmienne
     int temp1, temp2;
     int m=0;
-    temp1 = temp2 = sygnalizator.getTime(); //zmienne określające czas podczas przejazdu aut
+    temp1 = temp2 = sygnalizator->getTime() - sygnalizator->opoznienie; //zmienne określające czas podczas przejazdu aut (przejazd auto to czas zielonego - opóż nienie
     Auto pierwszy, drugi;
 
     ZapiszDoPliku(iteracjaNum);
@@ -354,19 +382,19 @@ void Skrzyzowanie::obsluga(){
     //pętelka na światła:
 
     while((temp1>0)&&(temp2>0)&&(m==0)){ // warunek końca przejazdu samochodów
-    if(sygnalizator.getKierunek()==pion){
+    if(sygnalizator->getKierunek()==pion){
         if(!up.empty()){
             pierwszy = up.front();
-            temp1=temp1 - pierwszy.GetCzasPrzejazdu();
-            SaveFile(CzasObslugi+sygnalizator.getTime() - temp1 + pierwszy.GetCzasOczekiwania(), false, name_czasy);
+            SaveFile(CzasObslugi+sygnalizator->getTime() - temp1 + pierwszy.GetCzasOczekiwania(), false, name_czasy);
+            temp1=temp1 - pierwszy.GetCzasPrzejazdu();            
             up.pop();
         }
         else{}
 
         if(!down.empty()){
             drugi = down.front();
+            SaveFile(CzasObslugi+sygnalizator->getTime() - temp2 + drugi.GetCzasOczekiwania(), false, name_czasy);
             temp2= temp2 - drugi.GetCzasPrzejazdu();
-            SaveFile(CzasObslugi+sygnalizator.getTime() - temp2 + drugi.GetCzasOczekiwania(), false, name_czasy);
             down.pop();
         }
         else{}
@@ -378,15 +406,15 @@ void Skrzyzowanie::obsluga(){
     else {
         if(!left.empty()){
             pierwszy = left.front();
+            SaveFile(CzasObslugi+sygnalizator->getTime() - temp1 + pierwszy.GetCzasOczekiwania(), false, name_czasy);
             temp1-=pierwszy.GetCzasPrzejazdu();
-            SaveFile(CzasObslugi+sygnalizator.getTime() - temp1 + pierwszy.GetCzasOczekiwania(), false, name_czasy);
             left.pop();
         }
 
         if(!right.empty()){
             drugi = right.front();
+            SaveFile(CzasObslugi+sygnalizator->getTime() - temp2 + drugi.GetCzasOczekiwania(), false, name_czasy);
             temp2-=drugi.GetCzasPrzejazdu();
-            SaveFile(CzasObslugi+sygnalizator.getTime() - temp2 + drugi.GetCzasOczekiwania(), false, name_czasy);
             right.pop();
         }
 
@@ -409,10 +437,11 @@ void Skrzyzowanie::obsluga(){
 
 
     iteracjaNum++;
-    sygnalizator.changeKierunek();
+    //cerr<<iteracjaNum<<endl;
+    sygnalizator->obsluga();
 
     //obsługa czasu obsługi
-    CzasObslugi+=sygnalizator.getTime();
+    CzasObslugi+=sygnalizator->getTime();
     AddRandomQueues(-CzasObslugi);
 
 }

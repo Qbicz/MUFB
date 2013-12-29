@@ -2,6 +2,9 @@
 #define SKRZYZOWANIE_H
 #include "auto.h"
 #include "sygnalizator.h"
+#include "staloczasowy.h"
+#include "inteligentne.h"
+
 #include <QString>
 
 /*!
@@ -34,9 +37,9 @@ enum Inteligence {brak, staloczasowa, inteligentna};
 class Skrzyzowanie
 {
 public:
-    Skrzyzowanie(int m = 3);
+    Skrzyzowanie(int mnoznik =1);
     Skrzyzowanie(int gora, int dol, int lewo, int prawo, int add = 3, int przejazd = 3);
-    void SetInteligence(Inteligence a);
+    void SetInteligence(Inteligence a, int* parameters);
     void SetStartEntry(int gora, int dol, int lewo, int prawo);
     void SetMaxAdd(int maxadd = 3);
     void SetCzasPrzejazdu(int max = 3, int min = 1);
@@ -49,7 +52,7 @@ public:
 
 private:
     queue <Auto> up, down, left, right;
-    Sygnalizator sygnalizator;
+    Sygnalizator * sygnalizator;
     unsigned int MaxAdd; //maksymalna ilość dodanych aut
     int MaxCzasPrzejazdu, MinCzasPrzejazdu;
     unsigned int CzasObslugi;
@@ -57,7 +60,7 @@ private:
 
     void AddRandomQueues(int czasoczekiwania = 0);
     void DodajDoKolejki(queue <Auto> & kolejka, int n=1, int maxczasprzejazdu = 3, int minczasprzejazdu = 1, int czasoczekiwania = 0);
-    void SetRandomSeed();
+    void SetRandomSeed(int mnoznik = 1);
     void ZapiszDoPliku(int IteracjaNum);
     void NaglowekPliku();
 

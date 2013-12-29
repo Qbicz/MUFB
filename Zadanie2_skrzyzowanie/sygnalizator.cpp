@@ -57,3 +57,12 @@ void Sygnalizator::changeKierunek()
         kierunek = pion;
 }
 
+void Sygnalizator:: setParameters(int *parameters){
+    greenTime = parameters[0];
+    opoznienie = parameters[1];
+    kierunek = (Kierunek)parameters[2];
+}
+
+void Sygnalizator::obsluga(int * dane){
+    changeKierunek();
+}
