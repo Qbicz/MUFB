@@ -119,7 +119,7 @@ Supervisor: & {\itshape \@supervisor}\\
 \centerline{\small\sffamily Krak\'{o}w, \@date}
 
 
-\setcounter{page}{2}
+\setcounter{page}{1}
 
 }
 
@@ -131,10 +131,10 @@ Supervisor: & {\itshape \@supervisor}\\
 \renewcommand{\footrulewidth}{0.5pt}
 \fancyhf{}
 \fancyhead{}
-\fancyhead[L]{\slshape{\small \rightmark}}
-\fancyhead[RE,LO]{\slshape{\small \rightmark}}
+%\fancyhead[L]{\slshape{\small \rightmark}}
+%\fancyhead[RE,LO]{\slshape{\small \rightmark}}
 \fancyhead[R]{\bfseries \thepage}
-\fancyhead[RO,LE]{\bfseries \thepage}
+%\fancyhead[RO,LE]{\bfseries \thepage}
 
 \thesisheaders
 
