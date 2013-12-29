@@ -17,7 +17,9 @@ public:
     void setParameters(int *parameters);
     void obsluga(int *dane);
     //wspołłczynniki:
-    int proporcjonalny;
+private:
+    int Kp,Kd,Ki;
+    int uchyb_pion, uchyb_poziom; //uchyb poprzedni do  modułu różniczkującego.
 };
 
 #endif // INTELIGENTNE_H

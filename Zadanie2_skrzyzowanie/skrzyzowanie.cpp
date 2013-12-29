@@ -9,6 +9,9 @@
 
 //SEPARATOR danych w pliku
 #define SEPARATOR ','
+#define MIN(X,Y) ((X) < (Y) ? (X) : (Y))
+#define MAX(X,Y) ((X) > (Y) ? (X) : (Y))
+
 
 using namespace std;
 
@@ -30,6 +33,7 @@ Skrzyzowanie::Skrzyzowanie(int mnoznik)
     rozladowanie =false;
     CzasObslugi = 0;
     iteracjaNum = 0;
+    MaxCzasOczekiwania = 0;
 }
 
 /*!
@@ -92,7 +96,7 @@ void Skrzyzowanie::NaglowekPliku(){
         out <<"#prawo";
         out.setFieldWidth(0);
         out << SEPARATOR;
-        out.setFieldWidth(5);
+        out.setFieldWidth(8);
         out <<"stan";
         out.setFieldWidth(0);
         out << SEPARATOR;
@@ -236,7 +240,8 @@ void Skrzyzowanie::InitFile(QString name){
                 out<<"Iteracja"<<SEPARATOR<<"Czasy ozekiwania"<<endl;
             }
             if (name == name_rozladowanie){
-                out<<"Rozladowanie po:"<<endl;
+                out<<"Rozladowanie po 'x' iteracjach"<<SEPARATOR<<"Max Czas Oczekiwania"
+                  <<SEPARATOR<<"Sredni czas zielonego" <<SEPARATOR<<"Czas obslugi"<<endl;
             }
 
         }
@@ -300,8 +305,15 @@ void Skrzyzowanie::ZapiszDoPliku(int IteracjaNum){
         out <<right.size();
         out.setFieldWidth(0);
         out << SEPARATOR;
-        out.setFieldWidth(5);
-        out <<sygnalizator->getKierunek();
+
+        out.setFieldWidth(9);
+        if (sygnalizator->getKierunek() == pion){
+            out <<"pion";
+        }
+        else{
+            out<<"poziom";
+        }
+
         out.setFieldWidth(0);
         out << SEPARATOR;
 
@@ -370,14 +382,26 @@ void Skrzyzowanie::ZapiszDoPliku(int IteracjaNum){
 
 void Skrzyzowanie::obsluga(){
 
-    //najpierw mnożymy zmienne
+    //obsługa światał przede wszystkim
+    int dane[4];
+    dane[0] = up.size();
+    dane[1] = down.size();
+    dane[2] = left.size();
+    dane[3] = right.size();
+
+    sygnalizator->obsluga(dane);
+
+    // mnożymy zmienne
     int temp1, temp2;
     int m=0;
     temp1 = temp2 = sygnalizator->getTime() - sygnalizator->opoznienie; //zmienne określające czas podczas przejazdu aut (przejazd auto to czas zielonego - opóż nienie
     Auto pierwszy, drugi;
+    int AktualnyCzasOczekiwania;
 
     ZapiszDoPliku(iteracjaNum);
     SaveFile(iteracjaNum, false, name_czasy);
+
+
 
     //pętelka na światła:
 
@@ -385,16 +409,20 @@ void Skrzyzowanie::obsluga(){
     if(sygnalizator->getKierunek()==pion){
         if(!up.empty()){
             pierwszy = up.front();
-            SaveFile(CzasObslugi+sygnalizator->getTime() - temp1 + pierwszy.GetCzasOczekiwania(), false, name_czasy);
-            temp1=temp1 - pierwszy.GetCzasPrzejazdu();            
+            AktualnyCzasOczekiwania = CzasObslugi+sygnalizator->getTime() - temp1 + pierwszy.GetCzasOczekiwania();
+            SaveFile(AktualnyCzasOczekiwania, false, name_czasy);
+            temp1=temp1 - pierwszy.GetCzasPrzejazdu();
+            MaxCzasOczekiwania = MAX(MaxCzasOczekiwania,AktualnyCzasOczekiwania);
             up.pop();
         }
         else{}
 
         if(!down.empty()){
             drugi = down.front();
-            SaveFile(CzasObslugi+sygnalizator->getTime() - temp2 + drugi.GetCzasOczekiwania(), false, name_czasy);
-            temp2= temp2 - drugi.GetCzasPrzejazdu();
+            AktualnyCzasOczekiwania = CzasObslugi+sygnalizator->getTime() - temp2 + drugi.GetCzasOczekiwania();
+            SaveFile(AktualnyCzasOczekiwania, false, name_czasy);
+            temp2-=drugi.GetCzasPrzejazdu();
+            MaxCzasOczekiwania = MAX(MaxCzasOczekiwania,AktualnyCzasOczekiwania);
             down.pop();
         }
         else{}
@@ -406,15 +434,19 @@ void Skrzyzowanie::obsluga(){
     else {
         if(!left.empty()){
             pierwszy = left.front();
-            SaveFile(CzasObslugi+sygnalizator->getTime() - temp1 + pierwszy.GetCzasOczekiwania(), false, name_czasy);
-            temp1-=pierwszy.GetCzasPrzejazdu();
+            AktualnyCzasOczekiwania = CzasObslugi+sygnalizator->getTime() - temp1 + pierwszy.GetCzasOczekiwania();
+            SaveFile(AktualnyCzasOczekiwania, false, name_czasy);
+            temp1=temp1 - pierwszy.GetCzasPrzejazdu();
+            MaxCzasOczekiwania = MAX(MaxCzasOczekiwania,AktualnyCzasOczekiwania);
             left.pop();
         }
 
         if(!right.empty()){
             drugi = right.front();
-            SaveFile(CzasObslugi+sygnalizator->getTime() - temp2 + drugi.GetCzasOczekiwania(), false, name_czasy);
+            AktualnyCzasOczekiwania = CzasObslugi+sygnalizator->getTime() - temp2 + drugi.GetCzasOczekiwania();
+            SaveFile(AktualnyCzasOczekiwania, false, name_czasy);
             temp2-=drugi.GetCzasPrzejazdu();
+            MaxCzasOczekiwania = MAX(MaxCzasOczekiwania,AktualnyCzasOczekiwania);
             right.pop();
         }
 
@@ -427,21 +459,24 @@ void Skrzyzowanie::obsluga(){
     //zakończ linię w pliku czasy.txt
     SaveFile(-1,true, name_czasy);
 
-    //warunek rozładowania skrzyżowania
-    if((up.size()<=MaxAdd)&&(down.size()<=MaxAdd)&&(left.size()<=MaxAdd)&&(right.size()<=MaxAdd)){
-        rozladowanie = true;
-        iteracjaNum++;
-        ZapiszDoPliku(iteracjaNum);
-        SaveFile(iteracjaNum,true,name_rozladowanie);
-    }
-
-
     iteracjaNum++;
     //cerr<<iteracjaNum<<endl;
-    sygnalizator->obsluga();
 
     //obsługa czasu obsługi
     CzasObslugi+=sygnalizator->getTime();
     AddRandomQueues(-CzasObslugi);
+
+    //warunek rozładowania skrzyżowania
+    if((up.size()<=MaxAdd)&&(down.size()<=MaxAdd)&&(left.size()<=MaxAdd)&&(right.size()<=MaxAdd)){
+        rozladowanie = true;
+        //iteracjaNum++;
+        ZapiszDoPliku(iteracjaNum);
+        SaveFile(iteracjaNum,false,name_rozladowanie);
+        SaveFile(MaxCzasOczekiwania, false, name_rozladowanie);
+        int SredniGreenTime = CzasObslugi/(iteracjaNum);
+        SaveFile(SredniGreenTime, false, name_rozladowanie);
+        SaveFile(CzasObslugi,true, name_rozladowanie);
+
+    }
 
 }

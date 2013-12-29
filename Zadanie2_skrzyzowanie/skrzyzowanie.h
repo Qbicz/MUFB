@@ -50,11 +50,13 @@ public:
 
     bool rozladowanie; //czy już jest rozladowany
 
+
 private:
     queue <Auto> up, down, left, right;
     Sygnalizator * sygnalizator;
     unsigned int MaxAdd; //maksymalna ilość dodanych aut
     int MaxCzasPrzejazdu, MinCzasPrzejazdu;
+    int MaxCzasOczekiwania;
     unsigned int CzasObslugi;
     unsigned int iteracjaNum;
 

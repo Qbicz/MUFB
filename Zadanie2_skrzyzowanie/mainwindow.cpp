@@ -14,14 +14,22 @@ MainWindow::MainWindow(QWidget *parent) :
     skrzyzowanie.InitFile("rozladowanie.txt");
 
     //parametry sygnalizacji
-    int parametry[3];
-    parametry[0] = 33; //greenTime
-    parametry[1] = 2;  //opóźnienie
-    parametry[2] = pion;  //kierunek
+    int parametry[6];
+    parametry[0] = 10;      //greenTime
+    parametry[1] = 2;       //opóźnienie
+    parametry[2] = pion;    //kierunek
 
-    for(int i = 0;i<10;i++){
+    parametry[3] = 1500;      //Kp;
+    parametry[4] = 1;        //Kd;
+    parametry[5] = 1;        //Ki;
+
+    for(int i = 0;i<100;i++){
 
     Skrzyzowanie skrzyzowanie(i);
+    //skrzyzowanie.SetInteligence(inteligentna,parametry);
+    if(i%5==0){
+        parametry[0]+=5;
+    }
     skrzyzowanie.SetInteligence(staloczasowa,parametry);
     skrzyzowanie.SetCzasPrzejazdu(5,1);
     skrzyzowanie.SetMaxAdd(5);
@@ -32,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     while(!skrzyzowanie.rozladowanie)
     {
         skrzyzowanie.obsluga();
-        //cout<<j<<endl;
+        //cerr<<j<<endl;
         j++;
     }
 
