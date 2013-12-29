@@ -122,12 +122,12 @@ Wahadło podwójne jest to wahadło matematyczne zawieszone na drugim wahadle ma
 \end{picture}
 \caption{Schemat wahadła}
 \end{figure}
-Wahadło opisuje 5 parametrów masy $m_1$ i $m_2$, długości $l_1$ i $l_2$ oraz przyśpieszenie ziemskie $g$. Można jednka zmniejszyś ich ilość podstawiając: 
+Wahadło opisuje 5 parametrów: masy $m_1$ i $m_2$, długości $l_1$ i $l_2$ oraz przyśpieszenie ziemskie $g$. Można jednka zmniejszyś ich ilość podstawiając: 
 \begin{equation}
 	A = \frac{m_1}{m_2} \qquad B = \frac{l_2}{l_1} \qquad C = \frac{g}{l_1}
 \end{equation}
-Stan wahadł opisują cztery parametry: kąty $\varphi_1$ i $\varphi_2$ oraz prędkości kątowe $\omega_1$ i $\omega_2$. 
-Ruch opisuje układ czterech równań różniczkowych:
+Stan wahadł opisują cztery parametry: kąty odchylenia od pionu $\varphi_1$ i $\varphi_2$ oraz prędkości kątowe $\omega_1$ i $\omega_2$. 
+Ruch opisuje układ czterech równań różniczkowych [1]:
 \begin{equation}
 	\dot{\varphi}_1 = \omega_1
 \end{equation}
@@ -143,7 +143,7 @@ Ruch opisuje układ czterech równań różniczkowych:
 \end{equation}
 W modelu nie uwzględniono tarcia.
 \section{Implementacja}
-Równiania zostały rozwiązane numerycznie za pomocą metody Rungego-Kutty czwartego rzędu która została zaimplementowana w języku c++. Wyniki zostały zapisane do pliku tekstowego, w każdej lini odzielone spacjami: czas od początku symulacji, kąty $\varphi_1$, $\varphi_2$ oraz prędkości kątowe $\omega_1$ i $\omega_2$. Wykeresy zostały przygotowane w programie gnuplot. Powstał także program przedstawiający ruch wahadła napisany z wykorzystaniem biblioteki QT. Wygląd programu pokazuje rys. \ref{QTgui}. Kody źródłowe przygotowanego oprogramowania znajdują się w repozytorium pod adresem www.github.com/Qbicz/MUFB. 
+Równiania zostały rozwiązane numerycznie za pomocą metody Rungego-Kutty czwartego rzędu [2] która została zaimplementowana w języku c++. Wyniki zostały zapisane do pliku tekstowego, w każdej lini odzielone spacjami: czas od początku symulacji, kąty $\varphi_1$, $\varphi_2$ oraz prędkości kątowe $\omega_1$ i $\omega_2$. Wykeresy zostały przygotowane w programie gnuplot. Powstał także program przedstawiający ruch wahadła napisany z wykorzystaniem biblioteki QT. Wygląd programu pokazuje rys. \ref{QTgui}. Kody źródłowe przygotowanego oprogramowania znajdują się w repozytorium pod adresem www.github.com/Qbicz/MUFB. 
 
 \begin{figure}[h!]
 	\centering
@@ -153,7 +153,7 @@ Równiania zostały rozwiązane numerycznie za pomocą metody Rungego-Kutty czwa
 \end{figure}
 
 \section{Wyniki}
-Symulacja dla parametrów $A = 100$, $B = 1$, $C = 1$ oraz stanu w chwili $t_0=0$ $\varphi_1(0) = 0$, $\varphi_2(0) = 1$, $\omega_1(0) = 0$ i $\omega_2(0) = 0$. Symulacja trwała 300 sekund z krokiem co 0,001 sekundy.  \\
+Symulacja zosała przeprowadzona dla parametrów $A = 100$, $B = 1$, $C = 1$ oraz stanu w chwili $t_0=0$ $\varphi_1(0) = 0$, $\varphi_2(0) = 1$, $\omega_1(0) = 0$ i $\omega_2(0) = 0$. Symulacja trwała 300 sekund z krokiem co 0,001 sekundy.  \\
 Rys. \ref{phi1_2odt.} przedstawia wartości kątów $\varphi_1$, $\varphi_2$, $\omega_1$ oraz $\omega_2$ w funkcji czasu. Dla tak dobranych parametrów powstają dudnienia.
 \begin{figure}[h!]
 	\centering
@@ -180,7 +180,8 @@ Rys. \ref{phi_omega} przedstawia trajektorie w przestrzeni fazowej: wykresy prę
 
 
 \section{Bibliografia}
-1. Wróblewski J. praca licencjacka "Wahadło podwójne" Warszawa 2011\\
-2.Dudek-Dyduch E., Wąs J., Dutkiewicz L., Grobel-Dębska K., Gudowski B. "Metody numeryczne wybrane zagadnienia" Wydawnictwo AGH Kraków 2011 
+$\qquad$ \\
+$[1]$ Wróblewski J. praca licencjacka ''Wahadło podwójne'' Warszawa 2011\\
+$[2]$ Dudek-Dyduch E., Wąs J., Dutkiewicz L., Grobel-Dębska K., Gudowski B. ''Metody numeryczne wybrane zagadnienia'' Wydawnictwo AGH Kraków 2011 
 
 \end{document}
