@@ -165,8 +165,7 @@ oraz stanu w chwili:
 \begin{equation} \nonumber
 	t_0=0 \quad , \qquad \varphi_1(0) = 0 \quad , \qquad 			\varphi_2(0) = 1 \quad , \qquad \omega_1(0) = 0 \quad , 		\qquad \omega_2(0) = 0
 \end{equation}
-Symulacja trwała 300 sekund z krokiem 0,001 sekundy.
-
+Symulacja trwała 300 sekund z krokiem 0,001 sekundy.  \\
 Rys. \ref{phi1_2odt.} przedstawia wartości kątów $\varphi_1$, $\varphi_2$ oraz prędkości kątowych $\omega_1$ , $\omega_2$ w funkcji czasu. Dla tak dobranych parametrów powstają dudnienia.
 \begin{figure}[t]
 	\centering
