@@ -1,0 +1,8 @@
+set terminal postscript eps color enhanced
+set output "om1_2odt.eps"
+
+set xlabel "Czas, s"
+set ylabel "{/Symbol w}, rad/s"
+set key top
+set x2tics
+plot './out.dat' u 1:5 with l title "{/Symbol w}_2(t)" ls 1 lc 2,  './out.dat' u 1:4 with l title "{/Symbol w}_1(t)" ls 1 lc 1

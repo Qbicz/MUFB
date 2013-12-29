@@ -1,0 +1,18 @@
+set size 2,1
+set terminal postscript eps color enhanced 
+set origin 0,0
+set output "phi1_omega1.eps"
+set multiplot layout 1,2        # engage multiplot mode
+set size 1,1
+
+set xlabel "{/Symbol f}_1, rad"
+set ylabel "{/Symbol w}_1, rad/s"
+set cblabel "t, s"
+
+plot './out.dat' using 2:4:1 with l palette notitle
+set origin 1,0
+set size 1,1
+set xlabel "{/Symbol f}_2, rad"
+set ylabel "{/Symbol w}_2, rad/s"
+
+plot './out.dat' using 3:5:1 with l palette notitle

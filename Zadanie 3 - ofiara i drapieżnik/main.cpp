@@ -11,7 +11,7 @@ public:
   float h; //step 
   unsigned long int i; //number of iteration
 
-  dp(float _A, float _B, float _C, float _h) : A(_A), B(_B), C(_C), h(_h), p1(0), p2(2), w1(0), w2(0), e1(0), e2(0), i(0)
+  dp(float _A, float _B, float _C, float _h) : A(_A), B(_B), C(_C), h(_h), p1(0), p2(1), w1(0), w2(0), e1(0), e2(0), i(0)
   {}
 
   float next_e1()
@@ -97,7 +97,7 @@ int main(int argc, char** argv)
   if(argc < 2) f.open("out.dat");
   else f.open(argv[1]);
 
-  dp w(1,1,1,0.001);
+  dp w(100,1,1,0.001);
   while(w.i < 300000)
   {
     if(!(w.i % 100)) f << w;

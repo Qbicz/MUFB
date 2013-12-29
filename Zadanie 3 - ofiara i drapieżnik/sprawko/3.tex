@@ -62,16 +62,16 @@
 \author{Żaneta Błaszczuk, Rafał Kozik, Filip Kubicz, Jakub Nowak, Jakub Porębski}
 \shortauthor{Ż. Błaszczuk, R. Kozik, F. Kubicz, J. Nowak, J. Porębski}
 
-\titlePL{Podwójne wachadło}
+\titlePL{Podwójne wahadło}
 \titleEN{Double pendulum}
 
-\shorttitlePL{Podwójne wachadło} % skrócona wersja tytułu jeśli jest bardzo długi
+\shorttitlePL{Podwójne wahadło} % skrócona wersja tytułu jeśli jest bardzo długi
 %\shorttitleEN{Thesis in \LaTeX}
 
 \thesistype{Modelowanie układów fizycznych i biologicznych}
 %\thesistype{Master of Science Thesis}
 
-\supervisor{dr }
+\supervisor{dr inż. Ireneusz Wochlik}
 
 \degreeprogramme{Automatyka i Robotyka}
 %\degreeprogramme{Computer Science}
@@ -90,7 +90,7 @@
 \titlepages
 
 \section{Teoria}
-Wachadło podwójne jest to wachadło matematyczne zawieszone na drugim wachadle matematycznym. Jego schemat pokazuje rys. \ref{Schemat}.
+Wahadło podwójne jest to wahadło matematyczne zawieszone na drugim wahadle matematycznym. Jego schemat pokazuje rys. \ref{Schemat}.
 \begin{figure}[h!]
 \centering
 \label{Schemat}
@@ -120,13 +120,13 @@ Wachadło podwójne jest to wachadło matematyczne zawieszone na drugim wachadle
 \put(37,15){\makebox(0,0){$m_2$}}
 
 \end{picture}
-\caption{Schemat wachadła}
+\caption{Schemat wahadła}
 \end{figure}
-Wachadło opisuje 5 parametrów masy $m_1$ i $m_2$, długości $l_1$ i $l_2$ oraz przyśpieszenie ziemskie $g$. Można jednka zmniejszyś ich ilość podstawiając: 
+Wahadło opisuje 5 parametrów masy $m_1$ i $m_2$, długości $l_1$ i $l_2$ oraz przyśpieszenie ziemskie $g$. Można jednka zmniejszyś ich ilość podstawiając: 
 \begin{equation}
 	A = \frac{m_1}{m_2} \qquad B = \frac{l_2}{l_1} \qquad C = \frac{g}{l_1}
 \end{equation}
-Stan wachadł opisują cztery parametry: kąty $\varphi_1$ i $\varphi_2$ oraz prędkości kątowe $\omega_1$ i $\omega_2$. 
+Stan wahadł opisują cztery parametry: kąty $\varphi_1$ i $\varphi_2$ oraz prędkości kątowe $\omega_1$ i $\omega_2$. 
 Ruch opisuje układ czterech równań różniczkowych:
 \begin{equation}
 	\dot{\varphi}_1 = \omega_1
@@ -139,55 +139,48 @@ Ruch opisuje układ czterech równań różniczkowych:
 	\dot{\varphi}_2 = \omega_2
 \end{equation}
 \begin{equation}
-	\dot{\omega}_2 = \frac{(A+1)(\omega_1^2\sin(\varphi_1-\varphi_2)-C\sin(p2))+\cos(\varphi_1-\varphi_2)((B\omega_2^2 \sin(\varphi_1-\varphi_2))+C(A+1)\sin(\varphi_1))}{B(A+\sin^2(\varphi_1-\varphi_2)}
+	\dot{\omega}_2 = \frac{(A+1)(\omega_1^2\sin(\varphi_1-\varphi_2)-C\sin(p2))+\cos(\varphi_1-\varphi_2)((B\omega_2^2 \sin(\varphi_1-\varphi_2))+C(A+1)\sin(\varphi_1))}{B(A+\sin^2(\varphi_1-\varphi_2))}
 \end{equation}
 W modelu nie uwzględniono tarcia.
 \section{Implementacja}
-Równiania zostały rozwiązane numerycznie za pomocą metody Rungego-Kutty czwartego rzędu która została zaimplementowana w języku c++:
-\begin{lstlisting}
-  void next_step(
-    e1 = next_e1();
-    e2 = next_e2();
+Równiania zostały rozwiązane numerycznie za pomocą metody Rungego-Kutty czwartego rzędu która została zaimplementowana w języku c++. Wyniki zostały zapisane do pliku tekstowego, w każdej lini odzielone spacjami: czas od początku symulacji, kąty $\varphi_1$, $\varphi_2$ oraz prędkości kątowe $\omega_1$ i $\omega_2$. Wykeresy zostały przygotowane w programie gnuplot. Powstał także program przedstawiający ruch wahadła napisany z wykorzystaniem biblioteki QT. Wygląd programu pokazuje rys. \ref{QTgui}. Kody źródłowe przygotowanego oprogramowania znajdują się w repozytorium pod adresem www.github.com/Qbicz/MUFB. 
 
-    float k1_1 = h*n_e1(p1,p2,w1,w2);
-    float k1_2 = h*n_e2(p1,p2,w1,w2);
-    float k1_3 = h*(w1);
-    float k1_4 = h*(w2);
-
-    float k2_1 = h*n_e1(p1+k1_3/2, p2+k1_4/2, w1+k1_1/2, w2+k1_2/2);
-    float k2_2 = h*n_e2(p1+k1_3/2, p2+k1_4/2, w1+k1_1/2, w2+k1_2/2);
-    float k2_3 = h*(k1_1/2+w1);
-    float k2_4 = h*(k1_2/2+w2);
-
-    float k3_1 = h*n_e1(p1+k2_3/2, p2+k2_4/2, w1+k2_1/2, w2+k2_2/2);
-    float k3_2 = h*n_e2(p1+k2_3/2, p2+k2_4/2, w1+k2_1/2, w2+k2_2/2);
-    float k3_3 = h*(k2_1/2+w1);
-    float k3_4 = h*(k2_2/2+w2);
-
-    float k4_1 = h*n_e1(p1+k3_3, p2+k3_4, w1+k3_1, w2+k3_2);
-    float k4_2 = h*n_e2(p1+k3_3, p2+k3_4, w1+k3_1, w2+k3_2);
-    float k4_3 = h*(k3_1+w1);
-    float k4_4 = h*(k3_2+w2);
-
-    w1 += (k1_1+2*k2_1+2*k3_1+k4_1)/6;
-    w2 += (k1_2+2*k2_2+2*k3_2+k4_2)/6;
-    p1 += (k1_3+2*k2_3+2*k3_3+k4_3)/6;
-    p2 += (k1_4+2*k2_4+2*k3_4+k4_4)/6;
-
-    i++;
-  }
-
-
-\end{lstlisting}
+\begin{figure}[h!]
+	\centering
+	\label{QTgui}
+	\includegraphics[width=0.4\textwidth]{qtgui.png}
+	\caption{Graficzna symulacja ruchu wahadła.}
+\end{figure}
 
 \section{Wyniki}
-
-
+Symulacja dla parametrów $A = 100$, $B = 1$, $C = 1$ oraz stanu w chwili $t_0=0$ $\varphi_1(0) = 0$, $\varphi_2(0) = 1$, $\omega_1(0) = 0$ i $\omega_2(0) = 0$. Symulacja trwała 300 sekund z krokiem co 0,001 sekundy.  \\
+Rys. \ref{phi1_2odt.} przedstawia wartości kątów $\varphi_1$, $\varphi_2$, $\omega_1$ oraz $\omega_2$ w funkcji czasu. Dla tak dobranych parametrów powstają dudnienia.
+\begin{figure}[h!]
+	\centering
+	\label{phi1_2odt.}
+	\includegraphics[width=0.95\textwidth]{phi1_2t.pdf}
+	\caption{Kąty oraz prędkości kątowe w funkcji czasu.}
+\end{figure}
+Rys. \ref{phi1_phi2.} przedstawia trajektorię ruchu wahadła narysowaną w przestrzenie $\varphi_1$, $\varphi_2$. Dla 300 sekund nie da się zaobserwować żadnej regularnonści w ruchu wahadła.
+\begin{figure}[h!]
+	\centering
+	\label{phi1_phi2.}
+	\includegraphics[width=0.95\textwidth]{phi1_phi2.pdf}
+	\caption{Trajektoria w przestrzenie $\varphi_1$, $\varphi_2$ a) dla pierwszych 30 sekund i b) dla 300 sekund.}
+\end{figure}
+Rys. \ref{phi_omega} przedstawia trajektorie w przestrzeni fazowej: wykresy prędkości kątowej w funkcji wartości kąta.
+\begin{figure}[h!]
+	\centering
+	\label{phi_omega}
+	\includegraphics[width=0.95\textwidth]{phi1_omega1.pdf}
+	\caption{Trajektoria w przestrzeni fazowej.}
+\end{figure}
 
 
 
 
 \section{Bibliografia}
-1. Wróblewski J. praca licencjacka Wahadło podwójne Warszawa 2011
+1. Wróblewski J. praca licencjacka "Wahadło podwójne" Warszawa 2011\\
+2.Dudek-Dyduch E., Wąs J., Dutkiewicz L., Grobel-Dębska K., Gudowski B. "Metody numeryczne wybrane zagadnienia" Wydawnictwo AGH Kraków 2011 
 
 \end{document}

@@ -1,0 +1,21 @@
+set size 2,1
+set terminal postscript eps color enhanced 
+set origin 0,0
+set output "phi1_2t.eps"
+set multiplot layout 1,2        # engage multiplot mode
+set size 1,1
+set palette rgb 33,13,10;
+
+set xlabel "Czas, s"
+set ylabel "{/Symbol f}, rad"
+set key top
+plot './out.dat' u 1:3:5 with l palette title "{/Symbol f}_2(t)",  './out.dat' u 1:2 with l title "{/Symbol f}_1(t)" ls 1 lc 1
+
+set origin 1,0
+set size 1,1
+set xlabel "Czas, s"
+set ylabel "{/Symbol w}, rad/s"
+set key top
+plot './out.dat' u 1:5 with l title "{/Symbol w}_2(t)" ls 1 lc 2,  './out.dat' u 1:4 with l title "{/Symbol w}_1(t)" ls 1 lc 1
+
+
