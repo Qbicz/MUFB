@@ -10,6 +10,31 @@
 \usepackage{listings}
 \lstloadlanguages{TeX}
 
+%kolorowanie linków + działanie linków
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=red,citecolor=green]{hyperref}
+
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+    backgroundcolor=\color{lbcolor},
+    tabsize=4,
+  language=C++,
+  captionpos=b,
+  tabsize=3,
+  frame=lines,
+  numbers=left,
+  numberstyle=\tiny,
+  numbersep=5pt,
+  breaklines=true,
+  showstringspaces=false,
+  basicstyle=\footnotesize,
+%  identifierstyle=\color{magenta},
+  keywordstyle=\color[rgb]{0,0,1},
+  commentstyle=\color{Darkgreen},
+  stringstyle=\color{red}
+  }
 \lstset{
   literate={ą}{{\k{a}}}1
            {ć}{{\'c}}1
@@ -33,22 +58,23 @@
 
 
 
+%\usepackage[pdftex]{graphicx}
 \usepackage{tikz}
 %---------------------------------------------------------------------------
 
 \author{Żaneta Błaszczuk, Rafał Kozik, Filip Kubicz, Jakub Nowak, Jakub Porębski}
 \shortauthor{Ż. Błaszczuk, R. Kozik, F. Kubicz, J. Nowak, J. Porębski}
-%Kolejnosc alfabetyczna
-\titlePL{Tytul}
-\titleEN{Tytul Eng}
 
-\shorttitlePL{Skrócony tytuł} % skrócona wersja tytułu jeśli jest bardzo długi
+\titlePL{Model skrzyżowania równorzędnego wraz z porównaniem sygnalizacji świetlnej: stałoczasowej oraz inteligentnie sterowanej }
+\titleEN{Double pendulum}
+
+\shorttitlePL{Model skrzyżowania równoległego} % skrócona wersja tytułu jeśli jest bardzo długi
 %\shorttitleEN{Thesis in \LaTeX}
 
 \thesistype{Modelowanie układów fizycznych i biologicznych}
 %\thesistype{Master of Science Thesis}
 
-\supervisor{dr }
+\supervisor{dr inż. Ireneusz Wochlik}
 
 \degreeprogramme{Automatyka i Robotyka}
 %\degreeprogramme{Computer Science}
@@ -66,14 +92,13 @@
 \begin{document}
 \titlepages
 
-\include{chapter1}
+\section{Teoria}
+Model skrzyżowania równoległego 
 
-\include{chapter2}
+\section{Wyniki}
 
-\include{chapter3}
 
-\bibliographystyle{alpha}
-\nocite{*}
-\bibliography{szablon}
+\section{Bibliografia}
+
 
 \end{document}
