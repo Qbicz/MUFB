@@ -13,6 +13,8 @@
 %kolorowanie linków + działanie linków
 \usepackage[colorlinks=true,urlcolor=blue,linkcolor=red,citecolor=green]{hyperref}
 
+
+
 \usepackage{listings}
 \usepackage{xcolor}
 \definecolor{listinggray}{gray}{0.9}
@@ -94,12 +96,12 @@
 
 \section{Teoria}
 Wahadło podwójne to wahadło matematyczne zawieszone na drugim wahadle matematycznym. Jego schemat pokazuje rys. \ref{Schemat}.
+
 \begin{figure}[h!]
 \centering
 \label{Schemat}
 \setlength{\unitlength}{2mm}
 \begin{picture}(50,35)(0,15)
-
 \put(25,50){\vector(1,0){3}}
 \put(25,50){\vector(0,-1){3}}
 \put(27,49){\makebox(0,0){$x$}}
@@ -147,13 +149,15 @@ Ruch opisuje układ czterech równań różniczkowych [\ref{bib_one}]: %(\ref{r�
 	\label{równanielast}
 \end{equation}
 W modelu wahadła nie uwzględniono tarcia.
+
+\clearpage
 \section{Implementacja}
 Równania zostały rozwiązane numerycznie za pomocą metody Rungego-Kutty czwartego rzędu [\ref{bib_two}] która została zaimplementowana w języku c++. Wyniki zostały zapisane do pliku tekstowego, w każdej linii oddzielone spacjami: czas od początku symulacji, kąty $\varphi_1$, $\varphi_2$ oraz prędkości kątowe $\omega_1$ i $\omega_2$. Wykresy zostały przygotowane w programie Gnuplot. Powstał także program przedstawiający ruch wahadła napisany z wykorzystaniem biblioteki QT. Wygląd programu pokazuje rys. \ref{QTgui}. Kody źródłowe przygotowanego oprogramowania znajdują się w repozytorium pod adresem \href{http://www.github.com/Qbicz/MUFB}{github.com/Qbicz/MUFB} 
 \begin{figure}[h!]
 	\centering
-	\label{QTgui}
 	\includegraphics[width=0.8\textwidth]{qtgui.png}
 	\caption{Graficzna symulacja ruchu wahadła.}
+	\label{QTgui}
 \end{figure}
 
 \section{Wyniki}
@@ -168,34 +172,34 @@ oraz stanu w chwili:
 Symulacja trwała 300 sekund z krokiem 0,001 sekundy.
 
 Rys. \ref{phi1_2odt.} przedstawia wartości kątów $\varphi_1$, $\varphi_2$ oraz prędkości kątowych $\omega_1$ , $\omega_2$ w funkcji czasu. Dla tak dobranych parametrów powstają dudnienia.
-\begin{figure}[t]
+\begin{figure}[h!]
 	\centering
+	\includegraphics[width=0.85\textwidth]{phi1_2t.pdf}
+	\caption{Kąty oraz prędkości kątowe w funkcji czasu.}	
 	\label{phi1_2odt.}
-	\includegraphics[width=0.95\textwidth]{phi1_2t.pdf}
-	\caption{Kąty oraz prędkości kątowe w funkcji czasu.}
 \end{figure}
 
 Rys. \ref{phi1_phi2} przedstawia trajektorię ruchu wahadła narysowaną w przestrzeniach $\varphi_1$, $\varphi_2$. Dla 300 sekund nie da się zaobserwować żadnej regularności w ruchu wahadła.
-\begin{figure}[t]
+\begin{figure}[h!]
 	\centering
-	\label{phi1_phi2}
-	\includegraphics[width=0.95\textwidth]{phi1_phi2.pdf}
+	\includegraphics[width=0.85\textwidth]{phi1_phi2.pdf}
 	\caption{Trajektoria w przestrzeniach $\varphi_1$ oraz $\varphi_2$ \quad a) dla pierwszych 30 sekund, \quad b) dla 300 sekund.}
+	\label{phi1_phi2}
 \end{figure}
 
 Rys. \ref{phi_omega} przedstawia trajektorię w przestrzeni fazowej: wykresy prędkości kątowej w funkcji wartości kąta.
-\begin{figure}[t]
+\begin{figure}[h!]
 	\centering
+	\includegraphics[width=0.85\textwidth]{phi1_omega1.pdf}
+	\caption{Trajektoria w przestrzeni fazowej $\omega(\varphi(t))$	}
 	\label{phi_omega}
-	\includegraphics[width=0.95\textwidth]{phi1_omega1.pdf}
-	\caption{Trajektoria w przestrzeni fazowej 
-	$\omega(\varphi(t))$
-	}
 \end{figure}
 
-
+\clearpage
 \section{Bibliografia}
-\begin{enumerate}[1]
+\renewcommand*\labelenumi{[\theenumi]}
+
+\begin{enumerate}
 \item Wróblewski J. praca licencjacka ,,Wahadło podwójne'' Warszawa 2011 \label{bib_one}
 \item Dudek-Dyduch E., Wąs J., Dutkiewicz L., Grobel-Dębska K., Gudowski B. ,,Metody numeryczne wybrane zagadnienia'' Wydawnictwo AGH Kraków 2011 \label{bib_two}
 
