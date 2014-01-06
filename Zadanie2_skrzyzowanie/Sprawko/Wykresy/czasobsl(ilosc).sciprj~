@@ -1,0 +1,82 @@
+SciDAVis 0.2.4 project file
+<scripting-lang>	muParser
+<windows>	2
+<table>
+4466
+<table creation_time="2014-06-01 16:33:31:000" caption_spec="%n%C{ - }%c" name="Table1" columns="2" rows="100"><comment><![CDATA[]]></comment><column creation_time="2014-06-01 16:33:31:495" caption_spec="%n%C{ - }%c" name="1" type="TypeDouble" mode="Numeric" plot_designation="Y"><comment><![CDATA[]]></comment><input_filter><simple_filter creation_time="2014-06-01 16:33:31:495" caption_spec="%n%C{ - }%c" name="InputFilter" filter_name="String2DoubleFilter"><comment><![CDATA[]]></comment></simple_filter></input_filter><output_filter><simple_filter creation_time="2014-06-01 16:33:31:495" caption_spec="%n%C{ - }%c" name="OutputFilter" format="g" digits="6" filter_name="Double2StringFilter"><comment><![CDATA[]]></comment></simple_filter></output_filter><row type="TypeDouble" index="0" invalid="no">3.3000000000000000e+02</row><row type="TypeDouble" index="1" invalid="no">5.8000000000000000e+02</row><row type="TypeDouble" index="2" invalid="no">8.5000000000000000e+02</row><row type="TypeDouble" index="3" invalid="no">1.1100000000000000e+03</row><row type="TypeDouble" index="4" invalid="no">1.5100000000000000e+03</row><row type="TypeDouble" index="5" invalid="no">1.6500000000000000e+03</row><row type="TypeDouble" index="6" invalid="no">1.9000000000000000e+03</row><row type="TypeDouble" index="7" invalid="no">2.1900000000000000e+03</row><row type="TypeDouble" index="8" invalid="no">2.5100000000000000e+03</row><row type="TypeDouble" index="9" invalid="no">2.7300000000000000e+03</row><row type="TypeDouble" index="10" invalid="no">3.0700000000000000e+03</row><row type="TypeDouble" index="11" invalid="no">3.3200000000000000e+03</row><row type="TypeDouble" index="12" invalid="no">3.5200000000000000e+03</row><row type="TypeDouble" index="13" invalid="no">3.9100000000000000e+03</row><row type="TypeDouble" index="14" invalid="no">4.1100000000000000e+03</row><row type="TypeDouble" index="15" invalid="no">4.2800000000000000e+03</row><row type="TypeDouble" index="16" invalid="no">4.6800000000000000e+03</row><row type="TypeDouble" index="17" invalid="no">4.9300000000000000e+03</row><row type="TypeDouble" index="18" invalid="no">5.2500000000000000e+03</row><row type="TypeDouble" index="19" invalid="no">5.5900000000000000e+03</row></column><column creation_time="2014-06-01 16:33:31:497" caption_spec="%n%C{ - }%c" name="2" type="TypeDouble" mode="Numeric" plot_designation="X"><comment><![CDATA[]]></comment><input_filter><simple_filter creation_time="2014-06-01 16:33:31:497" caption_spec="%n%C{ - }%c" name="InputFilter" filter_name="String2DoubleFilter"><comment><![CDATA[]]></comment></simple_filter></input_filter><output_filter><simple_filter creation_time="2014-06-01 16:33:31:497" caption_spec="%n%C{ - }%c" name="OutputFilter" format="g" digits="6" filter_name="Double2StringFilter"><comment><![CDATA[]]></comment></simple_filter></output_filter><row type="TypeDouble" index="0" invalid="no">5.0000000000000000e+01</row><row type="TypeDouble" index="1" invalid="no">1.0000000000000000e+02</row><row type="TypeDouble" index="2" invalid="no">1.5000000000000000e+02</row><row type="TypeDouble" index="3" invalid="no">2.0000000000000000e+02</row><row type="TypeDouble" index="4" invalid="no">2.5000000000000000e+02</row><row type="TypeDouble" index="5" invalid="no">3.0000000000000000e+02</row><row type="TypeDouble" index="6" invalid="no">3.5000000000000000e+02</row><row type="TypeDouble" index="7" invalid="no">4.0000000000000000e+02</row><row type="TypeDouble" index="8" invalid="no">4.5000000000000000e+02</row><row type="TypeDouble" index="9" invalid="no">5.0000000000000000e+02</row><row type="TypeDouble" index="10" invalid="no">5.5000000000000000e+02</row><row type="TypeDouble" index="11" invalid="no">6.0000000000000000e+02</row><row type="TypeDouble" index="12" invalid="no">6.5000000000000000e+02</row><row type="TypeDouble" index="13" invalid="no">7.0000000000000000e+02</row><row type="TypeDouble" index="14" invalid="no">7.5000000000000000e+02</row><row type="TypeDouble" index="15" invalid="no">8.0000000000000000e+02</row><row type="TypeDouble" index="16" invalid="no">8.5000000000000000e+02</row><row type="TypeDouble" index="17" invalid="no">9.0000000000000000e+02</row><row type="TypeDouble" index="18" invalid="no">9.5000000000000000e+02</row><row type="TypeDouble" index="19" invalid="no">1.0000000000000000e+03</row></column><column_width column="0">120</column_width><column_width column="1">120</column_width></table>
+geometry	187	39	718	382	
+
+</table>
+<multiLayer>
+Graph1	1	1	2014-01-06 16:44:49
+geometry	478	28	656	296	active
+WindowLabel		2
+Margins	5	5	5	5
+Spacing	5	5
+LayerCanvasSize	442	307
+Alignement	0	0
+<graph>
+ggeometry	5	5	628	229
+PlotTitle		#000000	4
+<Antialiasing>1</Antialiasing>
+Background	#ffffff	255
+Margin	0
+Border	0	#000000
+grid	0	0	0	0	#0000ff	0	0	#a0a0a4	2	0	#0000ff	0	0	#a0a0a4	2	0	0	0	2	0
+EnabledAxes	1	0	1	0	
+AxesTitles	Początkowa liczba samochodów	Czas obsługi skrzyżowania			
+AxesTitleColors	#000000	#000000	#000000	#000000	
+AxesTitleAlignment	4	4	4	4
+TitleFont	MS Shell Dlg 2	10	75	0	0	0
+ScaleFont0	MS Shell Dlg 2	8	75	0	0	0
+ScaleFont1	MS Shell Dlg 2	8	75	0	0	0
+ScaleFont2	MS Shell Dlg 2	8	75	0	0	0
+ScaleFont3	MS Shell Dlg 2	8	75	0	0	0
+AxisFont0	MS Shell Dlg 2	8	50	0	0	0
+AxisFont1	MS Shell Dlg 2	8	50	0	0	0
+AxisFont2	MS Shell Dlg 2	8	50	0	0	0
+AxisFont3	MS Shell Dlg 2	8	50	0	0	0
+EnabledTickLabels	1	1	1	1	
+AxesColors	#000000	#000000	#000000	#000000
+AxesNumberColors	#000000	#000000	#000000	#000000
+AxesBaseline	0	0	0	0	
+CanvasBackground	#ffffff	255
+curve	Table1_2	Table1_1	1	0	0	0	1	7	1	0	0	0	0	14	0	2	0	0	99	1
+FunctionCurve	0,LinearFit1,x,50,1000	2			0	1	1	0	1	0	0	0	19	0	0	14	0	2	0	59592896	0	1
+<formula>
+B=34.8947368421053
+A=5.45924812030075
+
+A*x+B
+</formula>
+scale	0	0	6000	0	8	5	0	0
+scale	1	0	6000	0	8	5	0	0
+scale	2	50	1000	0	7	5	0	0
+scale	3	50	1000	0	8	5	0	0
+LabelsFormat	0	4	0	4	0	4	0	4	
+AxisType	0	0	0	0	
+MajorTicks	1	1	1	1	
+MinorTicks	1	1	1	1	
+TicksLength	5	9
+DrawAxesBackbone	1
+AxesLineWidth	1
+LabelsRotation	0	0
+<legend>	707.168458781362	2543.47826086957	MS Shell Dlg 2	8	50	0	0	0	#000000	1	0	#ffffff	0	\c{1} Dane z symulacji	\c{2} Regresja liniowa:	 y = 5,46 * x + 34,89</legend>
+<text>	84.0501792114695	5347.82608695652	MS Shell Dlg 2	8	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
+<text>	84.0501792114695	5347.82608695652	MS Shell Dlg 2	8	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
+<text>	84.0501792114695	5347.82608695652	MS Shell Dlg 2	8	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
+<text>	84.0501792114695	5347.82608695652	MS Shell Dlg 2	8	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
+</graph>
+</multiLayer>
+<log>
+[2014-01-06 17:54:58	Plot: ''Graph1'']
+Linear Regression fit of dataset: Table1_1, using function: A*x+B
+Y standard errors: Unknown
+From x = 50 to x = 1 000
+B (y-intercept) = 34,8947368421053 +/- 24,8822164951032
+A (slope) = 5,45924812030075 +/- 0,0415425460161381
+--------------------------------------------------------------------------------------
+Chi^2/doF = 2 869,11445279866
+R^2 = 0,998958784491577
+---------------------------------------------------------------------------------------
+</log>

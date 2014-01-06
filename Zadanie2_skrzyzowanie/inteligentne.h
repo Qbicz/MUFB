@@ -19,7 +19,9 @@ public:
     //wspołłczynniki:
 private:
     int Kp,Kd,Ki;
-    int uchyb_pion, uchyb_poziom; //uchyb poprzedni do  modułu różniczkującego.
+    unsigned int uchyb_pop_pion, uchyb_pop_poziom, uchyb_pop; //uchyb poprzedni do  modułu różniczkującego.
+    unsigned long int calka_pion, calka_poziom;  //zmienna całkująca
+    unsigned long int greenTime_pion, greenTime_poziom ;
 };
 
 #endif // INTELIGENTNE_H

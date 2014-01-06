@@ -1,7 +1,7 @@
 #ifndef SYGNALIZATOR_H
 #define SYGNALIZATOR_H
 
-#define NULL 0
+#include <QtWidgets>
 
 //Sygnalizator swietlny jako maszyna stanow
 enum State {red, green};
