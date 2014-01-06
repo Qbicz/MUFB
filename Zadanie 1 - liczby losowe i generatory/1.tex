@@ -1,0 +1,181 @@
+\documentclass[11pt]{aghdpl}
+% \documentclass[en,11pt]{aghdpl}  % praca w języku angielskim
+\usepackage[polish]{babel}
+%\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% dodatkowe pakiety
+\usepackage{enumerate}
+\usepackage{listings}
+\lstloadlanguages{TeX}
+
+%kolorowanie linków + działanie linków
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=red,citecolor=green]{hyperref}
+
+
+
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+    backgroundcolor=\color{lbcolor},
+    tabsize=4,
+  language=C++,
+  captionpos=b,
+  tabsize=3,
+  frame=lines,
+  numbers=left,
+  numberstyle=\tiny,
+  numbersep=5pt,
+  breaklines=true,
+  showstringspaces=false,
+  basicstyle=\footnotesize,
+%  identifierstyle=\color{magenta},
+  keywordstyle=\color[rgb]{0,0,1},
+  commentstyle=\color{Darkgreen},
+  stringstyle=\color{red}
+  }
+\lstset{
+  literate={ą}{{\k{a}}}1
+           {ć}{{\'c}}1
+           {ę}{{\k{e}}}1
+           {ó}{{\'o}}1
+           {ń}{{\'n}}1
+           {ł}{{\l{}}}1
+           {ś}{{\'s}}1
+           {ź}{{\'z}}1
+           {ż}{{\.z}}1
+           {Ą}{{\k{A}}}1
+           {Ć}{{\'C}}1
+           {Ę}{{\k{E}}}1
+           {Ó}{{\'O}}1
+           {Ń}{{\'N}}1
+           {Ł}{{\L{}}}1
+           {Ś}{{\'S}}1
+           {Ź}{{\'Z}}1
+           {Ż}{{\.Z}}1
+}
+
+
+
+%\usepackage[pdftex]{graphicx}
+\usepackage{tikz}
+%---------------------------------------------------------------------------
+
+\author{Żaneta Błaszczuk, Rafał Kozik, Filip Kubicz, Jakub Nowak, Jakub Porębski}
+\shortauthor{Ż. Błaszczuk, R. Kozik, F. Kubicz, J. Nowak, J. Porębski}
+
+\titlePL{Generator liczb losowych}
+\titleEN{Random number generator}
+
+\shorttitlePL{Generator liczb losowych} % skrócona wersja tytułu jeśli jest bardzo długi
+%\shorttitleEN{Thesis in \LaTeX}
+
+\thesistype{Modelowanie układów fizycznych i biologicznych}
+%\thesistype{Master of Science Thesis}
+
+\supervisor{dr inż. Ireneusz Wochlik}
+
+\degreeprogramme{Automatyka i Robotyka}
+%\degreeprogramme{Computer Science}
+
+\date{2014}
+
+\department{Katedra Automatyki}
+%\department{Department of Applied Computer Science}
+
+\faculty{Wydział Elektrotechniki, Automatyki,\protect\\[-1mm] Informatyki i Inżynierii Biomedycznej}
+%\faculty{Faculty of Electrical Engineering, Automatics, Computer Science and Biomedical Engineering}
+
+\setlength{\cftsecnumwidth}{10mm}
+
+\begin{document}
+\titlepages
+\section{Wstęp}
+\subsection{Cel zastosowania generatorów liczb pseudo losowych}
+Liczby pseudo losowe przedewszystkim wykorzystuje się w 3 dziedzinach:
+\begin{enumerate}
+\item Olbiczeniach numerycznych – wykorzystywane w metodach obliczeniowych, które nie wymagaja dużej ilości liczb o danym rozkładzie.
+\item Kryptografia – wykorzystywane do generowania kluczy prywatnych
+\item Złudzenie losowości w grach – wykorzystując generatory gracz ma poczucie przewidywalności i nie powtarzalności.  
+\end{enumerate}
+\subsection{Liczby pseudo losowe}
+Liczbami pseudo losowymi nazywamy liczby wykazujące cechy liczb prawdziwie losowych uzyskanych poprzez działanie algorytmu. Zaletą korzystania z takich liczb jest możliwość szybkiego pozyskiwania rezultatów, ograniczona mocą obliczeniową komputera.
+\subsection{Generatory liczb pseudo losowych}
+Liczby pozyskiwane są z odpowiednich algorytmów, obliczających kolejną liczbę na podstawie poprzedniego wyniku. W związku z tym konieczne jest podanie pierwszej liczby. W praktyce generatory wykorzystują jako pierwszą liczbę aktualny czas. 
+\section{Testowanie generatorów}
+\subsection{Cel testowania generatorów}
+Generatory testowane są przedewszystkim by odrzucić te z nich, które dają wyniki nie losowe. Najważniejszym założeniem jest, by nie dopuścić do przepuszczenia złego generatora, nawet kosztem pomyłkowego odrzucenia działającego. W dzisiejszych czasach mamy do dyspozycji bardzo wiele różnych generatorów. Wybierając generator źle działający możemy mieć doczynienia z bardzo dotkliwymi stutkami dla użytkownika. Dlatego też zostały sformuowane „podstawowe cechy dobrego generatora”:
+\begin{enumerate}
+\item Jednorodność – prawdopodobieństwo wystopienia 1 lub 0 wynosi 0,5 w każdym punkcie generowaniego ciągu bitów.
+\item Skalowalność - każdy podciąg ciągu, który zakończył się pozywytnym testem, również powinien zakończyć się tym samym pozytywnym testem.
+\item Zgodność – zachowanie generatora powinno dawać podobne rezultaty niezależnie od początkowej wartości.
+\end{enumerate}
+\subsection{Analiza rezultatów}
+Testy, na których się oparłem pochądzą z pakietu DieHard, oraz z jego następcy DieHarder, uznawanego za jednego z najlepszych pakietów. Rozpowszechniony jest na licencji GPL, co pozwala na zgłębienie kodu oraz modyfikacji, jeśli zajdzie taka potrzeba.Atutem DieHard jest też przejżysty i powtarzalny sposób prezentacji testów. DieHard wynik przedstawia nam w postaci p-wartość, która informuje nas o odchyleniu rozkładu od wartości oczekiwanej. Dobre generatory w testach zbliżają się ze swoją p-wartość do 1. Natomiast wartością graniczną, przy której generator przestaje być losowy jest p-wartość~=~0,05. 
+Ten sam test powtarza się zazwyczaj dla danego generatora n razy (zazwyczaj n = 100), w celu uniknięcia zdarzenia, że generator raz przeszedł dany test. Następnie otrzymane p-wartości przepuszcza się przez test Kolmogorova-Smirnova, by sprawdzić czy ich wrtości mają rozkład równomierny.
+\section{Przykładowe testy}
+\subsection{Wybrane generatory do testów}
+\subsubsection{KISS – (Keep Is Simple Stupid)}
+Generator złożony z trzech prostych generatorów. Ideą jego jest bycie szybkim i prostym. KISS składa się z:
+\begin{equation}
+x(n) = a \cdot x (n-1)+1 \; mod \; 2^{32}
+\end{equation}
+\begin{equation}
+y(n)=y(n-1)(I+L^{13})(I+R^{17})(I+L^5)
+\end{equation}
+\begin{equation}
+z(n)=2 \cdot z(n-1)+z(n-2) +carry \; mod \; 2^{32}
+\end{equation}
+Generator ten nadaje się do programowania w asemblerze, gdzie trwa około 200 nanosekund przy procesorze Pentium 120.
+\subsubsection{Generator System Microsoft Fortran}
+Generator oparty na 32 bitach opisany wzorem:
+\begin{equation}
+X ( n ) = 48271 \cdot x (n- 1 )\; mod\; 2 ^ {31}-1,
+\end{equation}
+zbliżony do Lehmer, charakteryzuje się jednak tym, że zaproponowano w nim lepszy mnożnik. 
+\subsubsection{Odwrócony generator}
+Opisany przez Einchenauer-Herrmann. Obliczenia zajmują dużo więcej czasu. Sprawdza się gorzej, niż klasyczny RNG mod $2^{32}$
+\subsection{Wybrane testy}
+\subsubsection{Test urodzin}
+Polega on na „paradoksie urodzin”, czyli prawdopodobieństwie, że w grópie osób, znajdą się osby które mają urodziny tego samego dnia. Testowana grupa ma 512 osób, a dzień określa 24 bitowa liczba. Rozkład powinien być podobny do rozkładu Poissona.
+\subsubsection{Minimum Distance test}
+Wybiera się 8000 losowych punktów w kwadracie o boku 10000. Oblicza się d (minimalna odległość pomiędzy $\frac{n^2 -n}{2}$ parami punktów). Rozkład powinien przedstawiać rozkład równomierny.
+\subsubsection{Sums test}
+Polega na przekształceniu liczby losowych całkowitych na liczby zmiennoprzecinkowe. Następnie wylicza się sumy pokrywających się podciągów składających się ze 100 elementów. Otrzymany ciąg sum powinienn mieć rozkład normalny.
+\section{Testowanie}
+\subsection{Test urodzin}
+\begin{center}
+\begin{tabular}{ccc}
+generator & Finalna p-wartość & Wynik \\ \hline
+KISS &  0.934361  & PASSED \\
+System Microsoft Fortran & 0.995980 & PASSED \\
+Odwrócony generator & 0.804086 & PASSED \\
+\end{tabular}
+\end{center}
+Wszystkie generatory zdały test.
+\subsection{Minimum Distance test}
+\begin{center}
+\begin{tabular}{ccc}
+generator & Finalna p-wartość & Wynik \\ \hline
+KISS &  0.309341  & PASSED \\
+System Microsoft Fortran & 0.772850 & PASSED \\
+Odwrócony generator & 0.046785 & FAILED \\
+\end{tabular}
+\end{center}
+Odwrócony generator nie zdał testu. Z testem dobrze poradził sobie natomiast SMF.
+\subsection{Sums test}
+\begin{center}
+\begin{tabular}{ccc}
+generator & Finalna p-wartość & Wynik \\ \hline
+KISS & 0.593360 & PASSED \\
+System Microsoft Fortran & 0.808943 & PASSED \\
+Odwrócony generator & 0.315619  & PASSED \\
+\end{tabular}
+\end{center}
+Wszystkie generatory zdały test, chodź najlepiej poradził sobie SMF.
+\subsection{Podsumowanie}
+Z wybranych generatorów najlepiej sprawuje się generator System Microsoft Fortran, który, zakończył każdy test pozytywnie i był w tych testach najbardziej zbliżony do 1.
+\end{document}
