@@ -94,31 +94,31 @@
 \begin{document}
 \titlepages
 \section{Wstęp}
-\subsection{Cel zastosowania generatorów liczb pseudo losowych}
-Liczby pseudo losowe przede wszystkim wykorzystuje się w 3 dziedzinach:
+\subsection{Cel zastosowania generatorów liczb pseudolosowych}
+Liczby pseudolosowe przede wszystkim wykorzystuje się w 3 dziedzinach:
 \begin{enumerate}
 \item Obliczeniach numerycznych – wykorzystywane w metodach obliczeniowych, które nie wymagają dużej ilości liczb o danym rozkładzie.
 \item Kryptografia – wykorzystywane do generowania kluczy prywatnych
-\item Złudzenie losowości w grach – wykorzystując generatory gracz ma poczucie przewidywalności i nie powtarzalności.  
+\item Złudzenie losowości w grach – wykorzystując generatory gracz ma poczucie przewidywalności i niepowtarzalności.  
 \end{enumerate}
-\subsection{Liczby pseudo losowe}
-Liczbami pseudo losowymi nazywamy liczby wykazujące cechy liczb prawdziwie losowych uzyskanych poprzez działanie algorytmu. Zaletą korzystania z takich liczb jest możliwość szybkiego pozyskiwania rezultatów, ograniczona mocą obliczeniową komputera.
-\subsection{Generatory liczb pseudo losowych}
+\subsection{Liczby pseudolosowe}
+Liczbami pseudolosowymi nazywamy liczby wykazujące cechy liczb prawdziwie losowych uzyskanych poprzez działanie algorytmu. Zaletą korzystania z takich liczb jest możliwość szybkiego pozyskiwania rezultatów, ograniczona mocą obliczeniową komputera.
+\subsection{Generatory liczb pseudolosowych}
 Liczby pozyskiwane są z odpowiednich algorytmów, obliczających kolejną liczbę na podstawie poprzedniego wyniku. W związku z tym konieczne jest podanie pierwszej liczby. W praktyce generatory wykorzystują jako pierwszą liczbę aktualny czas. 
 \section{Testowanie generatorów}
 \subsection{Cel testowania generatorów}
-Generatory testowane są przede wszystkim by odrzucić te z nich, które dają wyniki nie losowe. Najważniejszym założeniem jest, by nie dopuścić do przepuszczenia złego generatora, nawet kosztem pomyłkowego odrzucenia działającego. W dzisiejszych czasach mamy do dyspozycji bardzo wiele różnych generatorów. Wybierając generator źle działający możemy mieć do czynienia z bardzo dotkliwymi skutkami dla użytkownika. Dlatego też zostały sformułowane ,,podstawowe cechy dobrego generatora'':
+Generatory testowane są przede wszystkim by odrzucić te z nich, które dają wyniki dalekie od losowych. Najważniejszym założeniem jest, by nie dopuścić do przepuszczenia złego generatora, nawet kosztem pomyłkowego odrzucenia działającego. W dzisiejszych czasach mamy do dyspozycji bardzo wiele różnych generatorów. Wybierając generator źle działający możemy mieć do czynienia z bardzo dotkliwymi skutkami dla użytkownika. Dlatego też zostały sformułowane ,,podstawowe cechy dobrego generatora'':
 \begin{enumerate}
 \item Jednorodność – prawdopodobieństwo wystąpienia 1 lub 0 wynosi 0,5 w każdym punkcie generowanego ciągu bitów.
 \item Skalowalność - każdy podciąg ciągu, który zakończył się pozytywnym testem, również powinien zakończyć się tym samym pozytywnym testem.
 \item Zgodność – zachowanie generatora powinno dawać podobne rezultaty niezależnie od początkowej wartości.
 \end{enumerate}
 \subsection{Analiza rezultatów}
-Testy, na których się oparłem pochodzą z pakietu DieHard, oraz z jego następcy DieHarder, uznawanego za jednego z najlepszych pakietów. Rozpowszechniony jest na licencji GPL, co pozwala na zgłębienie kodu oraz modyfikacji, jeśli zajdzie taka potrzeba. Atutem DieHard jest też przejrzysty i powtarzalny sposób prezentacji testów. DieHard wynik przedstawia nam w postaci p-wartość, która informuje nas o odchyleniu rozkładu od wartości oczekiwanej. Dobre generatory w testach zbliżają się ze swoją p-wartość do 1. Natomiast wartością graniczną, przy której generator przestaje być losowy jest p-wartość~=~0,05. 
-Ten sam test powtarza się zazwyczaj dla danego generatora n razy (zazwyczaj n = 100), w celu uniknięcia zdarzenia, że generator raz przeszedł dany test. Następnie otrzymane p-wartości przepuszcza się przez test Kolmogorova-Smirnova, by sprawdzić czy ich wartości mają rozkład równomierny.
+Testy, na których się oparłem pochodzą z pakietu DieHard, oraz z jego następcy DieHarder, uznawanego za jednego z najlepszych pakietów. Rozpowszechniony jest na licencji GPL, co pozwala na zgłębienie kodu oraz modyfikacji, jeśli zajdzie taka potrzeba. Atutem DieHard jest też przejrzysty i powtarzalny sposób prezentacji testów. DieHard wynik przedstawia nam w postaci p-wartości, która informuje nas o odchyleniu rozkładu od wartości oczekiwanej. Dobre generatory w testach zbliżają się ze swoją p-wartością do 1. Natomiast wartością graniczną, przy której generator przestaje być losowy jest p-wartość~=~0,05. 
+Ten sam test powtarza się zwykle dla danego generatora n razy (zazwyczaj n = 100), w celu uniknięcia zdarzenia, że generator raz przeszedł dany test. Następnie otrzymane p-wartości przepuszcza się przez test Kolmogorova-Smirnova, by sprawdzić czy ich wartości mają rozkład równomierny.
 \section{Przykładowe testy}
 \subsection{Wybrane generatory do testów}
-\subsubsection{KISS – (Keep Is Simple Stupid)}
+\subsubsection{KISS – (Keep It Simple Stupid)}
 Generator złożony z trzech prostych generatorów. Ideą jego jest bycie szybkim i prostym. KISS składa się z:
 \begin{equation}
 x(n) = a \cdot x (n-1)+1 \; mod \; 2^{32}
@@ -177,5 +177,5 @@ Odwrócony generator & 0.315619  & PASSED \\
 \end{center}
 Wszystkie generatory zdały test, chodź najlepiej poradził sobie SMF.
 \subsection{Podsumowanie}
-Z wybranych generatorów najlepiej sprawuje się generator System Microsoft Fortran, który, zakończył każdy test pozytywnie i był w tych testach najbardziej zbliżony do 1.
+Z wybranych generatorów najlepiej sprawuje się generator System Microsoft Fortran, który zakończył każdy test pozytywnie i jego p-wartość była w tych testach najbardziej zbliżona do 1.
 \end{document}
