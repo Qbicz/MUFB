@@ -9,14 +9,14 @@ geometry	-3	36	718	382
 </table>
 <multiLayer>
 Graph1	1	1	2014-01-06 16:44:49
-geometry	30	41	656	361	active
+geometry	30	41	656	296	active
 WindowLabel		2
 Margins	5	5	5	5
 Spacing	5	5
 LayerCanvasSize	442	307
 Alignement	0	0
 <graph>
-ggeometry	5	5	628	293
+ggeometry	5	5	628	229
 PlotTitle		#000000	4
 <Antialiasing>1</Antialiasing>
 Background	#ffffff	255
@@ -28,10 +28,10 @@ AxesTitles	Czas światła zielonego	Czas obsługi skrzyżowania
 AxesTitleColors	#000000	#000000	#000000	#000000	
 AxesTitleAlignment	4	4	4	4
 TitleFont	MS Shell Dlg 2	10	75	0	0	0
-ScaleFont0	MS Shell Dlg 2	10	75	0	0	0
-ScaleFont1	MS Shell Dlg 2	10	75	0	0	0
-ScaleFont2	MS Shell Dlg 2	10	75	0	0	0
-ScaleFont3	MS Shell Dlg 2	10	75	0	0	0
+ScaleFont0	MS Shell Dlg 2	8	75	0	0	0
+ScaleFont1	MS Shell Dlg 2	8	75	0	0	0
+ScaleFont2	MS Shell Dlg 2	8	75	0	0	0
+ScaleFont3	MS Shell Dlg 2	8	75	0	0	0
 AxisFont0	MS Shell Dlg 2	8	50	0	0	0
 AxisFont1	MS Shell Dlg 2	8	50	0	0	0
 AxisFont2	MS Shell Dlg 2	8	50	0	0	0

@@ -139,7 +139,7 @@ Długość każdej z kolejek spada co drugi okres czasu, kiedy pojawia się świ
 
 \subsection{Sygnalizacja stałoczasowa}
 Jest to najprostszy sposób sterowania ruchem na skrzyżowaniu. Posiada on tylko jeden parametr - czas światła zielonego. 
-Wybór optymalnej wartości tego parametru dokonaliśmy testując zachowanie skrzyżowania na impuls początkowy jakim jest 100 samochodów na jednej z dróg dojazdowych. parametrem porównawczym jest tu czas obsługi samochodów przez skrzyżowanie. Decyduje on o relatywnym zadowoleniu kierowców \ref{czasobs(time)}.
+Wybór optymalnej wartości tego parametru dokonaliśmy testując zachowanie skrzyżowania na impuls początkowy jakim jest 100 samochodów na jednej z dróg dojazdowych. parametrem porównawczym jest tu czas obsługi samochodów przez skrzyżowanie. Decyduje on o relatywnym zadowoleniu kierowców.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.80\textwidth]{czasobs(time).pdf}
@@ -147,9 +147,9 @@ Wybór optymalnej wartości tego parametru dokonaliśmy testując zachowanie skr
 	\label{czasobs(time)}
 \end{figure}
 
-Z wykresu wynika, że dla tych warunków czasy większe od 40 sekund pozwalają na osiągnięcie optymalnego czasu obsługi na poziomie około 600 sekund.\label{600}
+Z wykresu [\ref{czasobs(time)}] wynika, że dla tych warunków czasy większe od 40 sekund pozwalają na osiągnięcie optymalnego czasu obsługi na poziomie około 600 sekund [\label{600}]. 
 
-Reakcję skrzyżowania na różną liczbę początkową samochodów dla czasu światła zielonego 50 sekund obrazuje następny wykres:
+Reakcję skrzyżowania na różną liczbę początkową samochodów dla czasu światła zielonego 50 sekund obrazuje wykres [\ref{czasobs(ilosc)}]:
 
 \begin{figure}[h!]
 	\centering
@@ -157,14 +157,19 @@ Reakcję skrzyżowania na różną liczbę początkową samochodów dla czasu ś
 	\caption{Zależność czasu obsługi skrzyżowania od ilości początkowej samochodów}	
 	\label{czasobs(ilosc)}
 \end{figure} 
-Równanie regresji liniowej to:
+
+Równanie regresji liniowej dla wykresu [\ref{czasobs(ilosc)}] to:
 \begin{equation}
-	 y = 5,46 * x + 34,89
+	 y = 5,46 * x + 34,89 \qquad \qquad \qquad R^2 = 0,999
 \end{equation}
 
 \subsection{Sygnalizacja inteligentna}
 W celu zamodelowania sygnalizacji, która reaguje na dane o stanie modelu zastosowaliśmy najprostszy regulator P. Uchybem regulacji jest w tym wypadku sumaryczna długość kolejek w kierunku, na którym jest aktualnie światło zielone.
-Współczynnik proporcjonalności dobraliśmy doświadczalnie testując odpowiedzi układu na skok 100 samochodów w jednej z kolejek (tak samo jak w [\ref{czasobs(time)}]). Najlepsze wyniki otrzymaliśmy dla współczynnika proporcjonalności równego 2,2, a czas oczekiwania na ,,rozładowanie'' skrzyżowania wyniósł około 250 sekund (dla sterowania stałoczasowego było to 600 sekund [\ref{600}]).
+Współczynnik proporcjonalności dobraliśmy doświadczalnie testując odpowiedzi układu na skok 100 samochodów w jednej z kolejek (tak samo jak w [\ref{czasobs(time)}]). Najlepsze wyniki otrzymaliśmy dla współczynnika proporcjonalności równego $2,2$, a czas oczekiwania na ,,rozładowanie'' skrzyżowania wyniósł około 250 sekund (dla sterowania stałoczasowego było to 600 sekund [\ref{600}]).
+
+Czas obsługi skrzyżowania sterowanego przy użyciu regulatora $P$ w zależności od ilości początkowego impulsu samochodów przedstawia wykres [\ref{czasobs(ilosc)2}].
+
+\newpage
 
 \begin{figure}[h!]
 	\centering
@@ -173,14 +178,19 @@ Współczynnik proporcjonalności dobraliśmy doświadczalnie testując odpowied
 	\label{czasobs(ilosc)2}
 \end{figure}
 
-Równanie regresji liniowej to:
+Równanie regresji liniowej dla tego wykresu to:
 \begin{equation}
-	 y = 2,04 * x + 33,44
+	 y = 2,04 * x + 33,44 \qquad \qquad \qquad R^2 = 0,999 
+	 \label{regresja2}
 \end{equation}
 
-Mniejszy współczynnik kierunkowy w równaniu regresji świadczy o tym, że skrzyżowanie sterowane przy użyciu regulatora P jest ponad 2 razy skuteczniejsze od optymalnego sterowania stałoczasowego.
+Mniejszy współczynnik kierunkowy w równaniu regresji [\ref{regresja2}] świadczy o tym, że skrzyżowanie sterowane przy użyciu regulatora P jest ponad 2 razy skuteczniejsze od optymalnego sterowania stałoczasowego.
 
-Jednakże sterowanie za pomocą regulatora P jest dość kontrowersyjne. Dla tych samych danych początkowych co w zaprezentowanym powyżej przykładzie działania skrzyżowania [\ref{dzialanie}] sterowanie regulatorem P wygląda tak:
+\begin{equation}
+	\frac{a_{staloczasowe}}{a_{inteligentne}} = \frac{5,46}{2,04} = 2,68
+\end{equation}
+
+Jednakże sterowanie za pomocą regulatora P jest dość kontrowersyjne. Dla tych samych danych początkowych co w zaprezentowanym powyżej przykładzie działania skrzyżowania [\ref{dzialanie}] sterowanie regulatorem P wygląda tak [\ref{dzialanie2}]:
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.80\textwidth]{dzialanie2.pdf}
