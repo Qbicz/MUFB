@@ -95,9 +95,9 @@
 \titlepages
 \section{Wstęp}
 \subsection{Cel zastosowania generatorów liczb pseudo losowych}
-Liczby pseudo losowe przedewszystkim wykorzystuje się w 3 dziedzinach:
+Liczby pseudo losowe przede wszystkim wykorzystuje się w 3 dziedzinach:
 \begin{enumerate}
-\item Olbiczeniach numerycznych – wykorzystywane w metodach obliczeniowych, które nie wymagaja dużej ilości liczb o danym rozkładzie.
+\item Obliczeniach numerycznych – wykorzystywane w metodach obliczeniowych, które nie wymagają dużej ilości liczb o danym rozkładzie.
 \item Kryptografia – wykorzystywane do generowania kluczy prywatnych
 \item Złudzenie losowości w grach – wykorzystując generatory gracz ma poczucie przewidywalności i nie powtarzalności.  
 \end{enumerate}
@@ -107,15 +107,15 @@ Liczbami pseudo losowymi nazywamy liczby wykazujące cechy liczb prawdziwie loso
 Liczby pozyskiwane są z odpowiednich algorytmów, obliczających kolejną liczbę na podstawie poprzedniego wyniku. W związku z tym konieczne jest podanie pierwszej liczby. W praktyce generatory wykorzystują jako pierwszą liczbę aktualny czas. 
 \section{Testowanie generatorów}
 \subsection{Cel testowania generatorów}
-Generatory testowane są przedewszystkim by odrzucić te z nich, które dają wyniki nie losowe. Najważniejszym założeniem jest, by nie dopuścić do przepuszczenia złego generatora, nawet kosztem pomyłkowego odrzucenia działającego. W dzisiejszych czasach mamy do dyspozycji bardzo wiele różnych generatorów. Wybierając generator źle działający możemy mieć doczynienia z bardzo dotkliwymi stutkami dla użytkownika. Dlatego też zostały sformuowane „podstawowe cechy dobrego generatora”:
+Generatory testowane są przede wszystkim by odrzucić te z nich, które dają wyniki nie losowe. Najważniejszym założeniem jest, by nie dopuścić do przepuszczenia złego generatora, nawet kosztem pomyłkowego odrzucenia działającego. W dzisiejszych czasach mamy do dyspozycji bardzo wiele różnych generatorów. Wybierając generator źle działający możemy mieć do czynienia z bardzo dotkliwymi skutkami dla użytkownika. Dlatego też zostały sformułowane ,,podstawowe cechy dobrego generatora'':
 \begin{enumerate}
-\item Jednorodność – prawdopodobieństwo wystopienia 1 lub 0 wynosi 0,5 w każdym punkcie generowaniego ciągu bitów.
-\item Skalowalność - każdy podciąg ciągu, który zakończył się pozywytnym testem, również powinien zakończyć się tym samym pozytywnym testem.
+\item Jednorodność – prawdopodobieństwo wystąpienia 1 lub 0 wynosi 0,5 w każdym punkcie generowanego ciągu bitów.
+\item Skalowalność - każdy podciąg ciągu, który zakończył się pozytywnym testem, również powinien zakończyć się tym samym pozytywnym testem.
 \item Zgodność – zachowanie generatora powinno dawać podobne rezultaty niezależnie od początkowej wartości.
 \end{enumerate}
 \subsection{Analiza rezultatów}
-Testy, na których się oparłem pochądzą z pakietu DieHard, oraz z jego następcy DieHarder, uznawanego za jednego z najlepszych pakietów. Rozpowszechniony jest na licencji GPL, co pozwala na zgłębienie kodu oraz modyfikacji, jeśli zajdzie taka potrzeba.Atutem DieHard jest też przejżysty i powtarzalny sposób prezentacji testów. DieHard wynik przedstawia nam w postaci p-wartość, która informuje nas o odchyleniu rozkładu od wartości oczekiwanej. Dobre generatory w testach zbliżają się ze swoją p-wartość do 1. Natomiast wartością graniczną, przy której generator przestaje być losowy jest p-wartość~=~0,05. 
-Ten sam test powtarza się zazwyczaj dla danego generatora n razy (zazwyczaj n = 100), w celu uniknięcia zdarzenia, że generator raz przeszedł dany test. Następnie otrzymane p-wartości przepuszcza się przez test Kolmogorova-Smirnova, by sprawdzić czy ich wrtości mają rozkład równomierny.
+Testy, na których się oparłem pochodzą z pakietu DieHard, oraz z jego następcy DieHarder, uznawanego za jednego z najlepszych pakietów. Rozpowszechniony jest na licencji GPL, co pozwala na zgłębienie kodu oraz modyfikacji, jeśli zajdzie taka potrzeba. Atutem DieHard jest też przejrzysty i powtarzalny sposób prezentacji testów. DieHard wynik przedstawia nam w postaci p-wartość, która informuje nas o odchyleniu rozkładu od wartości oczekiwanej. Dobre generatory w testach zbliżają się ze swoją p-wartość do 1. Natomiast wartością graniczną, przy której generator przestaje być losowy jest p-wartość~=~0,05. 
+Ten sam test powtarza się zazwyczaj dla danego generatora n razy (zazwyczaj n = 100), w celu uniknięcia zdarzenia, że generator raz przeszedł dany test. Następnie otrzymane p-wartości przepuszcza się przez test Kolmogorova-Smirnova, by sprawdzić czy ich wartości mają rozkład równomierny.
 \section{Przykładowe testy}
 \subsection{Wybrane generatory do testów}
 \subsubsection{KISS – (Keep Is Simple Stupid)}
@@ -140,11 +140,11 @@ zbliżony do Lehmer, charakteryzuje się jednak tym, że zaproponowano w nim lep
 Opisany przez Einchenauer-Herrmann. Obliczenia zajmują dużo więcej czasu. Sprawdza się gorzej, niż klasyczny RNG mod $2^{32}$
 \subsection{Wybrane testy}
 \subsubsection{Test urodzin}
-Polega on na „paradoksie urodzin”, czyli prawdopodobieństwie, że w grópie osób, znajdą się osby które mają urodziny tego samego dnia. Testowana grupa ma 512 osób, a dzień określa 24 bitowa liczba. Rozkład powinien być podobny do rozkładu Poissona.
+Polega on na ,,paradoksie urodzin'', czyli prawdopodobieństwie, że w grupie osób, znajdą się osoby które mają urodziny tego samego dnia. Testowana grupa ma 512 osób, a dzień określa 24 bitowa liczba. Rozkład powinien być podobny do rozkładu Poissona.
 \subsubsection{Minimum Distance test}
-Wybiera się 8000 losowych punktów w kwadracie o boku 10000. Oblicza się d (minimalna odległość pomiędzy $\frac{n^2 -n}{2}$ parami punktów). Rozkład powinien przedstawiać rozkład równomierny.
+Wybiera się 8000 losowych punktów w kwadracie o boku 10000. Oblicza się $d$ (minimalną odległość pomiędzy $\frac{n^2 -n}{2}$ parami punktów). Rozkład powinien przedstawiać rozkład równomierny.
 \subsubsection{Sums test}
-Polega na przekształceniu liczby losowych całkowitych na liczby zmiennoprzecinkowe. Następnie wylicza się sumy pokrywających się podciągów składających się ze 100 elementów. Otrzymany ciąg sum powinienn mieć rozkład normalny.
+Polega na przekształceniu losowych liczb całkowitych na liczby zmiennoprzecinkowe. Następnie wylicza się sumy pokrywających się podciągów składających się ze 100 elementów. Otrzymany ciąg sum powinien mieć rozkład normalny.
 \section{Testowanie}
 \subsection{Test urodzin}
 \begin{center}
