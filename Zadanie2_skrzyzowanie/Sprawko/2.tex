@@ -11,7 +11,7 @@
 \lstloadlanguages{TeX}
 
 %kolorowanie linków + działanie linków
-\usepackage[colorlinks=true,urlcolor=blue,linkcolor=red,citecolor=green]{hyperref}
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=black,citecolor=green]{hyperref}
 
 \usepackage{listings}
 \usepackage{xcolor}
@@ -128,7 +128,7 @@ Przy każdej zmianie świateł przybywa maksymalnie 5 samochodów (do każdej z 
 Działanie skrzyżowania można zobaczyć na wykresie \ref{dzialanie}:
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.80\textwidth]{dzialanie.pdf}
+	\includegraphics[width=0.80\textwidth]{dzialanie.png}
 	\caption{Wykres długości kolejek samochodów w zależności od czasu.}	
 	\label{dzialanie}
 \end{figure}
@@ -142,7 +142,7 @@ Jest to najprostszy sposób sterowania ruchem na skrzyżowaniu. Posiada on tylko
 Wybór optymalnej wartości tego parametru dokonaliśmy testując zachowanie skrzyżowania na impuls początkowy jakim jest 100 samochodów na jednej z dróg dojazdowych. parametrem porównawczym jest tu czas obsługi samochodów przez skrzyżowanie. Decyduje on o relatywnym zadowoleniu kierowców.
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.80\textwidth]{czasobs(time).pdf}
+	\includegraphics[width=0.80\textwidth]{czasobs(time).png}
 	\caption{Zależność czasu obsługi skrzyżowania od czasu światła zielonego w sygnalizacji stałoczasowej}	
 	\label{czasobs(time)}
 \end{figure}
@@ -153,7 +153,7 @@ Reakcję skrzyżowania na różną liczbę początkową samochodów dla czasu ś
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.80\textwidth]{czasobs(ilosc).pdf}
+	\includegraphics[width=0.80\textwidth]{czasobs(ilosc).png}
 	\caption{Zależność czasu obsługi skrzyżowania od ilości początkowej samochodów}	
 	\label{czasobs(ilosc)}
 \end{figure} 
@@ -164,8 +164,8 @@ Równanie regresji liniowej dla wykresu [\ref{czasobs(ilosc)}] to:
 \end{equation}
 
 \subsection{Sygnalizacja inteligentna}
-W celu zamodelowania sygnalizacji, która reaguje na dane o stanie modelu zastosowaliśmy najprostszy regulator P. Uchybem regulacji jest w tym wypadku sumaryczna długość kolejek w kierunku, na którym jest aktualnie światło zielone.
-Współczynnik proporcjonalności dobraliśmy doświadczalnie testując odpowiedzi układu na skok 100 samochodów w jednej z kolejek (tak samo jak w [\ref{czasobs(time)}]). Najlepsze wyniki otrzymaliśmy dla współczynnika proporcjonalności równego $2,2$, a czas oczekiwania na ,,rozładowanie'' skrzyżowania wyniósł około 250 sekund (dla sterowania stałoczasowego było to 600 sekund [\ref{600}]).
+W celu zamodelowania sygnalizacji, która reaguje na dane o stanie modelu zastosowaliśmy regulator P, najprostszy nam dostępny. Uchybem regulacji jest w tym wypadku sumaryczna długość kolejek w kierunku, na którym jest aktualnie światło zielone.
+Współczynnik proporcjonalności dobraliśmy doświadczalnie testując odpowiedzi układu na skok 100 samochodów w jednej z kolejek (tak samo jak w [\ref{czasobs(time)}]). Najlepsze wyniki otrzymaliśmy dla współczynnika proporcjonalności równego $2.2$, a czas oczekiwania na ,,rozładowanie'' skrzyżowania wyniósł około 250 sekund (dla sterowania stałoczasowego było to 600 sekund [\ref{600}]).
 
 Czas obsługi skrzyżowania sterowanego przy użyciu regulatora $P$ w zależności od ilości początkowego impulsu samochodów przedstawia wykres [\ref{czasobs(ilosc)2}].
 
@@ -173,7 +173,7 @@ Czas obsługi skrzyżowania sterowanego przy użyciu regulatora $P$ w zależnoś
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.80\textwidth]{czasobs(ilosc)2.pdf}
+	\includegraphics[width=0.80\textwidth]{czasobs(ilosc)2.png}
 	\caption{Zależność czasu obsługi skrzyżowania od ilości początkowej samochodów}	
 	\label{czasobs(ilosc)2}
 \end{figure}
@@ -193,7 +193,7 @@ Mniejszy współczynnik kierunkowy w równaniu regresji [\ref{regresja2}] świad
 Jednakże sterowanie za pomocą regulatora P jest dość kontrowersyjne. Dla tych samych danych początkowych co w zaprezentowanym powyżej przykładzie działania skrzyżowania [\ref{dzialanie}] sterowanie regulatorem P wygląda tak [\ref{dzialanie2}]:
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.80\textwidth]{dzialanie2.pdf}
+	\includegraphics[width=0.80\textwidth]{dzialanie2.png}
 	\caption{Zależność czasu obsługi skrzyżowania od ilości początkowej samochodów}	
 	\label{dzialanie2}
 \end{figure}
@@ -201,7 +201,7 @@ Jednakże sterowanie za pomocą regulatora P jest dość kontrowersyjne. Dla tyc
 \section{Wnioski}
 \begin{enumerate}
 	\item Sterowanie skrzyżowaniem za pomocą prostego regulatora P jest ponad 2 razy szybsze od sygnalizacji stałoczasowej, chociaż jego rozwiązanie może być dość zaskakujące.
-	\item Zaimplementoawany model może posłużyć do bardziej  zaawansowanych symulacji prawdziwych sytuacji w ruchu ulicznym.
+	\item Zaimplementowany model może posłużyć do bardziej  zaawansowanych symulacji prawdziwych sytuacji w ruchu ulicznym.
 \end{enumerate}
 
 \section{Bibliografia}

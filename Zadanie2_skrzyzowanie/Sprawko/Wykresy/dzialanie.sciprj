@@ -24,7 +24,7 @@ Margin	0
 Border	0	#000000
 grid	0	0	0	0	#0000ff	0	0	#a0a0a4	2	0	#0000ff	0	0	#a0a0a4	2	0	0	0	2	0
 EnabledAxes	1	0	1	0	
-AxesTitles	Czas	Długość kolejki			
+AxesTitles	Czas, s	Długość kolejki			
 AxesTitleColors	#000000	#000000	#000000	#000000	
 AxesTitleAlignment	4	4	4	4
 TitleFont	MS Shell Dlg 2	10	75	0	0	0
@@ -57,7 +57,7 @@ TicksLength	5	9
 DrawAxesBackbone	1
 AxesLineWidth	1
 LabelsRotation	0	0
-<legend>	267.713310580205	53.2539682539683	MS Shell Dlg 2	11	50	0	0	0	#000000	1	0	#ffffff	0	\c{1} górna	\c{2} dolna	\c{3} lewo	\c{4} prawo</legend>
+<legend>	261.81660899654	53.1967213114754	MS Shell Dlg 2	11	50	0	0	0	#000000	1	0	#ffffff	0	\c{1} dojazd górny	\c{2} dojazd dolny	\c{3} dojazd lewy	\c{4} dojazd prawy</legend>
 <text>	10.7337883959044	49.4708994708995	MS Shell Dlg 2	11	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
 <text>	10.7337883959044	49.4708994708995	MS Shell Dlg 2	11	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
 <text>	10.7337883959044	49.4708994708995	MS Shell Dlg 2	11	50	0	0	0	#000000	1781793064	0	#000000	255	</text>

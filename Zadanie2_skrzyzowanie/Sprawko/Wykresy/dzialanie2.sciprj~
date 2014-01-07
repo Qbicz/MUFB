@@ -28,23 +28,23 @@ AxesTitles	Czas	Długość kolejki
 AxesTitleColors	#000000	#000000	#000000	#000000	
 AxesTitleAlignment	4	4	4	4
 TitleFont	MS Shell Dlg 2	10	75	0	0	0
-ScaleFont0	MS Shell Dlg 2	12	75	0	0	0
-ScaleFont1	MS Shell Dlg 2	12	75	0	0	0
-ScaleFont2	MS Shell Dlg 2	12	75	0	0	0
-ScaleFont3	MS Shell Dlg 2	12	75	0	0	0
-AxisFont0	MS Shell Dlg 2	10	50	0	0	0
-AxisFont1	MS Shell Dlg 2	10	50	0	0	0
-AxisFont2	MS Shell Dlg 2	10	50	0	0	0
-AxisFont3	MS Shell Dlg 2	10	50	0	0	0
+ScaleFont0	MS Shell Dlg 2	8	75	0	0	0
+ScaleFont1	MS Shell Dlg 2	8	75	0	0	0
+ScaleFont2	MS Shell Dlg 2	8	75	0	0	0
+ScaleFont3	MS Shell Dlg 2	8	75	0	0	0
+AxisFont0	MS Shell Dlg 2	8	50	0	0	0
+AxisFont1	MS Shell Dlg 2	8	50	0	0	0
+AxisFont2	MS Shell Dlg 2	8	50	0	0	0
+AxisFont3	MS Shell Dlg 2	8	50	0	0	0
 EnabledTickLabels	1	1	1	1	
 AxesColors	#000000	#000000	#000000	#000000
 AxesNumberColors	#000000	#000000	#000000	#000000
 AxesBaseline	0	0	0	0	
 CanvasBackground	#ffffff	255
-curve	Table1_1	Table1_5	2	1	0	0	1	7	1	0	0	0	0	14	0	2	0	0	99	1
-curve	Table1_1	Table1_4	2	1	1	0	1	7	2	1	1	0	0	14	0	2	0	0	99	1
-curve	Table1_1	Table1_3	2	1	2	0	1	7	3	2	2	0	0	14	0	2	0	0	99	1
-curve	Table1_1	Table1_2	2	1	3	0	1	7	4	3	3	0	0	14	0	2	0	0	99	1
+curve	Table1_1	Table1_5	2	1	0	0	1	7	1	0	0	0	0	14	1	2	0	0	99	1
+curve	Table1_1	Table1_4	2	1	1	0	1	7	2	1	1	0	0	14	1	2	0	0	99	1
+curve	Table1_1	Table1_3	2	1	2	0	1	7	3	2	2	0	0	14	1	2	0	0	99	1
+curve	Table1_1	Table1_2	2	1	3	0	1	7	4	3	3	0	0	14	1	2	0	0	99	1
 scale	0	0	55	0	8	5	0	0
 scale	1	0	55	0	8	5	0	0
 scale	2	0	370	0	6	5	0	0
@@ -57,11 +57,11 @@ TicksLength	5	9
 DrawAxesBackbone	1
 AxesLineWidth	1
 LabelsRotation	0	0
-<legend>	267.713310580205	53.2539682539683	MS Shell Dlg 2	11	50	0	0	0	#000000	1	0	#ffffff	0	\c{1} górna	\c{2} dolna	\c{3} lewo	\c{4} prawo</legend>
-<text>	10.7337883959044	49.4708994708995	MS Shell Dlg 2	11	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
-<text>	10.7337883959044	49.4708994708995	MS Shell Dlg 2	11	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
-<text>	10.7337883959044	49.4708994708995	MS Shell Dlg 2	11	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
-<text>	10.7337883959044	49.4708994708995	MS Shell Dlg 2	11	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
+<legend>	267.713310580205	53.2539682539683	MS Shell Dlg 2	8	50	0	0	0	#000000	1	0	#ffffff	0	\c{1} górna	\c{2} dolna	\c{3} lewo	\c{4} prawo	</legend>
+<text>	10.7337883959044	49.4708994708995	MS Shell Dlg 2	8	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
+<text>	10.7337883959044	49.4708994708995	MS Shell Dlg 2	8	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
+<text>	10.7337883959044	49.4708994708995	MS Shell Dlg 2	8	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
+<text>	10.7337883959044	49.4708994708995	MS Shell Dlg 2	8	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
 </graph>
 </multiLayer>
 <log>

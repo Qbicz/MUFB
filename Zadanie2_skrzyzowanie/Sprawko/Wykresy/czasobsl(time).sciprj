@@ -9,14 +9,14 @@ geometry	-3	36	718	382
 </table>
 <multiLayer>
 Graph1	1	1	2014-01-06 16:44:49
-geometry	394	45	656	296	active
+geometry	394	45	691	312	active
 WindowLabel		2
 Margins	5	5	5	5
 Spacing	5	5
 LayerCanvasSize	442	307
 Alignement	0	0
 <graph>
-ggeometry	5	5	628	229
+ggeometry	5	5	663	245
 PlotTitle		#000000	4
 <Antialiasing>1</Antialiasing>
 Background	#ffffff	255
@@ -24,18 +24,18 @@ Margin	0
 Border	0	#000000
 grid	0	0	0	0	#0000ff	0	0	#a0a0a4	2	0	#0000ff	0	0	#a0a0a4	2	0	0	0	2	0
 EnabledAxes	1	0	1	0	
-AxesTitles	Czas światła zielonego	Czas obsługi skrzyżowania			
+AxesTitles	Czas światła zielonego, s	Czas obsługi skrzyżowania, s			
 AxesTitleColors	#000000	#000000	#000000	#000000	
 AxesTitleAlignment	4	4	4	4
-TitleFont	MS Shell Dlg 2	10	75	0	0	0
+TitleFont	MS Shell Dlg 2	11	75	0	0	0
 ScaleFont0	MS Shell Dlg 2	10	75	0	0	0
-ScaleFont1	MS Shell Dlg 2	12	75	0	0	0
-ScaleFont2	MS Shell Dlg 2	12	75	0	0	0
-ScaleFont3	MS Shell Dlg 2	12	75	0	0	0
-AxisFont0	MS Shell Dlg 2	10	50	0	0	0
-AxisFont1	MS Shell Dlg 2	10	50	0	0	0
-AxisFont2	MS Shell Dlg 2	10	50	0	0	0
-AxisFont3	MS Shell Dlg 2	10	50	0	0	0
+ScaleFont1	MS Shell Dlg 2	13	75	0	0	0
+ScaleFont2	MS Shell Dlg 2	13	75	0	0	0
+ScaleFont3	MS Shell Dlg 2	13	75	0	0	0
+AxisFont0	MS Shell Dlg 2	11	50	0	0	0
+AxisFont1	MS Shell Dlg 2	11	50	0	0	0
+AxisFont2	MS Shell Dlg 2	11	50	0	0	0
+AxisFont3	MS Shell Dlg 2	11	50	0	0	0
 EnabledTickLabels	1	1	1	1	
 AxesColors	#000000	#000000	#000000	#000000
 AxesNumberColors	#000000	#000000	#000000	#000000
@@ -54,7 +54,7 @@ TicksLength	5	9
 DrawAxesBackbone	1
 AxesLineWidth	1
 LabelsRotation	0	0
-<legend>	91.9710669077758	1338.20224719101	MS Shell Dlg 2	11	50	0	0	0	#000000	1	0	#ffffff	0	\c{1}Czas obsługi</legend>
+<legend>	91.9710669077758	1338.20224719101	MS Shell Dlg 2	12	50	0	0	0	#000000	1	0	#ffffff	0	\c{1}Czas obsługi</legend>
 </graph>
 </multiLayer>
 <log>
