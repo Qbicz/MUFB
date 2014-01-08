@@ -96,7 +96,7 @@ Nasz model skrzyżowania składa się z 4 dróg dojazdowych, które są kolejkam
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=40mm]{model.png}
+	\includegraphics[width=50mm]{model.png}
 	\caption{Graficzne przedstawienie modelu skrzyżowania.}	
 	\label{model}
 \end{figure} 
@@ -117,7 +117,7 @@ Samochód posiada:
 	\item Czas oczekiwania na przejazd -- w celu analizy jakości sterowania.
 \end{itemize}
 
-Model zaimlementowaliśmy w języku C++ wykorzystując bibliotekę STL kolejek FIFO. Staraliśmy się zrealizować symulację w ten sposób, by można było sterować wszystkimi parametrami w celu badania mechanizmu skrzyżowań z sygnalizacją świetlną. Możliwość zmiany maksymalnej ilości przybywających samochodów oraz czasu ich przebywania na skrzyżowaniu służy do modelowania natężenia ruchu oraz ,,gatunku'' kierowców.
+Model zaimplementowaliśmy w języku C++ wykorzystując bibliotekę STL kolejek FIFO. Staraliśmy się zrealizować symulację w ten sposób, by można było sterować wszystkimi parametrami w celu badania mechanizmu skrzyżowań z sygnalizacją świetlną. Możliwość zmiany maksymalnej ilości przybywających samochodów oraz czasu ich przebywania na skrzyżowaniu służy do modelowania natężenia ruchu oraz ,,gatunku'' kierowców.
 
 Jednocześnie wyróżniliśmy stan ,,rozładowania'' skrzyżowania. występuje on w momencie, gdy na wszystkich drogach dojazdowych liczba samochodów jest mniejsza bądź równa maksymalnej równa liczbie samochodów, które w danej zmianie świateł mogły na skrzyżowanie przyjechać.
 
@@ -142,18 +142,18 @@ Jest to najprostszy sposób sterowania ruchem na skrzyżowaniu. Posiada on tylko
 Wybór optymalnej wartości tego parametru dokonaliśmy testując zachowanie skrzyżowania na impuls początkowy jakim jest 100 samochodów na jednej z dróg dojazdowych. parametrem porównawczym jest tu czas obsługi samochodów przez skrzyżowanie. Decyduje on o relatywnym zadowoleniu kierowców.
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.80\textwidth]{czasobs(time).png}
+	\includegraphics[height=55mm]{czasobs(time).png}
 	\caption{Zależność czasu obsługi skrzyżowania od czasu światła zielonego w sygnalizacji stałoczasowej}	
 	\label{czasobs(time)}
 \end{figure}
 
-Z wykresu [\ref{czasobs(time)}] wynika, że dla tych warunków czasy większe od 40 sekund pozwalają na osiągnięcie optymalnego czasu obsługi na poziomie około 600 sekund [\label{600}]. 
+Z wykresu [\ref{czasobs(time)}] wynika, że dla tych warunków czasy większe od 40 sekund pozwalają na osiągnięcie optymalnego czasu obsługi na poziomie około 600 sekund \label{600}. 
 
 Reakcję skrzyżowania na różną liczbę początkową samochodów dla czasu światła zielonego 50 sekund obrazuje wykres [\ref{czasobs(ilosc)}]:
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.80\textwidth]{czasobs(ilosc).png}
+	\includegraphics[height=55mm]{czasobs(ilosc).png}
 	\caption{Zależność czasu obsługi skrzyżowania od ilości początkowej samochodów}	
 	\label{czasobs(ilosc)}
 \end{figure} 
@@ -173,7 +173,7 @@ Czas obsługi skrzyżowania sterowanego przy użyciu regulatora $P$ w zależnoś
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.80\textwidth]{czasobs(ilosc)2.png}
+	\includegraphics[height=55mm]{czasobs(ilosc)2.png}
 	\caption{Zależność czasu obsługi skrzyżowania od ilości początkowej samochodów}	
 	\label{czasobs(ilosc)2}
 \end{figure}
@@ -193,10 +193,12 @@ Mniejszy współczynnik kierunkowy w równaniu regresji [\ref{regresja2}] świad
 Jednakże sterowanie za pomocą regulatora P jest dość kontrowersyjne. Dla tych samych danych początkowych co w zaprezentowanym powyżej przykładzie działania skrzyżowania [\ref{dzialanie}] sterowanie regulatorem P wygląda tak [\ref{dzialanie2}]:
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.80\textwidth]{dzialanie2.png}
+	\includegraphics[height=55mm]{dzialanie2.png}
 	\caption{Zależność czasu obsługi skrzyżowania od ilości początkowej samochodów}	
 	\label{dzialanie2}
 \end{figure}
+
+\newpage
 
 \section{Wnioski}
 \begin{enumerate}
@@ -206,7 +208,7 @@ Jednakże sterowanie za pomocą regulatora P jest dość kontrowersyjne. Dla tyc
 
 \section{Bibliografia}
 \begin{enumerate}
-\item Ilustracja skrzyżowania: \href{http://www.wf.gimkonst.pl/viewpage.php?page_id=50}{ www.wf.gimkonst.pl}.
+%\item Ilustracja skrzyżowania: \href{http://www.wf.gimkonst.pl/viewpage.php?page_id=50}{ www.wf.gimkonst.pl}.
 \item regulator PID -- ,,Podstawy Automatyki -- wykład'' prof. Krzysztof Oprzędkiewicz.
 
 \end{enumerate}
