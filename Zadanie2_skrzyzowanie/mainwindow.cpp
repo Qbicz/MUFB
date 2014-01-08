@@ -1,8 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "skrzyzowanie.h"
-
-#include <iostream>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -13,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QFont f("Helvetica",10);
     this->setFont(f);
 
-    WindowLayout= new QHBoxLayout;
+    WindowLayout= new QVBoxLayout;
 
     QWidget * mycentralwidget = new QWidget;
     mycentralwidget->setLayout(WindowLayout);
@@ -23,17 +20,33 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     Starter= new QPushButton("START");
+    WyborSygnalizacji = new QComboBox;
 
-    QHBoxLayout* Layout = new QHBoxLayout();
-      Layout->addWidget(Starter);
+
+    QHBoxLayout* Layout1 = new QHBoxLayout();
+      Layout1->addWidget(Starter);
 
       PasekPostepu = new QProgressBar;
       PasekPostepu->setRange(0,100);
-      Layout->addWidget(PasekPostepu);
-     WindowLayout->addLayout(Layout);
+      Layout1->addWidget(PasekPostepu);
+
+      QHBoxLayout* Layout2 = new QHBoxLayout();
+
+      WyborSygnalizacji->addItem("Brak");
+      WyborSygnalizacji->addItem("Stałoczasowa");
+      WyborSygnalizacji->addItem("Inteligentna");
+      WyborSygnalizacji->setMaximumWidth(200);
+      QLabel* EtykietaSyg= new QLabel("Wybierz typ sygnalizacji: ");
+
+      Layout2->addWidget(EtykietaSyg);
+      Layout2->addWidget(WyborSygnalizacji);
+
+     WindowLayout->addLayout(Layout1);
+     WindowLayout->addLayout(Layout2);
 
     connect(Starter, SIGNAL(clicked()), this, SLOT(start()));
     connect(this, SIGNAL(postep(int)), PasekPostepu, SLOT(setValue(int)));
+    connect(WyborSygnalizacji, SIGNAL(currentIndexChanged(int)), this, SLOT(zmianaTypu(int)));
 
 
 }
@@ -68,7 +81,7 @@ void MainWindow::start()
         //parametry[3]+=100;                        // zwiekszenie czasu zielonego o 5 co 5 iteracji
     }
 
-
+//tutaj bedze zamiast TypSwiatel zamiast staloczasowa!
     skrzyzowanie.SetInteligence(staloczasowa,parametry);  //sterowanie stałoczasowe z wcześniejszymi parametrami
     skrzyzowanie.SetCzasPrzejazdu(5,1);         //ustalenie
     skrzyzowanie.SetMaxAdd(5);                  //ile samochodów pojawia się po zmianie czasu w każdej kolejce
@@ -86,6 +99,19 @@ void MainWindow::start()
 
     }
     emit postep(100);
+}
+
+void MainWindow::zmianaTypu(int typ)
+{
+    //gdzie zgodnie z enum Intelligence mamy 0-brak 1-staloczasowa i 2 inteligentna
+
+    //jeśli typ==0 mozemy nie zmieniac typu
+
+    TypSwiatel=typ; //sama zmiana zmiennej nie wywola od nowa funkcji z niej korzystającej!
+    //trzeba dalej emitowac sygnaly ktore by zmienily reszta :(
+
+    //tutaj mogą się znaleźć opcje wykluczajace poszczegolne ustawienia
+    //jesli rozne typy sygnalizacji korzystaja z roznych parametrow
 }
 
 

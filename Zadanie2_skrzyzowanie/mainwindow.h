@@ -9,6 +9,13 @@
 #include <QHBoxLayout>
 #include <QFormLayout>
 #include <QProgressBar>
+#include <QComboBox>
+
+
+#include "skrzyzowanie.h"
+
+#include <iostream>
+
 
 namespace Ui {
 class MainWindow;
@@ -24,16 +31,20 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    QHBoxLayout * WindowLayout;
+    QVBoxLayout * WindowLayout;
+    int TypSwiatel;
+
 //******************ekran***************//
 
     QPushButton*  Starter;
     QProgressBar * PasekPostepu;
+    QComboBox * WyborSygnalizacji;
 
 
 
 private slots:
     void start();
+    void zmianaTypu(int typ);
 
 signals:
     void postep(int i);
