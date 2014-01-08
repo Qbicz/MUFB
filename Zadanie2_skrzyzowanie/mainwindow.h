@@ -2,6 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QPushButton>
+#include <QSpacerItem>
+#include <QGroupBox>
+#include <QWidget>
+#include <QHBoxLayout>
+#include <QFormLayout>
+#include <QProgressBar>
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +24,19 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QHBoxLayout * WindowLayout;
+//******************ekran***************//
+
+    QPushButton*  Starter;
+    QProgressBar * PasekPostepu;
+
+
+
+private slots:
+    void start();
+
+signals:
+    void postep(int i);
 };
 
 #endif // MAINWINDOW_H
