@@ -41,6 +41,15 @@ private:
     QComboBox * WyborSygnalizacji;
 
 
+    QFormLayout * SygnalizacjaLayout;
+    QSpinBox * GreenTimeBox;
+    QSpinBox * Opoznienie;
+    QComboBox *Kierunek;
+    QSpinBox * Kp;
+    QSpinBox * Kd;
+    QSpinBox * Ki;
+
+
 
 private slots:
     void start();

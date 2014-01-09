@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setFont(f);
 
     WindowLayout= new QVBoxLayout;
+    SygnalizacjaLayout= new QFormLayout;
 
     QWidget * mycentralwidget = new QWidget;
     mycentralwidget->setLayout(WindowLayout);
@@ -21,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     Starter= new QPushButton("START");
     WyborSygnalizacji = new QComboBox;
+
+
 
 
     QHBoxLayout* Layout1 = new QHBoxLayout();
@@ -40,6 +43,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
       Layout2->addWidget(EtykietaSyg);
       Layout2->addWidget(WyborSygnalizacji);
+
 
      WindowLayout->addLayout(Layout1);
      WindowLayout->addLayout(Layout2);
@@ -101,8 +105,7 @@ void MainWindow::start()
     emit postep(100);
 }
 
-void MainWindow::zmianaTypu(int typ)
-{
+void MainWindow::zmianaTypu(int typ){
     //gdzie zgodnie z enum Intelligence mamy 0-brak 1-staloczasowa i 2 inteligentna
 
     //jeśli typ==0 mozemy nie zmieniac typu
@@ -112,7 +115,140 @@ void MainWindow::zmianaTypu(int typ)
 
     //tutaj mogą się znaleźć opcje wykluczajace poszczegolne ustawienia
     //jesli rozne typy sygnalizacji korzystaja z roznych parametrow
+
+
+    //if((SygnalizacjaLayout!= 0) || (WindowLayout == 0)) return;
+
+
+    GreenTimeBox= new QSpinBox;
+    Opoznienie= new QSpinBox;
+    Kierunek = new QComboBox;
+    Kp = new QSpinBox;
+    Kd = new QSpinBox;
+    Ki = new QSpinBox;
+
+    GreenTimeBox->setMinimum(10);
+    GreenTimeBox->setMaximum(50);
+    GreenTimeBox->setValue(30);
+
+    Opoznienie->setMinimum(0);
+    Opoznienie->setMaximum(10);
+
+    Opoznienie->setValue(2);
+
+    Kierunek->addItem("pion");
+    Kierunek->addItem("poziom");
+
+
+    Kp->setMinimum(1000);
+    Kp->setMaximum(2000);
+    Kp->setValue(1400);
+
+    Kp->setEnabled(false);
+
+    Kd->setMinimum(0);
+    Kd->setMaximum(1000);
+    Kd->setValue(0);
+
+
+    Ki->setMinimum(0);
+    Ki->setMaximum(1000);
+    Ki->setValue(0);
+
+    Ki->setEnabled(false);
+
+cout<<SygnalizacjaLayout->rowCount();
+
+if(typ==1 || typ ==2){
+    Starter->setEnabled(true);
+
+    if(SygnalizacjaLayout->rowCount() ==0)
+    {
+        SygnalizacjaLayout->addRow("Czas światła zielonego: ",GreenTimeBox);
+
+        SygnalizacjaLayout->addRow("Opóźnienie: ",Opoznienie);
+
+        SygnalizacjaLayout->addRow("Kierunek:",Kierunek);
+
+        cout<<SygnalizacjaLayout->rowCount();
+    }
+
+    if(typ !=2)
+    {
+        WindowLayout->addLayout(SygnalizacjaLayout);
+
+    }
+
+
+    if(typ == 2 && SygnalizacjaLayout->rowCount() != 6)
+    {
+        SygnalizacjaLayout->addRow("Kp:",Kp);
+
+        SygnalizacjaLayout->addRow("Kd:",Kd);
+
+        SygnalizacjaLayout->addRow("Ki:",Ki);
+
+        cout<<SygnalizacjaLayout->rowCount();
+
+        WindowLayout->addLayout(SygnalizacjaLayout);
+
+
+    }
+
+    if(SygnalizacjaLayout->rowCount() ==6 && typ == 1)
+    {
+        QLayoutItem * item;
+        QLayout * sublayout;
+        QWidget * widget;
+        while ((item = SygnalizacjaLayout->takeAt(0))) {
+            if ((sublayout = item->layout()) != 0) {/* do the same for sublayout*/}
+            else if ((widget = item->widget()) != 0) {widget->hide(); delete widget;}
+            else {delete item;}
+        }
+
+       delete SygnalizacjaLayout;
+        SygnalizacjaLayout= new QFormLayout;
+
+        SygnalizacjaLayout->addRow("Czas światła zielonego: ",GreenTimeBox);
+
+        SygnalizacjaLayout->addRow("Opóźnienie: ",Opoznienie);
+
+        SygnalizacjaLayout->addRow("Kierunek:",Kierunek);
+
+        cout<<SygnalizacjaLayout->rowCount();
+
+
+        WindowLayout->addLayout(SygnalizacjaLayout);
+
+    }
+
+
+
+
 }
+
+if((SygnalizacjaLayout->rowCount() ==6 || SygnalizacjaLayout->rowCount() ==3)&& typ == 0)
+{
+    QLayoutItem * item;
+    QLayout * sublayout;
+    QWidget * widget;
+    while ((item = SygnalizacjaLayout->takeAt(0))) {
+        if ((sublayout = item->layout()) != 0) {/* do the same for sublayout*/}
+        else if ((widget = item->widget()) != 0) {widget->hide(); delete widget;}
+        else {delete item;}
+    }
+
+   delete SygnalizacjaLayout;
+    SygnalizacjaLayout= new QFormLayout;
+    WindowLayout->addLayout(SygnalizacjaLayout);
+
+}
+
+}
+
+
+
+
 
 
 MainWindow::~MainWindow()
