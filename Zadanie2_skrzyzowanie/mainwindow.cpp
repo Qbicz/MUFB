@@ -6,71 +6,32 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);                          //po zakończeniu wyświetl puste okienko, które nic nie robi...
+    //początkowe ustawienia okna
+    ui->setupUi(this);
     QFont f("Helvetica",10);
-    this->setFont(f);
-
-    WindowLayout= new QVBoxLayout;
-    SygnalizacjaLayout= new QFormLayout;
-
-    QWidget * mycentralwidget = new QWidget;
-    mycentralwidget->setLayout(WindowLayout);
-
-    this->setCentralWidget(mycentralwidget);
-    this->setWindowTitle("Skrzyżowanie");
+    setFont(f);
+    setWindowTitle("Skrzyżowanie");
 
     NazwaPliku= "rozladowanie.txt";
 
+    ui->Starter->setEnabled(false);
+    ui->PasekPostepu->setRange(0,100); //to chyba jest nie potrzebne, ale nnie testowałem.
 
-    Starter= new QPushButton("START");
-    Plik= new QPushButton("Zmień nazwę pliku");
-    Starter->setEnabled(false);
-    WyborSygnalizacji = new QComboBox;
+    connect(ui->Starter, SIGNAL(clicked()), this, SLOT(start()));
+    connect(this, SIGNAL(postep(int)), ui->PasekPostepu, SLOT(setValue(int)));
+    connect(ui->WyborSygnalizacji, SIGNAL(currentIndexChanged(int)), this, SLOT(zmianaTypu(int)));
+    connect(ui->Plik, SIGNAL(clicked()), this, SLOT(ustawNazwePliku()));
 
-
-
-
-    QHBoxLayout* Layout1 = new QHBoxLayout();
-      Layout1->addWidget(Starter);
-
-      PasekPostepu = new QProgressBar;
-      PasekPostepu->setRange(0,100);
-      Layout1->addWidget(PasekPostepu);
-
-      QHBoxLayout* Layout2 = new QHBoxLayout();
-
-      Layout2->addWidget(Plik);
-      Plik->setMaximumWidth(200);
-
-
-      QHBoxLayout* Layout3 = new QHBoxLayout();
-
-      WyborSygnalizacji->addItem("Brak");
-      WyborSygnalizacji->addItem("Stałoczasowa");
-      WyborSygnalizacji->addItem("Inteligentna");
-      WyborSygnalizacji->setMaximumWidth(200);
-      QLabel* EtykietaSyg= new QLabel("Wybierz typ sygnalizacji: ");
-      Layout3->addWidget(EtykietaSyg);
-      Layout3->addWidget(WyborSygnalizacji);
-
-
-
-     WindowLayout->addLayout(Layout1);
-     WindowLayout->addLayout(Layout2);
-     WindowLayout->addLayout(Layout3);
-
-    connect(Starter, SIGNAL(clicked()), this, SLOT(start()));
-    connect(this, SIGNAL(postep(int)), PasekPostepu, SLOT(setValue(int)));
-    connect(WyborSygnalizacji, SIGNAL(currentIndexChanged(int)), this, SLOT(zmianaTypu(int)));
-    connect(Plik, SIGNAL(clicked()), this, SLOT(ustawNazwePliku()));
-
-
+    zmianaTypu(0); //ukrycie
 }
 
 void MainWindow::start()
 {
     Skrzyzowanie skrzyzowanie;
+    skrzyzowanie.name_rozladowanie = NazwaPliku;
     skrzyzowanie.InitFile(NazwaPliku);
+
+
 
     ustawParametry();
 
@@ -79,6 +40,7 @@ void MainWindow::start()
     Skrzyzowanie skrzyzowanie(i);                           //inicjacja skrzyżowania z modyfikacja generatora liczb losowych
     //skrzyzowanie.SetInteligence(inteligentna,parametry);    //sterowanie inteligentne z wcześniejszymi parametrami
 
+    skrzyzowanie.name_rozladowanie = NazwaPliku; //nazwa pliku do wpisywania danych
 
     if(i%5==0){
         //n+=1;
@@ -108,110 +70,73 @@ void MainWindow::start()
 void MainWindow::zmianaTypu(int typ){
     //gdzie zgodnie z enum Intelligence mamy 0-brak (ale to wykluczam)  1-staloczasowa i 2 inteligentna
 
-
     if( typ<0 || typ>2)
         return; //ale to i tak sie nie zdarzy
 
     if(typ!=0) //jeśli typ==0 mozemy nie zmieniac typu
         TypSwiatel=typ;
 
-    GreenTimeBox= new QSpinBox;
-    Opoznienie= new QSpinBox;
-    Kierunek = new QComboBox;
-    Kp = new QSpinBox;
-    Kd = new QSpinBox;
-    Ki = new QSpinBox;
 
-    GreenTimeBox->setMinimum(10);
-    GreenTimeBox->setMaximum(50);
-    GreenTimeBox->setValue(30);
+    ui->Kd->setEnabled(false);
+    ui->Ki->setEnabled(false);
 
-    Opoznienie->setMinimum(0);
-    Opoznienie->setMaximum(10);
-
-    Opoznienie->setValue(2);
-
-    Kierunek->addItem("pion"); //0
-    Kierunek->addItem("poziom"); //1
-
-
-    Kp->setMinimum(1000);
-    Kp->setMaximum(2000);
-    Kp->setValue(1400);
-
-    Kp->setEnabled(false);
-
-    Kd->setMinimum(0);
-    Kd->setMaximum(1000);
-    Kd->setValue(0);
-
-
-    Ki->setMinimum(0);
-    Ki->setMaximum(1000);
-    Ki->setValue(0);
-
-    Ki->setEnabled(false);
-
-    if(typ==0)
-        Starter->setEnabled(false); // jesli nie ma wybranej sygnalizacji wyłączamy opcję symulacji
-
-
-    if(typ==1 || typ ==2){
-
-    Starter->setEnabled(true); //uruchamiamy opcje symulacji tylko jeśli wybrana jest któraś sygnalizacja
-
-        if(SygnalizacjaLayout->rowCount() ==0){
-
-            SygnalizacjaLayout->addRow("Czas światła zielonego: ",GreenTimeBox);
-            SygnalizacjaLayout->addRow("Opóźnienie: ",Opoznienie);
-            SygnalizacjaLayout->addRow("Kierunek:",Kierunek);
-
-        }
-
-        if(typ !=2){
-
-            WindowLayout->addLayout(SygnalizacjaLayout);
-        }
-
-
-        if(typ == 2 && SygnalizacjaLayout->rowCount() != 6){
-
-            SygnalizacjaLayout->addRow("Kp:",Kp);
-            SygnalizacjaLayout->addRow("Kd: ",Kd);
-            SygnalizacjaLayout->addRow("Ki: ",Ki);
-
-            cout<<SygnalizacjaLayout->rowCount();
-
-            WindowLayout->addLayout(SygnalizacjaLayout);
-
-        }
-
+    switch(typ){
+    case 0:
+    {
+        ui->GreenTimeBox->hide();
+        ui->GreenTimeLabel->hide();
+        ui->Opoznienie->hide();
+        ui->OpoznienieLabel->hide();
+        ui->Kierunek->hide();
+        ui->KierunekLabel->hide();
+        ui->Kp->hide();
+        ui->KpLabel->hide();
+        ui->Kd->hide();
+        ui->KdLabel->hide();
+        ui->Ki->hide();
+        ui->KiLabel->hide();
+        ui->Starter->setEnabled(false);
+        break;
+    }
+    case 1:
+    {
+        ui->GreenTimeBox->show();
+        ui->GreenTimeLabel->show();
+        ui->Opoznienie->show();
+        ui->OpoznienieLabel->show();
+        ui->Kierunek->show();
+        ui->KierunekLabel->show();
+        ui->Kp->hide();
+        ui->KpLabel->hide();
+        ui->Kd->hide();
+        ui->KdLabel->hide();
+        ui->Ki->hide();
+        ui->KiLabel->hide();
+        ui->Starter->setEnabled(true); //uruchamiamy opcje symulacji tylko jeśli wybrana jest któraś sygnalizacja
+        break;
+    }
+    case 2:
+    {
+        ui->GreenTimeBox->show();
+        ui->GreenTimeLabel->show();
+        ui->Opoznienie->show();
+        ui->OpoznienieLabel->show();
+        ui->Kierunek->show();
+        ui->KierunekLabel->show();
+        ui->Kp->show();
+        ui->KpLabel->show();
+        ui->Kd->show();
+        ui->KdLabel->show();
+        ui->Ki->show();
+        ui->KiLabel->show();
+        ui->Starter->setEnabled(true); //uruchamiamy opcje symulacji tylko jeśli wybrana jest któraś sygnalizacja
+        break;
     }
 
-//jeśli liczba obiektów powinna się zmienić usuwam SygnalizacjaLayout i widgety
-//tworze od nowa i obiekty (poprzez malutką rekurencję)
-    if((SygnalizacjaLayout->rowCount() ==6 && typ != 2) || (SygnalizacjaLayout->rowCount() ==3 && typ == 0)){
-        QLayoutItem * item;
-        QWidget * widget;
-
-        while ((item = SygnalizacjaLayout->takeAt(0))) {
-
-            if ((widget = item->widget()) != 0) {
-                widget->hide();
-                delete widget;
-            }
-            else {
-                delete item;
-            }
-        }
-
-        delete SygnalizacjaLayout;
-        SygnalizacjaLayout= new QFormLayout;
-
-        zmianaTypu(typ);
-
+    default:
+        zmianaTypu(0);
+        break;
     }
-
 }
 
 void MainWindow::ustawParametry()
@@ -220,15 +145,15 @@ void MainWindow::ustawParametry()
 
     //parametry sygnalizacji
 
-    parametry[0] = GreenTimeBox->value();      //greenTime
-    parametry[1] = Opoznienie->value();       //opóźnienie
-    parametry[2] = Kierunek->currentIndex();    //kierunek
+    parametry[0] = ui->GreenTimeBox->value();      //greenTime
+    parametry[1] = ui->Opoznienie->value();       //opóźnienie
+    parametry[2] = ui->Kierunek->currentIndex();    //kierunek
 
 
     //wszystkie współczynniki podanie sa *1000
-    parametry[3] = Kp->value();        //Kp;
-    parametry[4] = Kd->value();           //Kd;
-    parametry[5] = Ki->value();         //Ki;
+    parametry[3] = ui->Kp->value();        //Kp;
+    parametry[4] = ui->Kd->value();           //Kd;
+    parametry[5] = ui->Ki->value();         //Ki;
 
 
 }

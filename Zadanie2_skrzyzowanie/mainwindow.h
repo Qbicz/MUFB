@@ -41,20 +41,21 @@ private:
 
 
 //******************ekran***************//
+    //zastąpione przez Designer. Do usunięcia.
 
-    QPushButton*  Starter;
-    QPushButton*  Plik;
-    QProgressBar * PasekPostepu;
-    QComboBox * WyborSygnalizacji;
+    //QPushButton*  Starter;
+    //QPushButton*  Plik;
+    //QProgressBar * PasekPostepu;
+    //QComboBox * WyborSygnalizacji;
 
 
-    QFormLayout * SygnalizacjaLayout;
-    QSpinBox * GreenTimeBox;
-    QSpinBox * Opoznienie;
-    QComboBox *Kierunek;
-    QSpinBox * Kp;
-    QSpinBox * Kd;
-    QSpinBox * Ki;
+    //QFormLayout * SygnalizacjaLayout;
+    //QSpinBox * GreenTimeBox;
+    //QSpinBox * Opoznienie;
+    //QComboBox *Kierunek;
+    //Q/SpinBox * Kp;
+    //QSpinBox * Kd;
+    //QSpinBox * Ki;
 
 
 
