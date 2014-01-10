@@ -12,7 +12,7 @@ enum State {red, green};
  *  pion - zielone dla góry i dołu
  *  poziom - zielone dla lewo-prawo
  */
-enum Kierunek {pion, poziom};
+enum Kierunek {pion=0, poziom=1};
 
 /*!
 * \brief The Sygnalizator class

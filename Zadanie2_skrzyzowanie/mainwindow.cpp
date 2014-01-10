@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     Starter= new QPushButton("START");
+    Starter->setEnabled(false);
     WyborSygnalizacji = new QComboBox;
 
 
@@ -60,19 +61,7 @@ void MainWindow::start()
     Skrzyzowanie skrzyzowanie;
     skrzyzowanie.InitFile("rozladowanie.txt");
 
-    //parametry sygnalizacji
-    int parametry[6];
-    parametry[0] = 30;      //greenTime
-    parametry[1] = 2;       //opóźnienie
-    parametry[2] = pion;    //kierunek
-
-
-    //wszystkie współczynniki podanie sa *1000
-    parametry[3] = 1400;        //Kp;
-    parametry[4] = 0;           //Kd;
-    parametry[5] = 0;         //Ki;
-
-    int n=0;
+    ustawParametry();
 
     for(int i = 0;i<100;i++){
 
@@ -86,7 +75,7 @@ void MainWindow::start()
     }
 
 //tutaj bedze zamiast TypSwiatel zamiast staloczasowa!
-    skrzyzowanie.SetInteligence(staloczasowa,parametry);  //sterowanie stałoczasowe z wcześniejszymi parametrami
+    skrzyzowanie.SetInteligence((Inteligence)TypSwiatel,parametry);  //sterowanie stałoczasowe z wcześniejszymi parametrami
     skrzyzowanie.SetCzasPrzejazdu(5,1);         //ustalenie
     skrzyzowanie.SetMaxAdd(5);                  //ile samochodów pojawia się po zmianie czasu w każdej kolejce
     skrzyzowanie.SetStartEntry(100,0,1,0);    //wejściowy skok
@@ -106,19 +95,14 @@ void MainWindow::start()
 }
 
 void MainWindow::zmianaTypu(int typ){
-    //gdzie zgodnie z enum Intelligence mamy 0-brak 1-staloczasowa i 2 inteligentna
-
-    //jeśli typ==0 mozemy nie zmieniac typu
-
-    TypSwiatel=typ; //sama zmiana zmiennej nie wywola od nowa funkcji z niej korzystającej!
-    //trzeba dalej emitowac sygnaly ktore by zmienily reszta :(
-
-    //tutaj mogą się znaleźć opcje wykluczajace poszczegolne ustawienia
-    //jesli rozne typy sygnalizacji korzystaja z roznych parametrow
+    //gdzie zgodnie z enum Intelligence mamy 0-brak (ale to wykluczam)  1-staloczasowa i 2 inteligentna
 
 
-    //if((SygnalizacjaLayout!= 0) || (WindowLayout == 0)) return;
+    if( typ<0 || typ>2)
+        return; //ale to i tak sie nie zdarzy
 
+    if(typ!=0) //jeśli typ==0 mozemy nie zmieniac typu
+        TypSwiatel=typ;
 
     GreenTimeBox= new QSpinBox;
     Opoznienie= new QSpinBox;
@@ -136,8 +120,8 @@ void MainWindow::zmianaTypu(int typ){
 
     Opoznienie->setValue(2);
 
-    Kierunek->addItem("pion");
-    Kierunek->addItem("poziom");
+    Kierunek->addItem("pion"); //0
+    Kierunek->addItem("poziom"); //1
 
 
     Kp->setMinimum(1000);
@@ -157,98 +141,86 @@ void MainWindow::zmianaTypu(int typ){
 
     Ki->setEnabled(false);
 
-cout<<SygnalizacjaLayout->rowCount();
-
-if(typ==1 || typ ==2){
-    Starter->setEnabled(true);
-
-    if(SygnalizacjaLayout->rowCount() ==0)
-    {
-        SygnalizacjaLayout->addRow("Czas światła zielonego: ",GreenTimeBox);
-
-        SygnalizacjaLayout->addRow("Opóźnienie: ",Opoznienie);
-
-        SygnalizacjaLayout->addRow("Kierunek:",Kierunek);
-
-        cout<<SygnalizacjaLayout->rowCount();
-    }
-
-    if(typ !=2)
-    {
-        WindowLayout->addLayout(SygnalizacjaLayout);
-
-    }
+    if(typ==0)
+        Starter->setEnabled(false); // jesli nie ma wybranej sygnalizacji wyłączamy opcję symulacji
 
 
-    if(typ == 2 && SygnalizacjaLayout->rowCount() != 6)
-    {
-        SygnalizacjaLayout->addRow("Kp:",Kp);
+    if(typ==1 || typ ==2){
 
-        SygnalizacjaLayout->addRow("Kd:",Kd);
+    Starter->setEnabled(true); //uruchamiamy opcje symulacji tylko jeśli wybrana jest któraś sygnalizacja
 
-        SygnalizacjaLayout->addRow("Ki:",Ki);
+        if(SygnalizacjaLayout->rowCount() ==0){
 
-        cout<<SygnalizacjaLayout->rowCount();
+            SygnalizacjaLayout->addRow("Czas światła zielonego: ",GreenTimeBox);
+            SygnalizacjaLayout->addRow("Opóźnienie: ",Opoznienie);
+            SygnalizacjaLayout->addRow("Kierunek:",Kierunek);
 
-        WindowLayout->addLayout(SygnalizacjaLayout);
-
-
-    }
-
-    if(SygnalizacjaLayout->rowCount() ==6 && typ == 1)
-    {
-        QLayoutItem * item;
-        QLayout * sublayout;
-        QWidget * widget;
-        while ((item = SygnalizacjaLayout->takeAt(0))) {
-            if ((sublayout = item->layout()) != 0) {/* do the same for sublayout*/}
-            else if ((widget = item->widget()) != 0) {widget->hide(); delete widget;}
-            else {delete item;}
         }
 
-       delete SygnalizacjaLayout;
+        if(typ !=2){
+
+            WindowLayout->addLayout(SygnalizacjaLayout);
+        }
+
+
+        if(typ == 2 && SygnalizacjaLayout->rowCount() != 6){
+
+            SygnalizacjaLayout->addRow("Kp:",Kp);
+            SygnalizacjaLayout->addRow("Kd: ",Kd);
+            SygnalizacjaLayout->addRow("Ki: ",Ki);
+
+            cout<<SygnalizacjaLayout->rowCount();
+
+            WindowLayout->addLayout(SygnalizacjaLayout);
+
+        }
+
+    }
+
+//jeśli liczba obiektów powinna się zmienić usuwam SygnalizacjaLayout i widgety
+//tworze od nowa i obiekty (poprzez malutką rekurencję)
+    if((SygnalizacjaLayout->rowCount() ==6 && typ != 2) || (SygnalizacjaLayout->rowCount() ==3 && typ == 0)){
+        QLayoutItem * item;
+        QWidget * widget;
+
+        while ((item = SygnalizacjaLayout->takeAt(0))) {
+
+            if ((widget = item->widget()) != 0) {
+                widget->hide();
+                delete widget;
+            }
+            else {
+                delete item;
+            }
+        }
+
+        delete SygnalizacjaLayout;
         SygnalizacjaLayout= new QFormLayout;
 
-        SygnalizacjaLayout->addRow("Czas światła zielonego: ",GreenTimeBox);
-
-        SygnalizacjaLayout->addRow("Opóźnienie: ",Opoznienie);
-
-        SygnalizacjaLayout->addRow("Kierunek:",Kierunek);
-
-        cout<<SygnalizacjaLayout->rowCount();
-
-
-        WindowLayout->addLayout(SygnalizacjaLayout);
+        zmianaTypu(typ);
 
     }
 
-
-
-
 }
 
-if((SygnalizacjaLayout->rowCount() ==6 || SygnalizacjaLayout->rowCount() ==3)&& typ == 0)
+void MainWindow::ustawParametry()
 {
-    QLayoutItem * item;
-    QLayout * sublayout;
-    QWidget * widget;
-    while ((item = SygnalizacjaLayout->takeAt(0))) {
-        if ((sublayout = item->layout()) != 0) {/* do the same for sublayout*/}
-        else if ((widget = item->widget()) != 0) {widget->hide(); delete widget;}
-        else {delete item;}
-    }
+    parametry = new int[6];
 
-   delete SygnalizacjaLayout;
-    SygnalizacjaLayout= new QFormLayout;
-    WindowLayout->addLayout(SygnalizacjaLayout);
+    //parametry sygnalizacji
+
+    parametry[0] = GreenTimeBox->value();      //greenTime
+    parametry[1] = Opoznienie->value();       //opóźnienie
+    parametry[2] = Kierunek->currentIndex();    //kierunek
+
+
+    //wszystkie współczynniki podanie sa *1000
+    parametry[3] = Kp->value();        //Kp;
+    parametry[4] = Kd->value();           //Kd;
+    parametry[5] = Ki->value();         //Ki;
+
 
 }
-
-}
-
-
-
-
 
 
 MainWindow::~MainWindow()

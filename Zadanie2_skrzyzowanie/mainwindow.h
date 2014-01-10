@@ -33,6 +33,8 @@ private:
     Ui::MainWindow *ui;
     QVBoxLayout * WindowLayout;
     int TypSwiatel;
+    int * parametry;
+    void ustawParametry();
 
 //******************ekran***************//
 
