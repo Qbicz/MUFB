@@ -11,6 +11,7 @@ Staloczasowy::Staloczasowy()
 
 Staloczasowy::Staloczasowy(unsigned long time){
     greenTime = time;
+    redTime = time;
     state = red;
     kierunek = pion;
     opoznienie = 0;

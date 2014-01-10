@@ -19,8 +19,11 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setCentralWidget(mycentralwidget);
     this->setWindowTitle("Skrzyżowanie");
 
+    NazwaPliku= "rozladowanie.txt";
+
 
     Starter= new QPushButton("START");
+    Plik= new QPushButton("Zmień nazwę pliku");
     Starter->setEnabled(false);
     WyborSygnalizacji = new QComboBox;
 
@@ -36,22 +39,30 @@ MainWindow::MainWindow(QWidget *parent) :
 
       QHBoxLayout* Layout2 = new QHBoxLayout();
 
+      Layout2->addWidget(Plik);
+      Plik->setMaximumWidth(200);
+
+
+      QHBoxLayout* Layout3 = new QHBoxLayout();
+
       WyborSygnalizacji->addItem("Brak");
       WyborSygnalizacji->addItem("Stałoczasowa");
       WyborSygnalizacji->addItem("Inteligentna");
       WyborSygnalizacji->setMaximumWidth(200);
       QLabel* EtykietaSyg= new QLabel("Wybierz typ sygnalizacji: ");
+      Layout3->addWidget(EtykietaSyg);
+      Layout3->addWidget(WyborSygnalizacji);
 
-      Layout2->addWidget(EtykietaSyg);
-      Layout2->addWidget(WyborSygnalizacji);
 
 
      WindowLayout->addLayout(Layout1);
      WindowLayout->addLayout(Layout2);
+     WindowLayout->addLayout(Layout3);
 
     connect(Starter, SIGNAL(clicked()), this, SLOT(start()));
     connect(this, SIGNAL(postep(int)), PasekPostepu, SLOT(setValue(int)));
     connect(WyborSygnalizacji, SIGNAL(currentIndexChanged(int)), this, SLOT(zmianaTypu(int)));
+    connect(Plik, SIGNAL(clicked()), this, SLOT(ustawNazwePliku()));
 
 
 }
@@ -59,7 +70,7 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::start()
 {
     Skrzyzowanie skrzyzowanie;
-    skrzyzowanie.InitFile("rozladowanie.txt");
+    skrzyzowanie.InitFile(NazwaPliku);
 
     ustawParametry();
 
@@ -219,6 +230,21 @@ void MainWindow::ustawParametry()
     parametry[4] = Kd->value();           //Kd;
     parametry[5] = Ki->value();         //Ki;
 
+
+}
+
+void MainWindow::ustawNazwePliku()
+{
+
+    bool ok;
+    QString text = QInputDialog::getText(this,
+                                         tr("Zmiana nazwy pliku"),
+                                         tr("Wpisz nazwę pliku wynikowego z .txt na końcu: "),
+                                         QLineEdit::Normal,
+                                         NazwaPliku,
+                                         &ok);
+    if(ok)
+        NazwaPliku=text;
 
 }
 

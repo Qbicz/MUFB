@@ -10,6 +10,8 @@
 #include <QFormLayout>
 #include <QProgressBar>
 #include <QComboBox>
+#include <QInputDialog>
+#include <QString>
 
 
 #include "skrzyzowanie.h"
@@ -35,10 +37,13 @@ private:
     int TypSwiatel;
     int * parametry;
     void ustawParametry();
+    QString NazwaPliku;
+
 
 //******************ekran***************//
 
     QPushButton*  Starter;
+    QPushButton*  Plik;
     QProgressBar * PasekPostepu;
     QComboBox * WyborSygnalizacji;
 
@@ -56,6 +61,8 @@ private:
 private slots:
     void start();
     void zmianaTypu(int typ);
+    void ustawNazwePliku();
+
 
 signals:
     void postep(int i);
