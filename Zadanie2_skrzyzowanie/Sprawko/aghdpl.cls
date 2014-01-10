@@ -4,7 +4,7 @@
 %          
 % Author:  Marcin Szpyrka     (mszpyrka@agh.edu.pl)
 %          Grzegorz J. Nalepa (gjn@agh.edu.pl)
-%          AGH University of Science and Technology, Kraków, POLAND
+%          AGH University of Science and Technology, Krakï¿½w, POLAND
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -57,7 +57,7 @@
 \def\thesistable{
 \begin{tabular}{p{45mm}l}
 Autor: & {\itshape \@author}\\[-1mm]
-Kierunek studiów: & {\itshape \@degreeprogramme}\\[-1mm]
+Kierunek studiï¿½w: & {\itshape \@degreeprogramme}\\[-1mm]
 Opiekun pracy: & {\itshape \@supervisor}\\
 \end{tabular}
 }
@@ -106,7 +106,7 @@ Supervisor: & {\itshape \@supervisor}\\
 \vspace*{1mm}
 
 {\sffamily\Large\itshape \@titleEN}
-\vspace*{38mm}
+\vspace*{18mm}
 \end{center}
 
 \noindent
@@ -145,13 +145,13 @@ Supervisor: & {\itshape \@supervisor}\\
 \flushbottom
 
 %---------------------------------------------------------------------------
-% Ustawienia parametrów dla tytu³ów rozdzia³ów, podrozdzia³ów, itd.
+% Ustawienia parametrï¿½w dla tytuï¿½ï¿½w rozdziaï¿½ï¿½w, podrozdziaï¿½ï¿½w, itd.
 %---------------------------------------------------------------------------
 
 \renewcommand{\thesection}{\arabic{section}}
 \titleformat{\section}[block]
 {\bfseries\LARGE}{\filright \LARGE }{0ex}{}
-%odstêpy: lewy, góra, dó³
+%odstï¿½py: lewy, gï¿½ra, dï¿½ï¿½
 \titlespacing{\section}{0pt}{17mm}{19mm}
 \titleformat{\section}[block]
 {\bfseries\Large}{\filright \Large\thesection. }{0ex}{}
@@ -164,7 +164,7 @@ Supervisor: & {\itshape \@supervisor}\\
 \titlespacing{\subsubsection}{7mm}{3mm}{1.5mm}
 
 %---------------------------------------------------------------------------
-% Ustawienia parametrów generowania spisu tre¶ci i spisu rysunków
+% Ustawienia parametrï¿½w generowania spisu treï¿½ci i spisu rysunkï¿½w
 %---------------------------------------------------------------------------
 
 \renewcommand{\cfttoctitlefont}{\bfseries\Large}

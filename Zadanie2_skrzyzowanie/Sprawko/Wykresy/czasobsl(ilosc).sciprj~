@@ -28,26 +28,27 @@ AxesTitles	Początkowa liczba samochodów	Czas obsługi skrzyżowania
 AxesTitleColors	#000000	#000000	#000000	#000000	
 AxesTitleAlignment	4	4	4	4
 TitleFont	MS Shell Dlg 2	10	75	0	0	0
-ScaleFont0	MS Shell Dlg 2	8	75	0	0	0
-ScaleFont1	MS Shell Dlg 2	8	75	0	0	0
-ScaleFont2	MS Shell Dlg 2	8	75	0	0	0
-ScaleFont3	MS Shell Dlg 2	8	75	0	0	0
-AxisFont0	MS Shell Dlg 2	8	50	0	0	0
-AxisFont1	MS Shell Dlg 2	8	50	0	0	0
-AxisFont2	MS Shell Dlg 2	8	50	0	0	0
-AxisFont3	MS Shell Dlg 2	8	50	0	0	0
+ScaleFont0	MS Shell Dlg 2	10	75	0	0	0
+ScaleFont1	MS Shell Dlg 2	12	75	0	0	0
+ScaleFont2	MS Shell Dlg 2	12	75	0	0	0
+ScaleFont3	MS Shell Dlg 2	12	75	0	0	0
+AxisFont0	MS Shell Dlg 2	10	50	0	0	0
+AxisFont1	MS Shell Dlg 2	10	50	0	0	0
+AxisFont2	MS Shell Dlg 2	10	50	0	0	0
+AxisFont3	MS Shell Dlg 2	10	50	0	0	0
 EnabledTickLabels	1	1	1	1	
 AxesColors	#000000	#000000	#000000	#000000
 AxesNumberColors	#000000	#000000	#000000	#000000
 AxesBaseline	0	0	0	0	
 CanvasBackground	#ffffff	255
 curve	Table1_2	Table1_1	1	0	0	0	1	7	1	0	0	0	0	14	0	2	0	0	99	1
-FunctionCurve	0,LinearFit1,x,50,1000	2			0	1	1	0	1	0	0	0	19	0	0	14	0	2	0	59592896	0	1
+FunctionCurve	0,LinearFit1,x,50,1000	2			0	1	1	0	1	0	0	0	19	0	0	14	0	2	0	87532952	3211314	1
 <formula>
 B=34.8947368421053
 A=5.45924812030075
 
 A*x+B
+
 </formula>
 scale	0	0	6000	0	8	5	0	0
 scale	1	0	6000	0	8	5	0	0
@@ -61,11 +62,11 @@ TicksLength	5	9
 DrawAxesBackbone	1
 AxesLineWidth	1
 LabelsRotation	0	0
-<legend>	707.168458781362	2543.47826086957	MS Shell Dlg 2	8	50	0	0	0	#000000	1	0	#ffffff	0	\c{1} Dane z symulacji	\c{2} Regresja liniowa:	 y = 5,46 * x + 34,89</legend>
-<text>	84.0501792114695	5347.82608695652	MS Shell Dlg 2	8	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
-<text>	84.0501792114695	5347.82608695652	MS Shell Dlg 2	8	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
-<text>	84.0501792114695	5347.82608695652	MS Shell Dlg 2	8	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
-<text>	84.0501792114695	5347.82608695652	MS Shell Dlg 2	8	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
+<legend>	630.45871559633	2528.08988764045	MS Shell Dlg 2	11	50	0	0	0	#000000	1	0	#ffffff	0	\c{1} Dane z symulacji	\c{2} Regresja liniowa:	 y = 5,46 * x + 34,89</legend>
+<text>	84.0501792114695	5347.82608695652	MS Shell Dlg 2	11	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
+<text>	84.0501792114695	5347.82608695652	MS Shell Dlg 2	11	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
+<text>	84.0501792114695	5347.82608695652	MS Shell Dlg 2	11	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
+<text>	84.0501792114695	5347.82608695652	MS Shell Dlg 2	11	50	0	0	0	#000000	1781793064	0	#000000	255	</text>
 </graph>
 </multiLayer>
 <log>

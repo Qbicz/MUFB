@@ -101,16 +101,10 @@ Liczby pseudolosowe przede wszystkim wykorzystuje się w 3 dziedzinach:
 \item Kryptografia – wykorzystywane do generowania kluczy prywatnych.
 \item Złudzenie losowości w grach – wykorzystując generatory gracz ma poczucie przewidywalności i niepowtarzalności.  
 \end{enumerate}
-<<<<<<< HEAD
-\subsection{Liczby pseudo losowe}
-eLiczbami pseudo losowymi nazywamy liczby wykazujące cechy liczb prawdziwie losowych uzyskanych poprzez działanie algorytmu. Zaletą korzystania z takich liczb jest możliwość szybkiego pozyskiwania rezultatów, ograniczona mocą obliczeniową komputera.
-\subsection{Generatory liczb pseudo losowych}
-=======
 \subsection{Liczby pseudolosowe}
 Liczbami pseudolosowymi nazywamy liczby wykazujące cechy liczb prawdziwie losowych uzyskanych poprzez działanie algorytmu. Zaletą korzystania z takich liczb jest możliwość szybkiego pozyskiwania rezultatów, ograniczona mocą obliczeniową komputera.\\
 
 \subsection{Generatory liczb pseudolosowych}
->>>>>>> 3eb4ee3edb933a89c7c818b38ee4c338a6f442c2
 Liczby pozyskiwane są z odpowiednich algorytmów, obliczających kolejną liczbę na podstawie poprzedniego wyniku. W związku z tym konieczne jest podanie pierwszej liczby. W praktyce generatory wykorzystują jako pierwszą liczbę aktualny czas. 
 \section{Testowanie generatorów}
 \subsection{Cel testowania generatorów}
@@ -144,8 +138,7 @@ X ( n ) = 48271 \cdot x (n- 1 )\; mod\; 2 ^ {31}-1,
 \end{equation}
 zbliżony do Lehmer, charakteryzuje się jednak tym, że zaproponowano w nim lepszy mnożnik. 
 \subsubsection{Odwrócony generator}
-Opisany przez Einchenauer-Herrmann. Obliczenia zajmują dużo więcej czasu. Sprawdza się gorzej, niż klasyczny RNG mod $2^{32}$
-
+Opisany przez Einchenauer-Herrmann. Obliczenia zajmują dużo więcej czasu. Sprawdza się gorzej, niż klasyczny RNG mod $2^{32}$\\
 \subsection{Wybrane testy}
 \subsubsection{Test urodzin}
 Polega on na ,,paradoksie urodzin'', czyli prawdopodobieństwie, że w grupie osób, znajdą się osoby które mają urodziny tego samego dnia. Testowana grupa ma 512 osób, a dzień określa 24 bitowa liczba. Rozkład powinien być podobny do rozkładu Poissona.

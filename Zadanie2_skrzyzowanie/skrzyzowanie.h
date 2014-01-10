@@ -32,7 +32,7 @@ using namespace std;
  *      1x publiczna funkja obsługa, która robi wszystko - magic.
  */
 
-enum Inteligence {brak, staloczasowa, inteligentna};
+enum Inteligence {brak=0, staloczasowa=1, inteligentna=2};
 
 class Skrzyzowanie
 {
@@ -49,7 +49,7 @@ public:
     void InitFile(QString name);
 
     bool rozladowanie; //czy już jest rozladowany
-
+    QString name_rozladowanie;
 
 private:
     queue <Auto> up, down, left, right;
@@ -68,7 +68,7 @@ private:
 
     //nazwy plików
     QString name_czasy;
-    QString name_rozladowanie;
+
 
 };
 
