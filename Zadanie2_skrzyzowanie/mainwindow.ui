@@ -1,24 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow" >
-  <property name="geometry" >
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>621</width>
+    <height>573</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="minimumSize">
+   <size>
+    <width>621</width>
+    <height>573</height>
+   </size>
+  </property>
+  <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QMenuBar" name="menuBar" />
-  <widget class="QToolBar" name="mainToolBar" />
-  <widget class="QWidget" name="centralWidget" />
-  <widget class="QStatusBar" name="statusBar" />
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QWebView" name="webView">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>100</y>
+      <width>580</width>
+      <height>450</height>
+     </rect>
+    </property>
+    <property name="url">
+     <url>
+      <string>about:blank</string>
+     </url>
+    </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>0</y>
+      <width>91</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="0" column="1">
+      <widget class="QSpinBox" name="Kp">
+       <property name="minimum">
+        <number>1500</number>
+       </property>
+       <property name="maximum">
+        <number>5000</number>
+       </property>
+       <property name="value">
+        <number>2200</number>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="KpLabel">
+       <property name="text">
+        <string>Kp</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QSpinBox" name="Kd">
+       <property name="maximum">
+        <number>1000</number>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QSpinBox" name="Ki">
+       <property name="maximum">
+        <number>1000</number>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="KdLabel">
+       <property name="text">
+        <string>Kd</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="KiLabel">
+       <property name="text">
+        <string>Ki</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>0</y>
+      <width>201</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="0">
+      <widget class="QLabel" name="OpoznienieLabel">
+       <property name="text">
+        <string>Opóźnienie</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QComboBox" name="Kierunek">
+       <item>
+        <property name="text">
+         <string>pion</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>poziom</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="GreenTimeLabel">
+       <property name="text">
+        <string>Czas światła zielonego</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QSpinBox" name="GreenTimeBox">
+       <property name="minimum">
+        <number>10</number>
+       </property>
+       <property name="maximum">
+        <number>100</number>
+       </property>
+       <property name="value">
+        <number>50</number>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="KierunekLabel">
+       <property name="text">
+        <string>Kierunek</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QSpinBox" name="Opoznienie">
+       <property name="maximum">
+        <number>10</number>
+       </property>
+       <property name="value">
+        <number>2</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>12</x>
+      <y>2</y>
+      <width>251</width>
+      <height>78</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="1" column="0">
+      <widget class="QPushButton" name="Starter">
+       <property name="text">
+        <string>Start</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Wybierz typ sygnalizacji</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="Plik">
+       <property name="text">
+        <string>Zmień nazwe pliku</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QComboBox" name="WyborSygnalizacji">
+       <item>
+        <property name="text">
+         <string>brak</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>stałoczasowa</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>inteligentna</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="0" column="0" colspan="2">
+      <widget class="QProgressBar" name="PasekPostepu">
+       <property name="value">
+        <number>0</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <zorder>Starter</zorder>
+   <zorder>PasekPostepu</zorder>
+   <zorder>Plik</zorder>
+   <zorder>WyborSygnalizacji</zorder>
+   <zorder>label</zorder>
+   <zorder>GreenTimeLabel</zorder>
+   <zorder>OpoznienieLabel</zorder>
+   <zorder>KierunekLabel</zorder>
+   <zorder>KpLabel</zorder>
+   <zorder>KdLabel</zorder>
+   <zorder>KiLabel</zorder>
+   <zorder>GreenTimeBox</zorder>
+   <zorder>Opoznienie</zorder>
+   <zorder>Kp</zorder>
+   <zorder>Kd</zorder>
+   <zorder>Ki</zorder>
+   <zorder>Kierunek</zorder>
+   <zorder>webView</zorder>
+   <zorder>Ki</zorder>
+   <zorder>KpLabel</zorder>
+   <zorder>Kd</zorder>
+   <zorder>KiLabel</zorder>
+   <zorder>Kp</zorder>
+   <zorder>KdLabel</zorder>
+   <zorder>KpLabel</zorder>
+   <zorder>Kd</zorder>
+   <zorder>KiLabel</zorder>
+   <zorder>Ki</zorder>
+   <zorder>Kp</zorder>
+   <zorder>KdLabel</zorder>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QWebView</class>
+   <extends>QWidget</extends>
+   <header>QtWebKitWidgets/QWebView</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
