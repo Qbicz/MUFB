@@ -17,6 +17,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->Starter->setEnabled(false);
     ui->PasekPostepu->setRange(0,100); //to chyba jest nie potrzebne, ale nnie testowałem.
 
+    //----------Wyswietlanie QWebView------------//
+    ui->webView->settings()->setAttribute(QWebSettings::PluginsEnabled, true);
+    ui->webView->load(QUrl("http://www.student.agh.edu.pl/kubicz/index.html"));
+
     connect(ui->Starter, SIGNAL(clicked()), this, SLOT(start()));
     connect(this, SIGNAL(postep(int)), ui->PasekPostepu, SLOT(setValue(int)));
     connect(ui->WyborSygnalizacji, SIGNAL(currentIndexChanged(int)), this, SLOT(zmianaTypu(int)));
